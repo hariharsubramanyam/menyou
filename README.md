@@ -46,9 +46,7 @@ Documentation can be found in the **/doc** directory.
 
 ##Accessing
 
-The production version of the site can be accessed at menyou.ryanchipman.com
-The dev version of the site can be accessed at menyou-dev.ryanchipman.com
-The tests can be accessed at menyou-tests.ryanchipman.com
+The app can be accessed at 104.236.61.65:8080
 
-All routes matching menyou.ryanchipman.com/api/\* are handled as API requests.
+All routes matching 104.236.61.65:8080/api/\* are handled as API requests.
 All other routes are handled as front-end requests.
