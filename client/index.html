@@ -1,0 +1,17 @@
+<html ng-app="menyouApp" ng-strict-di>
+<head>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="app/app.module.js"></script>
+  <script src="app/app.route.js"></script>
+</head>
+<body ng-controller="homeController">
+
+  <ul>
+    <li ng-repeat="meal in meals">
+      <span>{{meal.name}}</span>
+      <p>{{meal.description}}</p>
+    </li>
+  </ul>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+{
+  "name": "menyou",
+  "description": "personalized meal recommendations",
+  "version": "0.0.1",
+  "License": "MIT",
+  "author": "Ryan Chipman, Danielle Man, Harihar Subramanyam, Tawanda Zimuto",
+  "scripts": {
+    "start": "node ./server/bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rychipman/menyou"
+  },
+  "bugs": {
+    "url": "https://github.com/rychipman/menyou"
+  },
+  "homepage": "https://github.com/rychipman/menyou",
+  "dependencies": {
+    "body-parser": "^1.9.2",
+    "express": "^4.10.1",
+    "jwt-simple": "^0.2.0",
+    "moment": "^2.8.3",
+    "mongodb": "^1.4.19",
+    "mongoose-q": "0.0.13",
+    "morgan": "^1.4.1",
+    "passport": "^0.2.1",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0",
+    "underscore": "^1.7.0",
+    "winston": "^0.8.1"
+  },
+  "devDependencies": {
+    "bower": "^1.3.12",
+    "gulp": "^3.8.9",
+    "gulp-linker": "^0.1.7",
+    "gulp-rsync": "0.0.4",
+    "gulp-stylus": "^1.3.3",
+    "gulp-supervisor": "^0.1.2",
+    "jeet": "^6.1.2"
+  }
+}
