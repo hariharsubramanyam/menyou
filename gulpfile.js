@@ -14,6 +14,7 @@ var gulp = require('gulp');
 var linker = require('gulp-linker');
 var rsync = require('gulp-rsync');
 var supervisor = require('gulp-supervisor');
+var watch = require('gulp-watch');
 var stylus = require('gulp-stylus'); // gulp stylus compiler
 var jeet = require('jeet'); // grid system for stylus
 
@@ -29,6 +30,7 @@ gulp.task('serve', function() {
     noRestartOn: 'exit'
   });
 });
+
 
 /**
  * This task compiles our stylus into css.
@@ -54,7 +56,7 @@ gulp.task('link-javascript', function() {
     .pipe(gulp.dest('./client/'));
 });
 
-gulp.task('deploy', function() {
+gulp.task('push', function() {
   gulp.src('.')
     .pipe(rsync({
       root: '.',
@@ -69,10 +71,11 @@ gulp.task('deploy', function() {
     }));
 });
 
-/**
- * the default task (the one that gets run if you
- *
- * just run 'gulp' in the root dir of the project)
- */
-gulp.task('default', ['compile-stylus', 'serve', 'watch-stylus']);
+gulp.task('watch', function() {
+  gulp.watch('client/assets/style/stylus/*.styl', ['compile-stylus']);
+  gulp.watch(['client/assets/js/*.js', 'client/app/**/**/*.js'], ['link-javascript']);
+});
+
+gulp.task('deploy', ['compile-stylus', 'link-javascript', 'push'])
+gulp.task('default', ['compile-stylus', 'link-javascript', 'serve', 'watch']);
 
