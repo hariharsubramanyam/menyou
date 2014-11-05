@@ -1,3 +1,4 @@
 node_modules
 logs
 client/bower_components
+npm-debug.log
