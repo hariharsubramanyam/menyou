@@ -1,6 +1,8 @@
 Menyou
 ======
 
+**NOTE** If you are looking for the design doc/teamwork plan, please check the **/doc/** directory.
+
 ###Ryan Chipman, Danielle Man, Harihar Subramanyam, Tawanda Zimuto
 
 A menu for you.
@@ -42,7 +44,7 @@ The meat of the app is divided into two parts, the client and the server, each i
 
 ###Documentation
 
-Documentation can be found in the **/doc** directory.
+Documentation can be found in the **/doc/** directory.
 
 ##Accessing
 
