@@ -12,8 +12,12 @@
 
 var gulp = require('gulp');
 var linker = require('gulp-linker');
+var concat = require('gulp-concat');
+var wrap = require('gulp-wrap');
 var rsync = require('gulp-rsync');
+var declare = require('gulp-declare');
 var supervisor = require('gulp-supervisor');
+var handlebars = require('gulp-handlebars');
 var watch = require('gulp-watch');
 var stylus = require('gulp-stylus'); // gulp stylus compiler
 var jeet = require('jeet'); // grid system for stylus
@@ -36,27 +40,38 @@ gulp.task('serve', function() {
  * This task compiles our stylus into css.
  */
 gulp.task('compile-stylus', function() {
-  gulp.src('./client/assets/style/stylus/style.styl')
+  gulp.src('./client/source/assets/style/style.styl')
     .pipe(stylus({
       use: [ jeet() ]
     }))
-    .pipe(gulp.dest('./client/assets/style/css/style.css'));
+    .pipe(gulp.dest('./client/build/assets/style/style.css'));
 });
 
-/**
- * This task links all the javscript files to the template
- */
-gulp.task('link-javascript', function() {
-  gulp.src('./client/index.html')
-    .pipe(linker({
-      scripts: [ 'client/app/**/*.js', 'client/assets/js/*.js' ],
-      fileTmpl: '<script src=%s type=text/javascript></script>',
-      appRoot: './client/'
+gulp.task('build-js', function() {
+
+});
+
+gulp.task('build-img', function() {
+
+});
+
+gulp.task('compile-handlebars', function() {
+  gulp.src('client/source/templates/**/*.hbs')
+    .pipe(handlebars())
+    .pipe(wrap('Handlebars.template(<%= contents %>)'))
+    .pipe(declare({
+      namespace: 'menyou.templates',
+      noRedeclare: true,
+      processName: function(filePath) {
+        return declare.processNameByPath(filePath.replace('client/source/templates/', ''));
+      }
     }))
-    .pipe(gulp.dest('./client/'));
+    .pipe(concat('templates.js'))
+    .pipe(gulp.dest('client/build/assets/js/'));
 });
 
 gulp.task('push', function() {
+  // push server and node mods, etc.
   gulp.src('.')
     .pipe(rsync({
       root: '.',
@@ -67,15 +82,25 @@ gulp.task('push', function() {
       recursive: true,
       clean: true,
       silent: true,
-      exclude: ['.gitignore', '.git', 'npm-debug.log', 'gulpfile', 'client/assets/style/stylus']
+      exclude: ['.gitignore', '.git', 'npm-debug.log', 'gulpfile', 'client']
+    }));
+  // push client
+  gulp.src('./client/build')
+    .pipe(rsync({
+      root: './client/build',
+      hostname: '104.236.61.65',
+      destination: 'menyou/client',
+      compress: true,
+      recursive: true,
+      clean: true,
+      silent: true
     }));
 });
 
 gulp.task('watch', function() {
-  gulp.watch('client/assets/style/stylus/*.styl', ['compile-stylus']);
-  gulp.watch(['client/assets/js/*.js', 'client/app/**/**/*.js'], ['link-javascript']);
+  gulp.watch(['client/source/assets/style/*.styl', 'client/source/assets/style/partials/*.styl'], ['compile-stylus']);
 });
 
-gulp.task('deploy', ['compile-stylus', 'link-javascript', 'push'])
-gulp.task('default', ['compile-stylus', 'link-javascript', 'serve', 'watch']);
+gulp.task('deploy', ['compile-stylus', 'push'])
+gulp.task('default', ['compile-stylus', 'serve', 'watch']);
 
