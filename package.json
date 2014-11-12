@@ -28,7 +28,8 @@
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
     "underscore": "^1.7.0",
-    "winston": "^0.8.1"
+    "winston": "^0.8.1",
+    "chai": "~1.10.0"
   },
   "devDependencies": {
     "gulp": "^3.8.9",
