@@ -1,5 +1,6 @@
 
 var express = require('express');
+var path = require('path');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 
@@ -17,7 +18,7 @@ var model = {
 // all our middleware to
 var app = express();
 app.use(bodyParser.json());
-app.use(morgan('dev', { 'stream': logger.stream }));
+app.use(morgan('dev'));
 
 app.use(function(req, res, next) {
   req.model = model;
@@ -27,8 +28,8 @@ app.use(function(req, res, next) {
 app.use('/api', require('./controllers/index'));
 //TODO figure out what other controllers are needed
 app.use('/*', function(req, res) {
-  var angular_index = __dirname + '/../../client/index.html';
-  res.sendfile(angular_index);
+  res.sendFile('index.html', {root: path.join(__dirname, '../../client')});
+
   //TODO do I need to set up static stuff?
 });
 
