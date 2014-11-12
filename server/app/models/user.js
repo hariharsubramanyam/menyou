@@ -3,14 +3,9 @@ var mongoose = require('mongoose-q')();
 
 var userSchema = mongoose.Schema({
 
-  name: {
+  username: {
     type: String,
-    required: 'User must have a name'
-  },
-
-  email: {
-    type: String,
-    required: 'User must have an email address'
+    required: 'User must have a username'
   },
 
   password: {
@@ -22,9 +17,7 @@ var userSchema = mongoose.Schema({
   tasteProfile: {
     likes: [String],
     dislikes: [String],
-    favorites: [String],
-    forbidden: [String],
-    restrictions: [String]
+    forbidden: [String]
   }
 
 });

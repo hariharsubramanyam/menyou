@@ -6,22 +6,21 @@ var passport = require('../config/passport');
 var resHelper = require('../helpers/response-helper.js');
 var tokenHelper = require('../helpers/token-helper.js');
 
-router.get('/dishes',
-  passport.authenticate('bearer', {session: false}),
+router.get('/token',
+  passport.authenticate('local', {session: false}),
   function(req, res) {
-    res.send({message: 'hi'});
+    var token = tokenHelper.create(req.user);
+    resHelper.success(res, 'Successfully obtained token', {
+      token: token
   });
 
-router.get('/me',
-  passport.authenticate('bearer', {session: false}),
+router.post('/register',
   function(req, res) {
-
+    
   });
 
-router.put('/taste',
+router.get('/validate',
   passport.authenticate('bearer', {session: false}),
   function(req, res) {
-
+    
   });
-
-module.exports = router;
