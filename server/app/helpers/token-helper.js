@@ -10,7 +10,7 @@ var create_token = function(user) {
 
   // set token expiration date as one day from now
   var expiration_days = 1;
-  var expires = moment().add(expiration_days, 'days').valueOf();
+  var expires = moment().add('days', expiration_days).valueOf();
 
   // encode the token with some identifying information
   var token = jwt.encode({
@@ -35,15 +35,8 @@ var verify_token = function(token) {
       // it is invalid
       if(decoded_token.expires <= Date.now)
         return null;
+      return user;
 
-      // if the token matches the current token
-      // for this user (i.e. if the token has not
-      // been invalidated by a logon or logoff in
-      // the time since it was issued)
-      if(user.token == token)
-        return user;
-
-      return null;
     });
 
 };

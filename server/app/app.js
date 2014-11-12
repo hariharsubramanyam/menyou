@@ -2,7 +2,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
-//TODO: cookie parser?
 
 // load configurations for mongodb and passport
 var passport = require('./config/passport');
