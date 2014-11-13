@@ -28,8 +28,16 @@ var FuzzySet = require("fuzzyset.js");
  *           more points, the more highly recommended the dish is.
  */
 var recommend = function(menu_items, taste_profile) {
+
+  // Vary from 0 to 1. This is the number returned by fuzzyset.get(someval). Read about what
+  // that means on http://glench.github.io/fuzzyset.js/ 
   var FUZZY_MATCH_THRESHOLD = 0.5;
+
+  // Return at most NUM_ELEMENTS_RETURNED recommendations.
   var NUM_ELEMENTS_RETURNED = Math.min(menu_items.length, 20);
+
+  // Helper function to check if the fuzzyset contains the value.
+  // Returns 1 if the set contains the value and 0 otherwise.
   var contains = function(fuzzyset, val) {
     if (fuzzyset.length() === 0) return 0;
     var match = fuzzyset.get(val);
@@ -67,16 +75,19 @@ var recommend = function(menu_items, taste_profile) {
       }
     }); // forEach token
 
+    // Consider the dish only if it isn't forbidden.
     if (!isForbidden) {
       menu_item.points = points;
       recommended.push(menu_item);
     }
   }); // forEach menu_item
 
+  // Sort the recommendations in descending order by points.
   recommended.sort(function(a, b) {
-    return a.points - b.points;
+    return b.points - a.points;
   });
 
+  // Return only the first NUM_ELEMENTS_RETURNED recommended dishes.
   return recommended.slice(0, NUM_ELEMENTS_RETURNED);
 };
 
