@@ -1,4 +1,5 @@
 var request = require("request");
+var secrets = require("./secrets.js");
 /**
  * Given a properly formatted menu object returned from the Locu API
  * (see https://dev.locu.com/documentation/#menu), extract the menu items.
@@ -29,6 +30,7 @@ var extract_menu_items = function(menu, restaurant) {
       subsection.contents.forEach(function(subsection_content) {
 
         // If this is is a menu item, add it to the array.
+        // Fill in null for any fields that don't exist.
         if (subsection_content.type === "ITEM") {
           var item = subsection_content;
           menu_items.push({
@@ -74,6 +76,8 @@ var menu_items_for_venue = function(restaurant) {
   var r_lon = null;
   var r_address = null;
 
+  // Check the restaurant for the name, latitude, longitude, and address.
+  // There are many if statements below because we don't want to access undefined values.
   if (restaurant !== undefined) {
     r_name = restaurant.name;
     if (restaurant.location !== undefined) {
@@ -82,6 +86,8 @@ var menu_items_for_venue = function(restaurant) {
         r_lat = restaurant.location.geo.coordinates[1];
         r_lon = restaurant.location.geo.coordinates[0];
       }
+      // The address will be: address1, locality, region
+      // For example, 1 Main St, Cambridge, MA
       r_address = "";
       if (restaurant.location.address1 !== undefined) {
         r_address += restaurant.location.address1;
@@ -105,8 +111,10 @@ var menu_items_for_venue = function(restaurant) {
     "address": r_address,
   };
 
+  // Iterate through each menu for the restaurant.
   var menu_items = [];
   restaurant.menus.forEach(function(menu) {
+    // Extract the menu items from the restaurant and add them to the list.
     extract_menu_items(menu, r_data).forEach(function(menu_item) {
       menu_items.push(menu_item);
     });
@@ -140,9 +148,11 @@ var menu_items_for_venue = function(restaurant) {
  */
 var get_nearby_dishes = function(lon, lat, radius_meters, likes, callback) {
   var LOCU_URL = "https://api.locu.com/v2/venue/search";
-  var API_KEY = "f165c0e560d0700288c2f70cf6b26e0c2de0348f";
+
+  // Search for restaurants with menus near the given location within the given radius.
+  // Retrieve the name, menus, and location for the restaurants.
   var request_body =  {
-    "api_key" : API_KEY,
+    "api_key" : secrets.LOCU_API_KEY,
     "fields" : [ "name", "menus", "location"],
     "venue_queries" : [
       {
@@ -158,6 +168,8 @@ var get_nearby_dishes = function(lon, lat, radius_meters, likes, callback) {
       }
     ]
   };
+
+  // Make the POST request to get this data.
   request({
     "url": LOCU_URL,
     "method": "POST",
@@ -167,8 +179,10 @@ var get_nearby_dishes = function(lon, lat, radius_meters, likes, callback) {
     if (err) {
       callback(err);
     } else {
+      // Iterate through each restaurant.
       var menu_items = [];
       body.venues.forEach(function(venue) {
+        // Get the menu items for the restaurant and add it to teh list of menu items.
         menu_items_for_venue(venue).forEach(function(menu_item) {
           menu_items.push(menu_item);
         });

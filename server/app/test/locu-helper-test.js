@@ -137,7 +137,9 @@ describe("Locu Helper", function() {
 
   describe("#get_nearby_dishes", function() {
     it("Gets dishes near the user", function(done) {
-      this.timeout(5000);
+      // This is a network request, so allow 7 seconds to run.
+      this.timeout(7000);
+
       var LAT = 42.359003;
       var LON = -71.091853;
       var RADIUS_METERS = 2000;
