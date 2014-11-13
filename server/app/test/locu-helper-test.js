@@ -145,7 +145,6 @@ describe("Locu Helper", function() {
       var RADIUS_METERS = 2000;
       var LIKES = ["pad thai", "chicken", "pizza"];
       locu_helper.get_nearby_dishes(LON, LAT, RADIUS_METERS, LIKES, function(err, menu_items) {
-        console.log(menu_items.length);
         menu_items.forEach(function(menu_item) {
           expect(menu_item).to.have.property("name");
           expect(menu_item).to.have.property("description");
