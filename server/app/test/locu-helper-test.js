@@ -137,14 +137,15 @@ describe("Locu Helper", function() {
 
   describe("#get_nearby_dishes", function() {
     it("Gets dishes near the user", function(done) {
-      // This is a network request, so allow 7 seconds to run.
-      this.timeout(7000);
+      // This is a network request, so allow more time to run.
+      this.timeout(10000);
 
       var LAT = 42.359003;
       var LON = -71.091853;
       var RADIUS_METERS = 2000;
-      var LIKES = ["pad thai"];
+      var LIKES = ["pad thai", "chicken", "pizza"];
       locu_helper.get_nearby_dishes(LON, LAT, RADIUS_METERS, LIKES, function(err, menu_items) {
+        console.log(menu_items.length);
         menu_items.forEach(function(menu_item) {
           expect(menu_item).to.have.property("name");
           expect(menu_item).to.have.property("description");
