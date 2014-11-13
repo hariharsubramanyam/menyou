@@ -29,7 +29,8 @@
     "passport-local": "^1.0.0",
     "underscore": "^1.7.0",
     "winston": "^0.8.1",
-    "chai": "~1.10.0"
+    "chai": "~1.10.0",
+    "request": "~2.48.0"
   },
   "devDependencies": {
     "gulp": "^3.8.9",
