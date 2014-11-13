@@ -1,5 +1,7 @@
+var FuzzySet = require("fuzzyset.js");
 /**
  * Recommend dishes for a given taste profile.
+ *
  * @param menu_items - The array of dishes, should take the form: 
  * [
  *  {
@@ -26,6 +28,56 @@
  *           more points, the more highly recommended the dish is.
  */
 var recommend = function(menu_items, taste_profile) {
+  var FUZZY_MATCH_THRESHOLD = 0.5;
+  var NUM_ELEMENTS_RETURNED = Math.min(menu_items.length, 20);
+  var contains = function(fuzzyset, val) {
+    if (fuzzyset.length() === 0) return 0;
+    var match = fuzzyset.get(val);
+    if (match !== null && match[0][0] >= FUZZY_MATCH_THRESHOLD) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+
+  // Create fuzzy sets for each aspect of the taste profile.
+  var like_set = FuzzySet(taste_profile.likes);
+  var dislike_set = FuzzySet(taste_profile.dislikes);
+  var forbidden_set = FuzzySet(taste_profile.forbidden);
+  
+  // Set array of recommended meals.
+  var recommended = [];
+
+  // Iterate through each menu item.
+  menu_items.forEach(function(menu_item) {
+
+    // Tokenize the name + description.
+    var tokens = (menu_item.name + " " + menu_item.description).split(" ");
+    var isForbidden = false;
+    var points = 0;
+
+    // Iterate through each token.
+    tokens.forEach(function(token) {
+      // Check for forbidden token to forbid the meal.
+      if (contains(forbidden_set, token) === 1) {
+        isForbidden = true;
+      } else if (!isForbidden) {
+        // Update the points.
+        points += contains(like_set, token) - contains(dislike_set, token);
+      }
+    }); // forEach token
+
+    if (!isForbidden) {
+      menu_item.points = points;
+      recommended.push(menu_item);
+    }
+  }); // forEach menu_item
+
+  recommended.sort(function(a, b) {
+    return a.points - b.points;
+  });
+
+  return recommended.slice(0, NUM_ELEMENTS_RETURNED);
 };
 
 module.exports.recommend = recommend;
