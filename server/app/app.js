@@ -28,7 +28,7 @@ app.use(function(req, res, next) {
 app.use('/api', require('./controllers/index'));
 //TODO figure out what other controllers are needed
 app.use('/*', function(req, res) {
-  res.sendFile('index.html', {root: path.join(__dirname, '../../client')});
+  res.sendFile('index.html', {root: path.join(__dirname, '../../client/source')});
 
   //TODO do I need to set up static stuff?
 });
