@@ -20,6 +20,7 @@ var supervisor = require('gulp-supervisor');
 var handlebars = require('gulp-handlebars');
 var watch = require('gulp-watch');
 var stylus = require('gulp-stylus'); // gulp stylus compiler
+var del = require('del');
 var jeet = require('jeet'); // grid system for stylus
 
 /**
@@ -48,10 +49,29 @@ gulp.task('compile-stylus', function() {
 });
 
 gulp.task('build-js', function() {
-
+  gulp.src('client/source/assets/js', {base: 'client/source/'})
+    .pipe(gulp.dest('client/build'));
 });
 
 gulp.task('build-img', function() {
+  gulp.src('client/source/assets/img', {base: 'client/source/'})
+    .pipe(gulp.dest('client/build'));
+});
+
+gulp.task('build-html', function() {
+  gulp.src('client/source/index.html')
+    .pipe(gulp.dest('client/build'));
+});
+
+gulp.task('clean', function(cb) {
+  del([
+    'client/build/**/**',
+    'client/build/**'
+  ], cb);
+});
+
+//TODO: link assets into head of html file
+gulp.task('link-assets', function() {
 
 });
 
@@ -99,8 +119,13 @@ gulp.task('push', function() {
 
 gulp.task('watch', function() {
   gulp.watch(['client/source/assets/style/*.styl', 'client/source/assets/style/partials/*.styl'], ['compile-stylus']);
+  gulp.watch('client/source/assets/js/*.js', ['build-js']);
+  gulp.watch('client/source/assets/img/', ['build-img']);
+  gulp.watch(['client/source/index.html', 'client/build/assets/'], ['build-html', 'link-assets']);
+  gulp.watch('client/source/templates/', ['compile-handlebars']);
 });
 
-gulp.task('deploy', ['compile-stylus', 'push'])
-gulp.task('default', ['compile-stylus', 'serve', 'watch']);
+gulp.task('deploy', ['build', 'push']);
+gulp.task('build', ['compile-stylus', 'build-img', 'build-js', 'build-html', 'compile-handlebars', 'link-assets']);
+gulp.task('default', ['build', 'serve']);
 

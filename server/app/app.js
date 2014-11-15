@@ -26,11 +26,10 @@ app.use(function(req, res, next) {
 });
 
 app.use('/api', require('./controllers/index'));
-//TODO figure out what other controllers are needed
-app.use('/*', function(req, res) {
-  res.sendFile('index.html', {root: path.join(__dirname, '../../client')});
+app.use('/api/auth', require('./controllers/auth'));
 
-  //TODO do I need to set up static stuff?
+app.use('/*', function(req, res) {
+  res.sendFile('index.html', {root: path.join(__dirname, '../../client/build/')});
 });
 
 
