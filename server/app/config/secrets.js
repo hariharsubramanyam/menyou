@@ -4,3 +4,4 @@
  * want to make a Locu account and get their own API key), we make this file visible on GitHub.
  */
 module.exports.LOCU_API_KEY = "f165c0e560d0700288c2f70cf6b26e0c2de0348f";
+module.exports.SALT = 10;

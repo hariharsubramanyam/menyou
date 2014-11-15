@@ -5,6 +5,7 @@ var bcrypt = require('bcrypt');
 var passport = require('../config/passport');
 var resHelper = require('../helpers/response-helper.js');
 var tokenHelper = require('../helpers/token-helper.js');
+var secrets = require("../config/secrets.js");
 
 /**
  * Create an access token for the given user
@@ -41,7 +42,7 @@ router.post('/register',
 
     //TODO switch to async versions of these
     // save the hashed version of the user's password
-    var salt = bcrypt.genSaltSync(10);
+    var salt = bcrypt.genSaltSync(secrets.SALT);
     user.password = bcrypt.hashSync(req.body.password, salt)
 
     // set the default taste profile (empty)

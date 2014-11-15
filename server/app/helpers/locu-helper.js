@@ -1,5 +1,5 @@
 var request = require("request");
-var secrets = require("./secrets.js");
+var secrets = require("../config/secrets.js");
 /**
  * Given a properly formatted menu object returned from the Locu API
  * (see https://dev.locu.com/documentation/#menu), extract the menu items.

@@ -5,6 +5,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var BearerStrategy = require('passport-http-bearer').Strategy;
 var token_helper = require('../helpers/token-helper');
+var secrets = require("../config/secrets.js");
 
 var User = require('../models/user');
 
@@ -14,15 +15,11 @@ passport.use(new LocalStrategy({
     passwordField: 'password'
   },
   function(username, password, done) {
-
-    var salt = bcrypt.genSaltSync(10);
-    var hash = bcrypt.hashSync(password, salt);
-
     User.
-      findOne({ "username": username, "password": hash })
+      findOne({ "username": username})
       .execQ()
       .then(function(user) {
-        if(!user)
+        if(!user && !bcrypt.compareSync(password, user.password))
           return done(null, false, { message: 'Invalid login credentials.' });
         return done(null, user);
       })
