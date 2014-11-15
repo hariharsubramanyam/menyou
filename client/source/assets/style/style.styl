@@ -15,7 +15,7 @@ hr {
 }
 
 #map-canvas {
-	width: 45%;
+	/*width: calc(100% - 465px);*/
 	height: calc(100% - 52px);
 	top: 52px;
 	border-right: 1px solid #ccc;
@@ -60,11 +60,12 @@ hr {
 }
 
 #menu-container {
-	width: 55%;
+	width: 465px;
 	height: calc(100% - 52px);
 	right: 0px;
 	position: absolute;
 	top: 52px;
+	overflow: scroll;
 }
 
 #question {
@@ -102,9 +103,15 @@ hr {
 
 }
 
+.meal .price {
+	font-size: 13px;
+	font-style: italic;
+	float: right;
+}
+
 /** ----------------------------------------------- **/
 
-@media (min-width: 850px) {
+@media (min-width: 805px) {
 	#pac-input:focus {
 		border-color: #4d90fe;
 		margin-left: -1px;
@@ -126,12 +133,50 @@ hr {
 	.pac-container {
 		font-family: Lato;
 	}
+	#map-canvas {
+		width: calc(100% - 465px);
+		height: calc(100% - 52px);
+		top: 52px;
+		border-right: 1px solid #ccc;
+	}
+	#menu-container {
+		width: 465px;
+		height: calc(100% - 52px);
+		right: 0px;
+		position: absolute;
+		top: 52px;
+	}
 }
 
 @media (min-width: 0px) {
-	@media (max-width: 849px) {
+	@media (max-width: 804px) {
 		#pac-input {
 			display: none;
+		}
+		#menu-container {
+			width: 465px;
+			height: calc(100% - 52px);
+			right: 0px;
+			position: absolute;
+			top: 52px;
+		}
+		#map-canvas {
+			width: calc(100% - 465px);
+			height: calc(100% - 52px);
+			top: 52px;
+			border-right: 1px solid #ccc;
+		}
+	}
+	@media (max-width: 465px) {
+		#map-canvas {
+			display:;
+		}
+		#menu-container {
+			width: 100%;
+			height: calc(100% - 52px);
+			right: 0px;
+			position: absolute;
+			top: 52px;
 		}
 	}
 }
