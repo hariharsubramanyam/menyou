@@ -1,4 +1,3 @@
-
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
@@ -25,8 +24,8 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/api', require('./controllers/index'));
 app.use('/api/auth', require('./controllers/auth'));
+app.use('/api/taste', require('./controllers/taste'));
 app.use(express.static(path.join(__dirname, '../../client/build')));
 
 module.exports = app;
