@@ -105,19 +105,7 @@ gulp.task('push', function() {
       recursive: true,
       clean: true,
       silent: true,
-      exclude: ['.gitignore', '.git', 'npm-debug.log', 'gulpfile', 'client']
-    }));
-  // push client
-  gulp.src('./client/build')
-    .pipe(rsync({
-      root: './client',
-      username: 'root',
-      hostname: '104.236.61.65',
-      destination: 'menyou/client',
-      compress: true,
-      recursive: true,
-      clean: true,
-      silent: true
+      exclude: ['.gitignore', '.git', 'npm-debug.log', 'gulpfile']
     }));
 });
 
