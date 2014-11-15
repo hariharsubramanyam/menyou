@@ -1,9 +1,8 @@
-
 var jwt = require('jwt-simple');
 var moment = require('moment');
 var User = require('../models/user');
+var secrets = require("../config/secrets.js");
 
-var token_secret = 'this_is_a_secret';
 
 // create an access token for the given user
 var create_token = function(user) {
@@ -16,7 +15,7 @@ var create_token = function(user) {
   var token = jwt.encode({
     user_id: user.id,
     expires: expires
-  }, token_secret);
+  }, secrets.TOKEN_SECRET);
 
   return token;
 };
@@ -25,7 +24,7 @@ var create_token = function(user) {
 // return a promise for a boolean
 var verify_token = function(token, callback) {
   try {
-    var decoded_token = jwt.decode(token, token_secret);
+    var decoded_token = jwt.decode(token, secrets.TOKEN_SECRET);
     User.findOne({"_id": decoded_token.user_id}, function(err, user) {
       if (err) {
         callback(err);

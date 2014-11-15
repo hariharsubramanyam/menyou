@@ -5,3 +5,4 @@
  */
 module.exports.LOCU_API_KEY = "f165c0e560d0700288c2f70cf6b26e0c2de0348f";
 module.exports.SALT = 10;
+module.exports.TOKEN_SECRET = "this_is_a_secret";
