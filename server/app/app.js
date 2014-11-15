@@ -27,10 +27,6 @@ app.use(function(req, res, next) {
 
 app.use('/api', require('./controllers/index'));
 app.use('/api/auth', require('./controllers/auth'));
-
-app.use('/*', function(req, res) {
-  res.sendFile('index.html', {root: path.join(__dirname, '../../client/build/')});
-});
-
+app.use(express.static(path.join(__dirname, '../../client/build')));
 
 module.exports = app;
