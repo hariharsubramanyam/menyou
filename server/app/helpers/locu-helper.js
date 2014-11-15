@@ -266,6 +266,7 @@ var get_nearby_dishes = function(lon, lat, radius_meters, likes, callback) {
       } else {
         num_completed += 1;
         if (num_completed === chosen_likes.length) {
+          console.log(menu_items);
           callback(null, menu_items);
         }
       }

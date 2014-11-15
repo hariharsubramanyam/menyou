@@ -31,7 +31,7 @@ var recommend = function(menu_items, taste_profile) {
 
   // Vary from 0 to 1. This is the number returned by fuzzyset.get(someval). Read about what
   // that means on http://glench.github.io/fuzzyset.js/ 
-  var FUZZY_MATCH_THRESHOLD = 0.5;
+  var FUZZY_MATCH_THRESHOLD = 0.7;
 
   // Return at most NUM_ELEMENTS_RETURNED recommendations.
   var NUM_ELEMENTS_RETURNED = Math.min(menu_items.length, 20);
