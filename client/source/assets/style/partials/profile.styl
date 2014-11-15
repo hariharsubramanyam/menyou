@@ -1,13 +1,10 @@
 #profile-container {
-    min-height: calc(100% - 103px);
-    top: 77px;
-    border: 1px solid #ccc;
-    position: absolute;
+    min-height: calc(90% - 52px);
     width: 90%;
-    left: 5%;
-    right: 5%;
+    margin: 40px 5%;
     background-color: #FCFCF6;
     text-align: center;
+    border: 1px solid #ccc;
 }
 
 #username {
@@ -18,27 +15,43 @@
 }
 
 #likes-container {
-    position: absolute;
     left: 5%;
     width: 30%;
-    height: calc(100% - 70px);
+    display: inline-block;
+    vertical-align: top;
+    // background-color: #f7f7e3;
 }
 
 #dislikes-container {
-    position: absolute;
     left: 35%;
     width: 30%;
-    height: calc(100% - 70px);
+    display: inline-block;
+    vertical-align: top;
+    // background-color: #f7f7e3;
 }
 
 #restrictions-container {
-    position: absolute;
     right: 5%;
     width: 30%;
-    height: calc(100% - 70px);
+    display: inline-block;
+    vertical-align: top;
+    padding-bottom: 20px;
+    // background-color: #f7f7e3;
 }
 
 .section-title {
     font-size: 20px;
     font-weight: 400;
+    margin-bottom: 5px;
+}
+
+#allergies {
+    text-align: left;
+    right: auto;
+    left: auto;
+}
+
+#likes-input, #dislikes-input {
+    width: 80%;
+    height: 25px;
 }
