@@ -45,7 +45,8 @@ gulp.task('compile-stylus', function() {
     .pipe(stylus({
       use: [ jeet() ]
     }))
-    .pipe(gulp.dest('./client/build/assets/style/style.css'));
+    .pipe(concat('style.css'))
+    .pipe(gulp.dest('./client/build/assets/style/'));
 });
 
 gulp.task('build-js', function() {
@@ -107,7 +108,8 @@ gulp.task('push', function() {
   // push client
   gulp.src('./client/build')
     .pipe(rsync({
-      root: './client/build',
+      root: './client',
+      username: 'root',
       hostname: '104.236.61.65',
       destination: 'menyou/client',
       compress: true,
