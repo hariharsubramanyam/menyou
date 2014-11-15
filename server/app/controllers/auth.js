@@ -22,7 +22,8 @@ router.post('/token',
   function(req, res) {
     var token = tokenHelper.create(req.user);
     resHelper.success(res, 'Successfully obtained token', {
-      token: token
+      "token": token,
+      "username": req.user.username
     });
   });
 
@@ -38,15 +39,27 @@ router.post('/token',
 router.post('/register',
   function(req, res) {
     async.waterfall([
-      // Step 1: Generate salt.
+      // Step 1: Ensure that the username does not exist.
+      function(callback) {
+        req.model.User.findOne({"username": req.body.username}, function(err, user) {
+          if (err) {
+            callback(err);
+          } else if (user) {
+            callback("Username already exists!");
+          } else {
+            callback(null);
+          } // else
+        }); // findOne
+      }, 
+      // Step 2: Generate salt.
       function(callback) {
         bcrypt.genSalt(secrets.SALT, callback);
       },
-      // Step 2: Hash password.
+      // Step 3: Hash password.
       function(salt, callback) {
         bcrypt.hash(req.body.password, salt, callback);
       },
-      // Step 3: Save user.
+      // Step 4: Save user.
       function(hash, callback) {
         var user = new req.model.User();
 
@@ -66,16 +79,16 @@ router.post('/register',
             var access_token = tokenHelper.create(user);
             callback(null, {
               "token": access_token,
-              "user": user
+              "username": user.username
             }); // callback
           } // else
         }); // save
       }, // step 3
     ], function(err, result) {
       if (err) {
-        resHelper.error(res, err);
+        resHelper.failure(res, 200, err);
       } else {
-        resHelper.success(res, result);
+        resHelper.success(res, "Successfully registered", result);
       }
     }); // final callback
   });
@@ -84,7 +97,7 @@ router.post('/register',
  * Check if a token is valid. If yes, return the user object
  * associated with that access token.
  * Request body:
- *   Nothing expected. Access token provided in the header
+ *   Access Token in access_code paremter in query string.
  * Response content:
  *   user: the user object associated with the provided
  *         access token.
@@ -93,7 +106,7 @@ router.get('/validate',
   passport.authenticate('bearer', {session: false}),
   function(req, res) {
     resHelper.success(res, 'Valid token', {
-      user: req.user
+      "username": req.user.username
     });
   });
 

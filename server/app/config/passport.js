@@ -58,7 +58,7 @@ passport.use(new BearerStrategy(
   function(token, done) {
     token_helper.verify(token, function(err, user) {
       if (err) {
-        return done(err);
+        return done(null, false, { "message": err });
       } else {
         return done(null, user);
       } // else

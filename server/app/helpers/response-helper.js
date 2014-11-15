@@ -17,7 +17,6 @@ var send_failure_response = function(res, code, message) {
 var send_failure_response_from_error = function(res, err) {
   var message = 'The server returned an error: ' + err.message;
   send_failure_response(res, 500, message);
-  console.log(err);
 };
 
 module.exports = {

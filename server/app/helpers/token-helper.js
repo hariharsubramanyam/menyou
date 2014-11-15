@@ -24,18 +24,22 @@ var create_token = function(user) {
 // verify the given access token
 // return a promise for a boolean
 var verify_token = function(token, callback) {
-  var decoded_token = jwt.decode(token, token_secret);
-  User.findOne({"_id": decoded_token.user_id}, function(err, user) {
-    if (err) {
-      callback(err);
-    } else if (!user) {
-      callback("User does not exist");
-    } else if (decoded_token.expires <= Date.now) {
-      callback("Token has expired");
-    } else {
-      callback(null, user);
-    }
-  });
+  try {
+    var decoded_token = jwt.decode(token, token_secret);
+    User.findOne({"_id": decoded_token.user_id}, function(err, user) {
+      if (err) {
+        callback(err);
+      } else if (!user) {
+        callback("User does not exist");
+      } else if (decoded_token.expires <= Date.now) {
+        callback("Token has expired");
+      } else {
+        callback(null, user);
+      }
+    });
+  } catch(err) {
+    callback("Failed to decode token");
+  }
 };
 
 module.exports = {
