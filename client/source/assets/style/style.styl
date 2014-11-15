@@ -1,0 +1,160 @@
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	background-color: #FCFCF6;
+}
+
+hr {
+  margin: 0px 0px 10px 0px;
+  color: #7a7a7a;
+  border: 0;
+  border-top: 1px solid #eee;
+}
+
+#map-canvas {
+	width: 45%;
+	height: calc(100% - 52px);
+	top: 52px;
+	border-right: 1px solid #ccc;
+}
+
+#navbar div {
+	display: inline;
+}
+
+#navbar {
+	position: absolute;
+	height: 40px;
+	padding-bottom: 10px;
+	border: 1px solid #ccc;
+	width: 100%;
+	background-color: white;
+}
+
+#logo {
+	font-size: 35px;
+	margin-left: 20px;
+	color: #5D8A31;
+	font-weight: 300;
+}
+
+#logout {
+	position: absolute;
+	right: 20px;
+	top: 15px;
+}
+
+#profile {
+	position: absolute;
+	right: 100px;
+	top: 15px;
+}
+
+#profile:hover, #logout:hover {
+	color: #5D8A31;
+	font-weight: 400;
+	cursor: pointer;
+}
+
+#menu-container {
+	width: 55%;
+	height: calc(100% - 52px);
+	right: 0px;
+	position: absolute;
+	top: 52px;
+}
+
+#question {
+	border: 1px solid pink;
+	padding: 10px;
+	margin: 10px;
+}
+
+#recommendation-container {
+	padding: 10px;
+	margin: 10px;
+}
+
+#recommendation-title {
+	font-weight: 400;
+	font-size: 20px;
+}
+
+.meal {
+	margin: 10px 5px 10px 5px;
+	border: 1px solid #FCFCF6;
+	padding: 5px;
+	border-radius: 4px;
+}
+
+.meal p {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.meal .description {
+	font-size: 13px;
+	margin-left: 10px;
+	font-style: italic;
+
+}
+
+/** ----------------------------------------------- **/
+
+@media (min-width: 850px) {
+	#pac-input:focus {
+		border-color: #4d90fe;
+		margin-left: -1px;
+		padding-left: 14px;  /* Regular padding-left + 1. */
+		margin-left: 20px;
+		margin-right: 20px;
+		width: 301px;
+	}
+	#pac-input {
+		padding: 0 11px 0 13px;
+		font-family: Lato;
+		font-size: 15px;
+		font-weight: 300;
+		text-overflow: ellipsis;
+		margin-left: 20px;
+		margin-right: 20px;
+		width: 300px;
+	}
+	.pac-container {
+		font-family: Lato;
+	}
+}
+
+@media (min-width: 0px) {
+	@media (max-width: 849px) {
+		#pac-input {
+			display: none;
+		}
+	}
+}
+
+.controls {
+	margin-top: 16px;
+	border: 1px solid transparent;
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: 32px;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#type-selector {
+	color: #fff;
+	background-color: #4d90fe;
+	padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+	font-family: Lato;
+	font-size: 13px;
+	font-weight: 300;
+}
