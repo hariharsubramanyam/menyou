@@ -23,22 +23,19 @@ var create_token = function(user) {
 
 // verify the given access token
 // return a promise for a boolean
-var verify_token = function(token) {
+var verify_token = function(token, callback) {
   var decoded_token = jwt.decode(token, token_secret);
-
-  return User
-    .findOne({ _id: decoded_token.user_id })
-    .execQ()
-    .then(function(user) {
-
-      // if the token is more than a day old,
-      // it is invalid
-      if(decoded_token.expires <= Date.now)
-        return null;
-      return user;
-
-    });
-
+  User.findOne({"_id": decoded_token.user_id}, function(err, user) {
+    if (err) {
+      callback(err);
+    } else if (!user) {
+      callback("User does not exist");
+    } else if (decoded_token.expires <= Date.now) {
+      callback("Token has expired");
+    } else {
+      callback(null, user);
+    }
+  });
 };
 
 module.exports = {

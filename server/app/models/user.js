@@ -1,5 +1,5 @@
 
-var mongoose = require('mongoose-q')();
+var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
 
@@ -8,9 +8,8 @@ var userSchema = mongoose.Schema({
     required: 'User must have a username'
   },
 
-  password: {
+  hash_password: {
     type: String,
-    select: false,
     required: 'User must have a password'
   },
 

@@ -1,5 +1,6 @@
 
 var express = require('express');
+var async = require("async");
 var router = express.Router();
 var bcrypt = require('bcrypt');
 var passport = require('../config/passport');
@@ -36,36 +37,47 @@ router.post('/token',
  */
 router.post('/register',
   function(req, res) {
-    var user = new req.model.User();
+    async.waterfall([
+      // Step 1: Generate salt.
+      function(callback) {
+        bcrypt.genSalt(secrets.SALT, callback);
+      },
+      // Step 2: Hash password.
+      function(salt, callback) {
+        bcrypt.hash(req.body.password, salt, callback);
+      },
+      // Step 3: Save user.
+      function(hash, callback) {
+        var user = new req.model.User();
 
-    user.username = req.body.username;
+        // set the default taste profile (empty)
+        user.tasteProfile = {
+          likes: [],
+          dislikes: [],
+          forbidden: []
+        };
+        user.hash_password = hash;
+        user.username = req.body.username;
 
-    //TODO switch to async versions of these
-    // save the hashed version of the user's password
-    var salt = bcrypt.genSaltSync(secrets.SALT);
-    user.password = bcrypt.hashSync(req.body.password, salt)
-
-    // set the default taste profile (empty)
-    user.tasteProfile = {
-      likes: [],
-      dislikes: [],
-      forbidden: []
-    };
-
-    // save the user!
-    user
-      .saveQ()
-      .then(function(saved_user) {
-        var access_token = tokenHelper.create(saved_user);
-        resHelper.success(res, 'Successfully registered', {
-          token: access_token,
-          user: saved_user
-        });
-      })
-      .catch(function(err) {
+        user.save(function(err) {
+          if (err) {
+            callback(err);
+          } else {
+            var access_token = tokenHelper.create(user);
+            callback(null, {
+              "token": access_token,
+              "user": user
+            }); // callback
+          } // else
+        }); // save
+      }, // step 3
+    ], function(err, result) {
+      if (err) {
         resHelper.error(res, err);
-      })
-      .done();
+      } else {
+        resHelper.success(res, result);
+      }
+    }); // final callback
   });
 
 /**

@@ -1,5 +1,5 @@
-
-var mongoose = require('mongoose-q')();
+var mongoose = require('mongoose');
+var async = require("async");
 var bcrypt = require('bcrypt');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -15,36 +15,54 @@ passport.use(new LocalStrategy({
     passwordField: 'password'
   },
   function(username, password, done) {
-    User.
-      findOne({ "username": username})
-      .execQ()
-      .then(function(user) {
-        if(!user && !bcrypt.compareSync(password, user.password))
-          return done(null, false, { message: 'Invalid login credentials.' });
-        return done(null, user);
-      })
-      .catch(function(err) {
+    var INVALID_LOGIN = "Invalid login credentials.";
+    async.waterfall([
+      // Step 1: Look up the user.
+      function(callback) {
+        User.findOne({ "username": username }, function(err, user) {
+          callback(err, user);
+        });
+      },
+      // Step 2: Check that the passwords match.
+      function(user, callback) {
+        if (!user) {
+          callback(INVALID_LOGIN);
+        } else {
+          console.log("username = " + username);
+          console.log("password = " + password);
+          console.log(user);
+          bcrypt.compare(password, user.hash_password, function(err, passwords_match) {
+            if (err) {
+              callback(err);
+            } else if (!passwords_match) {
+              callback(INVALID_LOGIN);
+            } else {
+              callback(null, user);
+            } // else
+          }); // compare
+        } // else 
+      } // function 
+    ], function(err, user) {
+      if (err === INVALID_LOGIN) {
+        return done(null, false, { "message": INVALID_LOGIN });
+      } else if (err) {
         return done(err);
-      })
-      .done();
-
-  }
-));
+      } else {
+        return done(null, user);
+      }
+    }); // final callback
+  }));
 
 // Token authentication
 passport.use(new BearerStrategy(
   function(token, done) {
-    token_helper.verify(token)
-      .then(function(user) {
-        if(!user)
-          return done(new Error('Token invalid'));
-        return done(null, user);
-      })
-      .catch(function(err) {
+    token_helper.verify(token, function(err, user) {
+      if (err) {
         return done(err);
-      })
-      .done();
-  }
-));
+      } else {
+        return done(null, user);
+      } // else
+    }); // verity
+  }));
 
 module.exports = passport;
