@@ -14,10 +14,11 @@ var User = require("./../models/user");
 //     res.send({message: 'hi'});
 //   });
 router.get('/dishes',
+  passport.authenticate('bearer', {session: false}),
   function(req, res) {
     var lat = req.query.lat;
     var lon = req.query.lon;
-    var user = req.user; //FIXME authenticate with passport
+    var user = req.user;
     //this is a callback called after getting dishes from Locu
     function handle_menu_items(err, menu_items){
       if (err){
@@ -36,9 +37,10 @@ router.get('/dishes',
   });
 
 router.put('/taste',
+  passport.authenticate('bearer', {session: false}),
   function(req, res) {
 
-    var taste_profile = req.user.tasteProfile;//FIXME authenticate wih passport
+    var taste_profile = req.user.tasteProfile;
     /**
     Update the taste profile
     @param updates - A  structure containing the keywords to add or remove in
@@ -74,8 +76,9 @@ router.put('/taste',
   });
 
 router.get('/taste',
+  passport.authenticate('bearer', {session: false}),
   function(req, res) {
-    var user = req.user;//FIXME authenticate wih passport
+    var user = req.user;
     //send the taste profile to client 
     //TODO use the response helpers
     res.send({"success" : true, "profile" : user.tasteProfile});
