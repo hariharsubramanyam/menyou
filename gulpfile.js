@@ -73,10 +73,8 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('link-assets', function() {
-  var target = gulp.src('client/build/*.html');
-  var sources = gulp.src(['client/build/assets/js/*.js', 'client/build/assets/style/*.css'], {read: false});
-  return target.pipe(inject(sources))
-    .pipe(concat('index.html'))
+  gulp.src('client/build/*.html')
+    .pipe(inject(gulp.src(['client/build/assets/js/*.js', 'client/build/assets/style/*.css'], {read: false}), {relative: true}))
     .pipe(gulp.dest('client/build'));
 });
 
