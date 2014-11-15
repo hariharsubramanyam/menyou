@@ -7,14 +7,15 @@ var resHelper = require('../helpers/response-helper.js');
 var tokenHelper = require('../helpers/token-helper.js');
 
 /**
- * Get an access token for the given user
+ * Create an access token for the given user
  * Request body:
- *   TODO: figure out where username and password should go
+ *  username: the username. should be unique.
+ *  password: the password.
  * Response content:
  *   token: the access token for the user whose credentials
  *          were provided with the request
  */
-router.get('/token',
+router.post('/token',
   passport.authenticate('local', {session: false}),
   function(req, res) {
     var token = tokenHelper.create(req.user);
@@ -36,7 +37,7 @@ router.post('/register',
   function(req, res) {
     var user = new req.model.User();
 
-    user.username = req.body.name;
+    user.username = req.body.username;
 
     //TODO switch to async versions of these
     // save the hashed version of the user's password

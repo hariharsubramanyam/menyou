@@ -10,16 +10,16 @@ var User = require('../models/user');
 
 // Email/Password authentication.
 passport.use(new LocalStrategy({
-    usernameField: 'email',
+    usernameField: 'username',
     passwordField: 'password'
   },
-  function(email, password, done) {
+  function(username, password, done) {
 
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(password, salt);
 
     User.
-      findOne({ email: email, password: hash })
+      findOne({ "username": username, "password": hash })
       .execQ()
       .then(function(user) {
         if(!user)
