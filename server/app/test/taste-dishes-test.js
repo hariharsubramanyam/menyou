@@ -1,9 +1,9 @@
 var request = require('request');
 var expect = require("chai").expect;
-var SERVER_ADDRESS = "http://localhost:8080/"
-var token = "";
 var User = require('../models/user');
 var db = require('../config/mongodb');
+var SERVER_ADDRESS = "http://localhost:8080/"
+var token = "";
 
 describe("Taste and Dishes routing", function(){
 	before(function(done){
@@ -16,7 +16,7 @@ describe("Taste and Dishes routing", function(){
 			"body": request_body
 		}, function(err, httpResponse, body) {
 		  if (err) {
-		    callback(err);
+		    throw error;
 		  } else {
 		  	token = body.content.token;
 		  	done();
@@ -43,7 +43,7 @@ describe("Taste and Dishes routing", function(){
 				}
 			}, function(err, httpResponse, body) {
 			  if (err) {
-			    callback(err);
+			    throw err;
 			  } else {
 			  	expect(body).to.have.property("success");
 			  	expect(body).to.have.property("message");
@@ -69,7 +69,7 @@ describe("Taste and Dishes routing", function(){
 				}
 			}, function(err, httpResponse, body) {
 			  if (err) {
-			    callback(err);
+			    throw err;
 			  } else {
 			  	expect(body).to.have.property("success");
 			  	expect(body).to.have.property("message");
@@ -102,7 +102,7 @@ describe("Taste and Dishes routing", function(){
 				}
 			}, function(err, httpResponse, body) {
 			  if (err) {
-			    callback(err);
+			    throw err;
 			  } else {
 			  	expect(body.content.likes.length).to.eql(0);
 			  	expect(body.content.dislikes.length).to.eql(0);
@@ -132,7 +132,7 @@ describe("Taste and Dishes routing", function(){
 				}
 			}, function(err, httpResponse, body) {
 			  if (err) {
-			    callback(err);
+			    throw err;
 			  } else {
 			  	expect(body).to.have.property("success");
 			  	expect(body).to.have.property("message");
@@ -150,11 +150,6 @@ describe("Taste and Dishes routing", function(){
 			});//request
 		});//it
 	});//describe
-
-	/*after(function(done){
-		
-		done();
-	});*/
 
 	after(function(done){
 		this.timeout(10000);
