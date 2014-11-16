@@ -8,8 +8,8 @@ var locuHelper = require('../helpers/locu-helper.js');
 router.get('/',
   passport.authenticate('bearer', {session: false}),
   function(req, res) {
-    var lat = parseInt(req.query.lat, 10);
-    var lon = parseInt(req.query.lon, 10);
+    var lat = parseFloat(req.query.lat);
+    var lon = parseFloat(req.query.lon);
     var radius = parseInt(req.query.radius, 10);
     var user = req.user;
     //this is a callback called after getting dishes from Locu
