@@ -11,10 +11,44 @@ var recommender = require('../helpers/recommender.js');
 var locuHelper = require('../helpers/locu-helper.js');
 
 /**
- * Recommend for the given user near the given latitude/ longitude and within the given radius.
- * Query String: ?lat=<latitude>&lon=<longitude>&radius=<radius in meters>
- * Response content:
- * The list of returned meals.
+ * Get a list of dishes recommended for the user.
+ *
+ * Request: 
+ * GET /dishes/?lat=<lat>&lon=<lon>&radius=<radius in meters>
+ *
+ * Headers:
+ * Content-Type: application/json
+ * Authorization: Bearer <token>
+ *
+ * Query String:
+ * lat (Number)
+ * lon (Number)
+ * radius (Number)
+ *
+ * Response:
+ *
+ * On success:
+ * {
+ *  "success": true,
+ *  "message": "Recommended meals",
+ *  "content": [
+ *    {
+ *      "name": String,
+ *      "description": String,
+ *      "price": String (or null),
+ *      "restaurant": {
+ *        "name": String,
+ *        "lat": Number,
+ *        "lon": Number,
+ *        "address": String
+ *       },
+ *      "points": Number
+ *     },
+ *    ...
+ *   ]
+ * }
+ *
+ * On invalid token, return 401 Unauthorized error.
  */
 router.get('/',
   passport.authenticate('bearer', {session: false}),
