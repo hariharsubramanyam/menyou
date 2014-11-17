@@ -21,9 +21,7 @@ $(document).on('click', '#logout', function(evt) {
 
 Menyou.UI.loadPage = function(template, data) {
   data = data || {};
-  $('body').prepend(Menyou.templates.app.nav(data));
-  $('#main-container').html(Menyou.templates[template](data));
-  //$('#main-container').append(Menyou.templates.app.footer(data));
+  $('body').html(Menyou.templates[template](data));
 };
 
 google.maps.event.addDomListener(window, 'load', Menyou.Map.initialize);

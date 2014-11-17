@@ -22,7 +22,7 @@ var watch = require('gulp-watch');
 var inject = require('gulp-inject');
 var stylus = require('gulp-stylus'); // gulp stylus compiler
 var del = require('del');
-var jeet = require('jeet'); // grid system for stylus
+var path = require('path');
 
 /**
  * this serves our node app, and restarts the server
@@ -43,9 +43,7 @@ gulp.task('serve', function() {
  */
 gulp.task('compile-stylus', function() {
   gulp.src('./client/source/assets/style/style.styl')
-    .pipe(stylus({
-      use: [ jeet() ]
-    }))
+    .pipe(stylus())
     .pipe(concat('style.css'))
     .pipe(gulp.dest('./client/build/assets/style/'));
 });
@@ -68,8 +66,8 @@ gulp.task('clean', function(cb) {
   ], cb);
 });
 
-gulp.task('compile-handlebars', function() {
-  gulp.src('client/source/templates/**/*.hbs')
+gulp.task('templates', function() {
+  gulp.src('client/source/templates/*.hbs')
     .pipe(handlebars())
     .pipe(wrap('Handlebars.template(<%= contents %>)'))
     .pipe(declare({
@@ -81,6 +79,20 @@ gulp.task('compile-handlebars', function() {
     }))
     .pipe(concat('templates.js'))
     .pipe(gulp.dest('client/build/assets/js/'));
+});
+
+gulp.task('partials', function() {
+  gulp.src('client/source/templates/partials/*.hbs')
+    .pipe(handlebars())
+    .pipe(wrap('Handlebars.registerPartial("<%= fname(file) %>", Handlebars.template(<%= contents %>))', {}, {
+      imports: {
+        fname: function(file) {
+          return path.basename(file.path, '.js');
+        }
+      }
+    }))
+    .pipe(concat('partials.js'))
+    .pipe(gulp.dest('client/build/assets/js'));
 });
 
 gulp.task('push', function() {
@@ -102,10 +114,11 @@ gulp.task('push', function() {
 gulp.task('watch', function() {
   gulp.watch(['client/source/assets/style/*.styl', 'client/source/assets/style/partials/*.styl'], ['compile-stylus']);
   gulp.watch(['client/source/index.html', 'client/source/assets/'], ['build-assets']);
-  gulp.watch('client/source/templates/', ['compile-handlebars']);
+  gulp.watch('client/source/templates/*.hbs', ['templates']);
+  gulp.watch('client/source/templates/partials/*.hbs', ['partials']);
 });
 
 gulp.task('deploy', ['build', 'push']);
-gulp.task('build', ['compile-stylus', 'build-assets', 'compile-handlebars']);
+gulp.task('build', ['compile-stylus', 'build-assets', 'partials', 'templates']);
 gulp.task('default', ['build', 'serve', 'watch']);
 

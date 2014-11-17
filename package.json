@@ -47,6 +47,7 @@
     "gulp-supervisor": "^0.1.2",
     "gulp-watch": "^1.1.0",
     "gulp-wrap": "^0.5.0",
-    "jeet": "^6.1.2"
+    "jeet": "^6.1.2",
+    "path": "^0.4.9"
   }
 }
