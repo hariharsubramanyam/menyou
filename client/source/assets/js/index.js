@@ -1,6 +1,5 @@
 $(document).ready(function() {
-    loadPage('profile');
-    // loadPage('index');
+    loadPage('index');
 });
 
 $(document).on('click', '#logo', function(evt) {
@@ -17,5 +16,5 @@ $(document).on('click', '#logout', function(evt) {
 
 loadPage = function(template, data) {
   data = data || {};
-  $('#main-container').html(Handlebars.templates[template](data));
+  $('#main-container').html(menyou.templates[template](data));
 };
