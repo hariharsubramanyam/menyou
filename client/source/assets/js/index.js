@@ -1,4 +1,3 @@
-Menyou = Menyou || {};
 Menyou.UI = {};
 
 $(document).ready(function() {
@@ -8,10 +7,6 @@ $(document).ready(function() {
 $(document).on('click', '#logo', function(evt) {
   Menyou.UI.loadPage('index');
   Menyou.Map.initialize();
-});
-
-$(document).on('click', '#profile', function(evt) {
-  Menyou.UI.loadPage('profile');
 });
 
 $(document).on('click', '#logout', function(evt) {

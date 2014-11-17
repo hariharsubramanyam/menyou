@@ -1,4 +1,3 @@
-Menyou = Menyou || {};
 Menyou.Map = {};
 
 Menyou.Map.initialize = function() {

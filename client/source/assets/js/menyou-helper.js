@@ -1,4 +1,3 @@
-Menyou = Menyou || {};
 Menyou.APIHelper = {};
 
 /**
