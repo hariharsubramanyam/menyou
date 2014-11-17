@@ -114,7 +114,7 @@ Menyou.APIHelper.responseHandlers = function(callback) {
   return {
     200: function(data) {
       console.log('OKAY');
-      console.log(datbodya)body;
+      console.log(data);
       callback(data);
     },
     304: function(jqxhr) {
