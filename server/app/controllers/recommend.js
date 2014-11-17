@@ -1,3 +1,8 @@
+/**
+ * Lead Author: Tawanda
+ *
+ * Get the recommended dishes near the user.
+ */
 var express = require('express');
 var router = express.Router();
 var passport = require('../config/passport');
@@ -5,17 +10,60 @@ var resHelper = require('../helpers/response-helper.js');
 var recommender = require('../helpers/recommender.js');
 var locuHelper = require('../helpers/locu-helper.js');
 
+/**
+ * Get a list of dishes recommended for the user.
+ *
+ * Request: 
+ * GET /api/dishes/?lat=<lat>&lon=<lon>&radius=<radius in meters>
+ *
+ * Headers:
+ * Content-Type: application/json
+ * Authorization: Bearer <token>
+ *
+ * Query String:
+ * lat (Number)
+ * lon (Number)
+ * radius (Number)
+ *
+ * Response:
+ *
+ * On success:
+ * {
+ *  "success": true,
+ *  "message": "Recommended meals",
+ *  "content": [
+ *    {
+ *      "name": String,
+ *      "description": String,
+ *      "price": String (or null),
+ *      "restaurant": {
+ *        "name": String,
+ *        "lat": Number,
+ *        "lon": Number,
+ *        "address": String
+ *       },
+ *      "points": Number
+ *     },
+ *    ...
+ *   ]
+ * }
+ *
+ * On invalid token, return 401 Unauthorized error.
+ */
 router.get('/',
   passport.authenticate('bearer', {session: false}),
   function(req, res) {
+
+    // Extract arguments from request.
     var lat = parseFloat(req.query.lat);
     var lon = parseFloat(req.query.lon);
     var radius = parseInt(req.query.radius, 10);
     var user = req.user;
-    //this is a callback called after getting dishes from Locu
+
+    //  Callback to be executed when menu items are fetched.
     function handle_menu_items(err, menu_items){
       if (err){
-        res.send({"success" : false})
+        resHelper.error(res, err);
       } else{
         //get recommended meals
         var meals = recommender.recommend(menu_items, user.tasteProfile);

@@ -1,3 +1,8 @@
+/**
+ * Lead Author: Harihar
+ *
+ * Configure login handler and token handler for passport.
+ */
 var mongoose = require('mongoose');
 var async = require("async");
 var bcrypt = require('bcrypt');
@@ -9,13 +14,16 @@ var secrets = require("../config/secrets.js");
 
 var User = require('../models/user');
 
-// Email/Password authentication.
+/**
+ * Username and password authentication.
+ */
 passport.use(new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password'
   },
   function(username, password, done) {
     var INVALID_LOGIN = "Invalid login credentials.";
+
     async.waterfall([
       // Step 1: Look up the user.
       function(callback) {
@@ -25,12 +33,10 @@ passport.use(new LocalStrategy({
       },
       // Step 2: Check that the passwords match.
       function(user, callback) {
+        // If the username does not exist, then signal an error.
         if (!user) {
           callback(INVALID_LOGIN);
         } else {
-          console.log("username = " + username);
-          console.log("password = " + password);
-          console.log(user);
           bcrypt.compare(password, user.hash_password, function(err, passwords_match) {
             if (err) {
               callback(err);
@@ -53,7 +59,9 @@ passport.use(new LocalStrategy({
     }); // final callback
   }));
 
-// Token authentication
+/**
+ * Token authentication.
+ */
 passport.use(new BearerStrategy(
   function(token, done) {
     token_helper.verify(token, function(err, user) {

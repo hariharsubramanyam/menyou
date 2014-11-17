@@ -1,4 +1,6 @@
 /**
+ * Lead Author: Harihar
+ *
  * Normally, this file would be in the .gitignore, because it contains API keys that we don't want
  * anybody to see. However, since the 6.170 TAs need to be able to run our project (and they don't
  * want to make a Locu account and get their own API key), we make this file visible on GitHub.
