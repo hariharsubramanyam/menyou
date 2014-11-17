@@ -7,6 +7,7 @@ $(document).ready(function() {
 
 $(document).on('click', '#logo', function(evt) {
   Menyou.UI.loadPage('index');
+  Menyou.Map.initialize();
 });
 
 $(document).on('click', '#profile', function(evt) {
