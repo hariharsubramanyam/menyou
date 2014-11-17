@@ -1,3 +1,5 @@
+Menyou = Menyou || {};
+
 $(document).on('click', '#likes-add', function(evt) {
     var input = $(this).parent().find('#likes-input');
     var newLike = input.val();
