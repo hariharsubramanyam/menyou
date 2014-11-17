@@ -7,6 +7,12 @@ Menyou
 
 A menu for you.
 
+##API Documentation
+
+The API documentation is accessed at the following link:
+
+https://docs.google.com/document/d/1DDVklyfrSfcfKjzs5Morc1ZGB5zDgEWIZnuiFBhSTxg/edit
+
 ##Directory Structure
 
 The meat of the app is divided into two parts, the client and the server, each in the correspondingly named folders.
@@ -58,8 +64,3 @@ The app can be accessed at 104.236.61.65:8080
 All routes matching 104.236.61.65:8080/api/\* are handled as API requests.
 All other routes are handled as front-end requests.
 
-##API Documentation
-
-The API documentation is accessed at the following link:
-
-https://docs.google.com/document/d/1DDVklyfrSfcfKjzs5Morc1ZGB5zDgEWIZnuiFBhSTxg/edit
