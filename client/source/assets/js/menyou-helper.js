@@ -6,7 +6,11 @@ Menyou = Menyou || {};
 Menyou.APIHelper = {};
 
 /**
+ * Get a token for the given username and password.
  *
+ * @param username - The username of the user.
+ * @param password - The password of the user.
+ * @param callback - Executed as callback(data). See API doc for /api/auth/token for response.
  */
 Menyou.APIHelper.getToken = function(username, password, callback) {
   $.ajax({
@@ -25,7 +29,11 @@ Menyou.APIHelper.getToken = function(username, password, callback) {
 };
 
 /**
+ * Register a new user.
  *
+ * @param username - The username of the user.
+ * @param password - The password for the user
+ * @param callback - Executed as callback(data). See API doc for /api/auth/register for response.
  */
 Menyou.APIHelper.register = function(username, password, callback) {
   $.ajax({
@@ -44,7 +52,10 @@ Menyou.APIHelper.register = function(username, password, callback) {
 };
 
 /**
+ * Check that the token is valid.
  *
+ * @param token - The token string.
+ * @param callback - Executed as callback(data). See API doc for /api/auth/validate for response.
  */
 Menyou.APIHelper.validateToken = function(token, callback) {
   $.ajax({
@@ -60,11 +71,17 @@ Menyou.APIHelper.validateToken = function(token, callback) {
 };
 
 /**
+ * Get the recommended dishes for the current user.
  *
+ * @param latitude - The latitude of the user's location.
+ * @param longitude - The longitude of the user's location.
+ * @param radius_meters - The search radius, in meters.
+ * @param token - The token string.
+ * @param callback - Executed as callback(data). See API doc for /api/dishes for response.
  */
-Menyou.APIHelper.getDishes = function(token, callback) {
+Menyou.APIHelper.getDishes = function(latitude, longitude, radius_meters, token, callback) {
   $.ajax({
-    url: '/api/dishes',
+    url: '/api/dishes/?lat=' + latitude + "&lon=" + longitude + "&radius=" + radius_meters,
     type: 'GET',
     headers: {
       'Accept': 'appliction/json; charset=utf-8',
@@ -76,7 +93,10 @@ Menyou.APIHelper.getDishes = function(token, callback) {
 };
 
 /**
+ * Get the taste profile for the current user.
  *
+ * @param token - The token string.
+ * @param callback - Executed as callback(data). See API doc for /api/taste for response.
  */
 Menyou.APIHelper.getTasteProfile = function(token, callback) {
   $.ajax({
@@ -92,9 +112,27 @@ Menyou.APIHelper.getTasteProfile = function(token, callback) {
 };
 
 /**
+ * Update the taste profile for the current user. 
  *
+ * @param updates - The updates to the taste profile, must take the form:
+ * {
+ *  "likesg: {
+ *    "add": ["keyword",...],
+ *    "remove: ["keyword",...],
+ *  },
+ *  "dislikesg: {
+ *    "add": ["keyword",...],
+ *    "remove: ["keyword",...],
+ *  },
+ *  "forbiddeng: {
+ *    "add": ["keyword",...],
+ *    "remove: ["keyword",...],
+ *  },
+ * }
+ * @param token - The token string.
+ * @param callback - Executed as callback(data). See API doc for /api/taste for response.
  */
-Menyou.APIHelper.updateTasteProfile = function(add, remove, token, callback) {
+Menyou.APIHelper.updateTasteProfile = function(updates, token, callback) {
   $.ajax({
     url: '/api/taste',
     type: 'PUT',
@@ -103,16 +141,15 @@ Menyou.APIHelper.updateTasteProfile = function(add, remove, token, callback) {
       'Content-Type': 'application/json; charset=utf-8',
       'Authorization': 'Bearer ' + token
     },
-    data: JSON.stringify({
-      add: add,
-      remove: remove
-    }),
+    data: JSON.stringify(updates),
     statusCode: Menyou.APIHelper.responseHandlers(callback)
   });
 };
 
 /**
+ * Respond to error codes, and if there are none, trigger the callback.
  *
+ * @param callback - Executed as callback(data) if there is no error.
  */
 Menyou.APIHelper.responseHandlers = function(callback) {
   return {
