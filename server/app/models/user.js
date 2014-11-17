@@ -1,3 +1,8 @@
+/**
+ * Lead Author: Ryan
+ *
+ * The model for the User.
+ */
 var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({

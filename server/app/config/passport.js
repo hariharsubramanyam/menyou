@@ -37,6 +37,7 @@ passport.use(new LocalStrategy({
         if (!user) {
           callback(INVALID_LOGIN);
         } else {
+        // Else check that the passwords match.
           bcrypt.compare(password, user.hash_password, function(err, passwords_match) {
             if (err) {
               callback(err);
