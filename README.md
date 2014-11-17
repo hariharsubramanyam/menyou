@@ -45,6 +45,12 @@ The meat of the app is divided into two parts, the client and the server, each i
 
 Documentation can be found in the **/doc/** directory.
 
+- **meetings/** - the folder containing project meetings.
+- **DesignDoc.pdf** - the design document of the application.
+- **MenyouPitch.pdf** - the document used to pitch the application.
+- **TeamContract.pdf** - the document detailing the contract agreed by the team.
+- **TeamworkPlan.pdf** - the document detailing the teamwork plan.
+
 ##Accessing
 
 The app can be accessed at 104.236.61.65:8080
