@@ -54,6 +54,6 @@ All other routes are handled as front-end requests.
 
 ##API Documentation
 
-The API documentation can be accessed by clicking on the following link:
+The API documentation is accessed at the following link:
 
 https://docs.google.com/document/d/1DDVklyfrSfcfKjzs5Morc1ZGB5zDgEWIZnuiFBhSTxg/edit
