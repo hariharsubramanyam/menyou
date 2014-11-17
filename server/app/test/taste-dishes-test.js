@@ -16,7 +16,7 @@ describe("Taste and Dishes routing", function(){
 			"body": request_body
 		}, function(err, httpResponse, body) {
 		  if (err) {
-		    throw error;
+		    throw err;
 		  } else {
 		  	token = body.content.token;
 		  	done();
@@ -154,7 +154,11 @@ describe("Taste and Dishes routing", function(){
 	after(function(done){
 		this.timeout(10000);
 		User.remove({"username" : "menyou"}, function(err){
-			done();
+			if (err){
+				throw err;
+			} else{
+				done();
+			}
 		});
 	});
 
