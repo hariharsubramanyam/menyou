@@ -14,7 +14,7 @@ var locuHelper = require('../helpers/locu-helper.js');
  * Get a list of dishes recommended for the user.
  *
  * Request: 
- * GET /dishes/?lat=<lat>&lon=<lon>&radius=<radius in meters>
+ * GET /api/dishes/?lat=<lat>&lon=<lon>&radius=<radius in meters>
  *
  * Headers:
  * Content-Type: application/json
