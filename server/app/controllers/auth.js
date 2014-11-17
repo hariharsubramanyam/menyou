@@ -1,3 +1,8 @@
+/**
+ * Lead Author: Harihar
+ *
+ * Routes for registering, getting a token, and validating a token.
+ */
 var express = require('express');
 var async = require("async");
 var router = express.Router();

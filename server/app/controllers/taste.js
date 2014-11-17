@@ -1,3 +1,8 @@
+/**
+ * Lead Author: Tawanda
+ *
+ * Routes for updating and retrieving the taste profile.
+ */
 var express = require('express');
 var router = express.Router();
 var passport = require('../config/passport');

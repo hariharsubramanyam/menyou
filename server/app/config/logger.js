@@ -1,3 +1,8 @@
+/**
+ * Lead Author: Ryan
+ *
+ * Allow us to perform custom logging.
+ */
 var winston = require('winston');
 winston.emitErrs = true;
 
