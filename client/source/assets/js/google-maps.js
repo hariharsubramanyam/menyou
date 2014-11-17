@@ -1,52 +1,58 @@
-Menyou.Map = {};
 
-Menyou.Map.initialize = function() {
+(function() {
 
-	var markers = [];
+  Menyou.Map = {};
 
-	var mapOptions = {
-		center: { lat: 42.3606249, lng: -71.0591156},
-		zoom: 15,
-		disableDefaultUI: true
-	};
-	var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  Menyou.Map.initialize = function() {
 
-  var input = document.getElementById('pac-input');
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+          var markers = [];
 
-  var searchBox = new google.maps.places.SearchBox((input));
+          var mapOptions = {
+                  center: { lat: 42.3606249, lng: -71.0591156},
+                  zoom: 15,
+                  disableDefaultUI: true
+          };
+          var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-  google.maps.event.addListener(searchBox, 'places_changed', function() {
-  	var places = searchBox.getPlaces();
+    var input = document.getElementById('pac-input');
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-  	if (places.length == 0) { return; }
-  	for (var i = 0, marker; marker = markers[i]; i++) {
-  		marker.setMap(null);
-  	}
+    var searchBox = new google.maps.places.SearchBox((input));
 
-    // For each place, get the icon, place name, and location.
-    markers = [];
-    var bounds = new google.maps.LatLngBounds();
-    for (var i = 0, place; place = places[i]; i++) {
+    google.maps.event.addListener(searchBox, 'places_changed', function() {
+          var places = searchBox.getPlaces();
 
-        // Create a marker for each place.
-        var marker = new google.maps.Marker({
-        	map: map,
-        	title: place.name,
-        	position: place.geometry.location
-        });
+          if (places.length == 0) { return; }
+          for (var i = 0, marker; marker = markers[i]; i++) {
+                  marker.setMap(null);
+          }
 
-        markers.push(marker);
+      // For each place, get the icon, place name, and location.
+      markers = [];
+      var bounds = new google.maps.LatLngBounds();
+      for (var i = 0, place; place = places[i]; i++) {
 
-        bounds.extend(place.geometry.location);
-    }
-    map.fitBounds(bounds);
-    map.setZoom(15);
-  });
+          // Create a marker for each place.
+          var marker = new google.maps.Marker({
+                  map: map,
+                  title: place.name,
+                  position: place.geometry.location
+          });
 
-  google.maps.event.addListener(map, 'bounds_changed', function() {
-  	var bounds = map.getBounds();
-  	searchBox.setBounds(bounds);
-  });
+          markers.push(marker);
 
-};
+          bounds.extend(place.geometry.location);
+      }
+      map.fitBounds(bounds);
+      map.setZoom(15);
+    });
+
+    google.maps.event.addListener(map, 'bounds_changed', function() {
+          var bounds = map.getBounds();
+          searchBox.setBounds(bounds);
+    });
+
+  };
+
+})();
+
