@@ -2,3 +2,4 @@ node_modules
 logs
 client/build
 npm-debug.log
+backup_gitignore.txt
