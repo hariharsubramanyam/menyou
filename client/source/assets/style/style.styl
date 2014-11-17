@@ -13,109 +13,6 @@ hr {
   border-top: 1px solid #eee;
 }
 
-#map-canvas {
-	margin-top: -52px;
-	height: calc(100% - 52px);
-	top: 0;
-	border-right: 1px solid #ccc;
-}
-
-nav div {
-	display: inline;
-}
-
-nav {
-	height: 40px;
-	padding-bottom: 10px;
-	border: 1px solid #ccc;
-	width: 100%;
-	background-color: white;
-}
-
-#logo {
-	font-size: 35px;
-	margin-left: 20px;
-	color: #5D8A31;
-	font-weight: 300;
-	cursor: pointer;
-}
-
-#logo:hover {
-	color: black;
-}
-
-#logout {
-	position: absolute;
-	right: 20px;
-	top: 15px;
-}
-
-#profile {
-	position: absolute;
-	right: 100px;
-	top: 15px;
-}
-
-#profile:hover, #logout:hover {
-	color: #5D8A31;
-	font-weight: 400;
-	cursor: pointer;
-}
-
-#menu-container {
-	width: 465px;
-	height: calc(100% - 52px);
-	right: 0px;
-	position: absolute;
-	top: 52px;
-	overflow: scroll;
-	background-color: #FCFCF6;
-}
-
-#question {
-	border: 1px solid pink;
-	padding: 10px;
-	margin: 10px;
-}
-
-#recommendation-container {
-	padding: 10px;
-	margin: 10px;
-}
-
-#recommendation-title {
-	font-weight: 400;
-	font-size: 20px;
-}
-
-.meal {
-	margin: 10px 5px 10px 5px;
-	padding: 5px;
-	border-radius: 4px;
-}
-
-.meal:hover {
-	background-color: #f7f7e3;
-}
-
-.meal p {
-	margin-top: 0px;
-	margin-bottom: 0px;
-}
-
-.meal .description {
-	font-size: 13px;
-	margin-left: 10px;
-	font-style: italic;
-
-}
-
-.meal .price {
-	font-size: 13px;
-	font-style: italic;
-	float: right;
-}
-
 /** ----------------------------------------------- **/
 
 @media (min-width: 805px) {
@@ -189,26 +86,29 @@ nav {
 }
 
 .controls {
-	margin-top: 16px;
-	border: 1px solid transparent;
-	border-radius: 2px 0 0 2px;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	height: 32px;
-	outline: none;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    margin-top: 16px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 #type-selector {
-	color: #fff;
-	background-color: #4d90fe;
-	padding: 5px 11px 0px 11px;
-}
+    color: #fff;
+    background-color: #4d90fe;
+    padding: 5px 11px 0px 11px;
 
-#type-selector label {
-	font-family: Lato;
-	font-size: 13px;
-	font-weight: 300;
+	label {
+	    font-family: Lato;
+	    font-size: 13px;
+	    font-weight: 300;
+	}
 }
 
 @import 'partials/profile'
+@import 'partials/map'
+@import 'partials/dishes'
+@import 'partials/nav'
