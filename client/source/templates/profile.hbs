@@ -3,7 +3,7 @@
 <div id="profile-container">
 
   <div id="username">
-    <!-- Load User Name Here -->
+    {{username}}
   </div>
 
   <div id="likes-container">
@@ -14,7 +14,9 @@
     <input type="button" id="likes-add" value="Add"></input>
 
     <ul>
-    <!-- Load User Likes Here -->
+      {{#each likes}}
+        <li>{{this}}</li>
+      {{/each}}
     </ul>
   </div>
 
@@ -26,7 +28,9 @@
     <input type="submit" id="dislikes-add" value="Add"></input>
 
     <ul>
-      <!-- Load User Dislikes Here -->
+      {{#each dislikes}}
+        <li>{{this}}</li>
+      {{/each}}
     </ul>
   </div>
 
