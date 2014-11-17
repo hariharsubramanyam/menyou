@@ -3,10 +3,10 @@
 $(document).on('click', '#profile', function(evt) {
     var token = $.cookie(Menyou.COOKIE_NAME);
     Menyou.APIHelper.getTasteProfile(token, function(tasteProfile) {
-        Menyou.UI.loadPage('profile', $.extend(
+        Menyou.UI.loadPage('profile', $.extend({
             username: Menyou.USERNAME,
             taste: tasteProfile.content
-        ));
+        }));
     })
 });
 

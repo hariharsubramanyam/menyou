@@ -41,15 +41,15 @@ gulp.task('serve', function() {
 /**
  * This task compiles our stylus into css.
  */
-gulp.task('compile-stylus', function() {
+gulp.task('stylus', function() {
   gulp.src('./client/source/assets/style/style.styl')
     .pipe(stylus())
     .pipe(concat('style.css'))
     .pipe(gulp.dest('./client/build/assets/style/'));
 });
 
-gulp.task('build-assets', function() {
-  gulp.src('client/source/assets/js/*.js', {base: 'client/source/'})
+gulp.task('assets', function() {
+  gulp.src('client/source/assets/js/**/**', {base: 'client/source/'})
     .pipe(gulp.dest('client/build'));
   gulp.src('client/source/assets/img/*', {base: 'client/source/'})
     .pipe(gulp.dest('client/build'));
@@ -112,13 +112,13 @@ gulp.task('push', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['client/source/assets/style/*.styl', 'client/source/assets/style/partials/*.styl'], ['compile-stylus']);
-  gulp.watch(['client/source/index.html', 'client/source/assets/'], ['build-assets']);
+  gulp.watch(['client/source/assets/style/*.styl', 'client/source/assets/style/partials/*.styl'], ['stylus']);
+  gulp.watch(['client/source/index.html', 'client/source/assets/'], ['assets']);
   gulp.watch('client/source/templates/*.hbs', ['templates']);
   gulp.watch('client/source/templates/partials/*.hbs', ['partials']);
 });
 
 gulp.task('deploy', ['build', 'push']);
-gulp.task('build', ['compile-stylus', 'build-assets', 'partials', 'templates']);
+gulp.task('build', ['stylus', 'assets', 'partials', 'templates']);
 gulp.task('default', ['build', 'serve', 'watch']);
 
