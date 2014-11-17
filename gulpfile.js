@@ -50,18 +50,14 @@ gulp.task('compile-stylus', function() {
     .pipe(gulp.dest('./client/build/assets/style/'));
 });
 
-gulp.task('build-js', function() {
+gulp.task('build-assets', function() {
   gulp.src('client/source/assets/js/*.js', {base: 'client/source/'})
     .pipe(gulp.dest('client/build'));
-});
-
-gulp.task('build-img', function() {
   gulp.src('client/source/assets/img/*', {base: 'client/source/'})
     .pipe(gulp.dest('client/build'));
-});
-
-gulp.task('build-html', function() {
-  gulp.src('client/source/*.html')
+  gulp.src('client/source/assets/txt/*', {base: 'client/source/'})
+    .pipe(gulp.dest('client/build'));
+  gulp.src('client/source/index.html')
     .pipe(gulp.dest('client/build'));
 });
 
@@ -72,18 +68,12 @@ gulp.task('clean', function(cb) {
   ], cb);
 });
 
-gulp.task('link-assets', function() {
-  gulp.src('client/build/*.html')
-    .pipe(inject(gulp.src(['client/build/assets/js/*.js', 'client/build/assets/style/*.css'], {read: false}), {relative: true}))
-    .pipe(gulp.dest('client/build'));
-});
-
 gulp.task('compile-handlebars', function() {
   gulp.src('client/source/templates/**/*.hbs')
     .pipe(handlebars())
     .pipe(wrap('Handlebars.template(<%= contents %>)'))
     .pipe(declare({
-      namespace: 'menyou.templates',
+      namespace: 'Menyou.templates',
       noRedeclare: true,
       processName: function(filePath) {
         return declare.processNameByPath(filePath.replace('client/source/templates/', ''));
@@ -111,13 +101,11 @@ gulp.task('push', function() {
 
 gulp.task('watch', function() {
   gulp.watch(['client/source/assets/style/*.styl', 'client/source/assets/style/partials/*.styl'], ['compile-stylus']);
-  gulp.watch('client/source/assets/js/*.js', ['build-js']);
-  gulp.watch('client/source/assets/img/', ['build-img']);
-  gulp.watch(['client/source/index.html', 'client/build/assets/'], ['build-html', 'link-assets']);
+  gulp.watch(['client/source/index.html', 'client/source/assets/'], ['build-assets']);
   gulp.watch('client/source/templates/', ['compile-handlebars']);
 });
 
 gulp.task('deploy', ['build', 'push']);
-gulp.task('build', ['compile-stylus', 'build-img', 'build-js', 'build-html', 'compile-handlebars', 'link-assets']);
+gulp.task('build', ['compile-stylus', 'build-assets', 'compile-handlebars']);
 gulp.task('default', ['build', 'serve', 'watch']);
 

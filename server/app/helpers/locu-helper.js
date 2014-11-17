@@ -1,3 +1,8 @@
+/**
+ * Lead Author: Harihar
+ *
+ * Helper for communicating with Locu API and parsing results.
+ */
 var request = require("request");
 var secrets = require("../config/secrets.js");
 /**

@@ -1,3 +1,8 @@
+/**
+ * Lead Author: Harihar
+ *
+ * Recommend meals for the user.
+ */
 var FuzzySet = require("fuzzyset.js");
 /**
  * Recommend dishes for a given taste profile.

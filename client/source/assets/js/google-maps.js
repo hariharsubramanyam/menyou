@@ -1,4 +1,7 @@
-function initialize() {
+Menyou = Menyou || {};
+Menyou.Map = {};
+
+Menyou.Map.initialize = function() {
 
 	var markers = [];
 
@@ -41,11 +44,10 @@ function initialize() {
     map.fitBounds(bounds);
     map.setZoom(15);
   });
-  
+
   google.maps.event.addListener(map, 'bounds_changed', function() {
   	var bounds = map.getBounds();
   	searchBox.setBounds(bounds);
   });
-}
+};
 
-google.maps.event.addDomListener(window, 'load', initialize);

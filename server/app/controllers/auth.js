@@ -1,3 +1,8 @@
+/**
+ * Lead Author: Harihar
+ *
+ * Routes for registering, getting a token, and validating a token.
+ */
 var express = require('express');
 var async = require("async");
 var router = express.Router();
@@ -8,13 +13,31 @@ var tokenHelper = require('../helpers/token-helper.js');
 var secrets = require("../config/secrets.js");
 
 /**
- * Create an access token for the given user
- * Request body:
- *  username: the username. should be unique.
- *  password: the password.
- * Response content:
- *   token: the access token for the user whose credentials
- *          were provided with the request
+ * Create a session token.
+*
+ * Request: POST /api/auth/token
+ * 
+ * Headers: Content-Type: application/json
+ *
+ * Body:
+ * {
+ * "username": String,
+ * "password": String
+ * }
+ *
+ * Response:
+ * On success:
+ *
+ * {
+ *  “success”: true,
+ *  “message”: “Successfully obtained token”,
+ *  “content”: {
+ *    “token”: String,
+ *    “username”: String
+ *  }
+ * }
+ *
+ * On credentials incorrect, return 401 Unauthorized error.
  */
 router.post('/token',
   passport.authenticate('local', {session: false}),
@@ -27,13 +50,34 @@ router.post('/token',
   });
 
 /**
- * Register a new user.
- * Request body:
- *   username: the username. should be unique
- *   password: the password.
- * Response content:
- *   token: the user's access token
- *   user: the user just created
+ * Creates account and gets session token.
+ * 
+ * Request: POST /api/auth/register
+ *
+ * Headers: Content-Type: application/json
+ *
+ * Body:
+ * {
+ * "username": String,
+ * "password": String
+ * }
+ *
+ * Response:
+ * On success:
+ * {
+ *  "success": true,
+ *  "message": "Successfully registered",
+ *  "content": {
+ *    "token": String,
+ *    "username": String
+ *  }
+ * }
+ *
+ * On username already exists:
+ * {
+ *  "success": false,
+ *  "message": "Username already exists!"
+ * }
  */
 router.post('/register',
   function(req, res) {
@@ -93,13 +137,26 @@ router.post('/register',
   });
 
 /**
- * Check if a token is valid. If yes, return the user object
- * associated with that access token.
- * Request body:
- *   Access Token in access_code paremter in query string.
- * Response content:
- *   user: the user object associated with the provided
- *         access token.
+ * Check if the token is valid.
+ *
+ * Request:
+ * GET /api/auth/validate
+ *
+ * Headers:
+ * Content-Type: application/json
+ * Authorization: Bearer <token>
+ *
+ * Response:
+ * On success,
+ * {
+ *  "success": true,
+ *  "message": "Valid token",
+ *  "content": {
+ *    "username": String
+ *   }
+ * }
+ *
+ * On invalid token, return 401 Unauthorized error.
  */
 router.get('/validate',
   passport.authenticate('bearer', {session: false}),

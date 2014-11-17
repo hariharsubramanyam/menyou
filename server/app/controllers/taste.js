@@ -1,15 +1,86 @@
+/**
+ * Lead Author: Tawanda
+ *
+ * Routes for updating and retrieving the taste profile.
+ */
 var express = require('express');
 var router = express.Router();
 var passport = require('../config/passport');
 var resHelper = require('../helpers/response-helper.js');
 var User = require("./../models/user");
 
+/**
+ * Get the taste profile of the user
+ *
+ * Request:
+ * GET /api/taste
+ *
+ * Headers:
+ * Content-Type: application/json
+ * Authorization: Bearer <token>
+ *
+ * Response:
+ * On success
+ * {
+ *  "success": true,
+ *  "message": "Got taste profile",
+ *  "content": {
+ *    "likes": [String],
+ *    "dislikes": [String],
+ *    "forbidden": [String]
+ *   }
+ * }
+ *
+ *
+ * On invalid token, return 401 Unauthorized error.
+ */
 router.get('/',
   passport.authenticate('bearer', {session: false}),
   function(req, res) {
     resHelper.success(res, "Got taste profile", req.user.tasteProfile);
   });
 
+/**
+ * Update the taste profile of the user.
+ * 
+ * Request:
+ * PUT /api/taste
+ *
+ * Headers:
+ * Content-Type: application/json
+ * Authorization: Bearer <token>
+ *
+ * Body:
+ * {
+ *  “likes”: {
+ *    “add”: [“keyword”,...],
+ *    “remove”: [“keyword”,...],
+ *  },
+ *  “dislikes”: {
+ *    “add”: [“keyword”,...],
+ *    “remove”: [“keyword”,...],
+ *  },
+ *  “forbidden”: {
+ *    “add”: [“keyword”,...],
+ *    “remove”: [“keyword”,...],
+ *  },
+ * }
+ *
+ * Response:
+ * On success:
+ * {
+ *  "success": true,
+ *  "message": "Updated taste profile",
+ *  "content": {
+ *  "likes": [String],
+ *  "dislikes": [String],
+ *  "forbidden": [String]
+ *  }
+ * }
+ *
+ * On invalid token, return 401 Unauthorized error.
+ *
+ */
 router.put('/',
   passport.authenticate('bearer', {session: false}),
   function(req, res) {
