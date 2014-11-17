@@ -5,8 +5,7 @@ $(document).on('click', '#likes-add', function(evt) {
     var newLike = input.val();
     input.val('');
     if (newLike != '') {
-        console.log(newLike);
-        console.log('woohoo')
+        $(this).parent().find('ul').append('<li>' + newLike + '</li>');
     }
 });
 
@@ -15,7 +14,12 @@ $(document).on('click', '#dislikes-add', function(evt) {
     var newDislike = input.val();
     input.val('');
     if (newDislike != '') {
-        console.log(newDislike);
-        console.log('woohoo')
+        $(this).parent().find('ul').append('<li>' + newDislike + '</li>');
+    }
+});
+
+$(document).on('click', '.checkbox', function(evt) {
+    if ($(this)[0].checked) {
+        console.log($(this)[0].value);
     }
 });

@@ -49,5 +49,5 @@ Menyou.Map.initialize = function() {
   	var bounds = map.getBounds();
   	searchBox.setBounds(bounds);
   });
-};
 
+};
