@@ -1,10 +1,20 @@
+/**
+ * Lead Author: Ryan
+ *
+ * Generate and verify JWT tokens.
+ */
+
 var jwt = require('jwt-simple');
 var moment = require('moment');
 var User = require('../models/user');
 var secrets = require("../config/secrets.js");
 
-
-// create an access token for the given user
+/**
+ * Create the token for the given user.
+ *
+ * @param user - The user object (must contain the ID).
+ * @return - The JWT token for the user.
+ */
 var create_token = function(user) {
 
   // set token expiration date as one day from now
@@ -20,8 +30,13 @@ var create_token = function(user) {
   return token;
 };
 
-// verify the given access token
-// return a promise for a boolean
+/**
+ * Ensure that the user's token is valid, and trigger the callback.
+ *
+ * @param token - The JWT token to check
+ * @param callback - Executed as callback(err, user), where err is the error message and user is
+ * the user object with the given token.
+ */
 var verify_token = function(token, callback) {
   try {
     var decoded_token = jwt.decode(token, secrets.TOKEN_SECRET);

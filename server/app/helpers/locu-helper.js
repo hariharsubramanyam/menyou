@@ -3,8 +3,10 @@
  *
  * Helper for communicating with Locu API and parsing results.
  */
+
 var request = require("request");
 var secrets = require("../config/secrets.js");
+
 /**
  * Given a properly formatted menu object returned from the Locu API
  * (see https://dev.locu.com/documentation/#menu), extract the menu items.
@@ -271,7 +273,6 @@ var get_nearby_dishes = function(lon, lat, radius_meters, likes, callback) {
       } else {
         num_completed += 1;
         if (num_completed === chosen_likes.length) {
-          console.log(menu_items);
           callback(null, menu_items);
         }
       }
