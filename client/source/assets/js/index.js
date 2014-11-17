@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    loadPage('index');
+    loadPage('profile');
+    // loadPage('index');
 });
 
 $(document).on('click', '#logo', function(evt) {
