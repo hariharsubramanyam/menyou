@@ -3,20 +3,25 @@
   Menyou.Map = {};
 
   // Default location is in Boston.
-  Menyou.Map.DEFAULT_LOCATION = { lat: 42.3606249, lng: -71.0591156 };
+  var DEFAULT_LOCATION = { lat: 42.3606249, lng: -71.0591156 };
+
+  // Markers 
+  var RED_MARKER_URL = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+  var GREEN_MARKER_URL = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
 
   Menyou.Map.initialize = function() {
 
     var markers = [];
 
     var mapOptions = {
-            center: Menyou.Map.DEFAULT_LOCATION,
+            center: DEFAULT_LOCATION,
             zoom: 15,
             disableDefaultUI: true
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
     var user_marker = new google.maps.Marker({
+      icon: RED_MARKER_URL,
       position: map.center,
       map: map,
       title: 'Me'
