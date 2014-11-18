@@ -56,17 +56,21 @@
   var postRender = {
     index: function(callback) {
       // if there is an authenticated user, fetch his recommendations!
-      $('body').spin("modal");
-      Menyou.APIHelper.getDishes(Menyou.state.location.lat, Menyou.state.location.lon,
-                                 Menyou.state.location.radius, Menyou.state.token,
-                                 function(data) {
-                                   //TODO handle failure case
-                                  $('body').spin("modal");
-                                   Menyou.state.dishes = data.content;
-                                   $('body').html(Menyou.templates["index"](Menyou.state));
-                                   Menyou.Map.initialize(); //TODO this really shouldn't be right here
-                                   callback();
-                                 });
+      if (Menyou.state.token) {
+        $('body').spin("modal");
+        Menyou.APIHelper.getDishes(Menyou.state.location.lat, 
+            Menyou.state.location.lon,
+            Menyou.state.location.radius, 
+            Menyou.state.token,
+            function(data) {
+              //TODO handle failure case
+              $('body').spin("modal");
+              Menyou.state.dishes = data.content;
+              $('body').html(Menyou.templates["index"](Menyou.state));
+              Menyou.Map.initialize(); //TODO this really shouldn't be right here
+              callback();
+            });
+      }
     },
     profile: function(callback) {
       callback();
