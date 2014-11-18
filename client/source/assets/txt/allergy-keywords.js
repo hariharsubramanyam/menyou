@@ -10,5 +10,5 @@ Menyou.AllergyKeywords = {
     wheat: ['wheat','pasta']
 }
 
-Menyou.state.allergies = Menyou.AllergyKeywords;
+Menyou.state.allergies = Menyou.AllergyKeywords.allergies;
 Menyou.DEFAULT_STATE.allergies = Menyou.AllergyKeywords;

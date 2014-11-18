@@ -50,10 +50,11 @@
      * Toggle an allergy from the allergy list
      */
     $(document).on('click', '.checkbox', function(evt) {
+        var allergy = $(this)[0].value;
         if ($(this)[0].checked) {
-            console.log('add ' + $(this)[0].value);
+            update('forbidden', 'add', Menyou.AllergyKeywords[allergy]);
         } else {
-            console.log('remove ' + $(this)[0].value);
+            update('forbidden', 'remove', Menyou.AllergyKeywords[allergy]);
         }
     });
 
@@ -86,8 +87,6 @@
 
     //TODO: cleaner way of doing this?
     Handlebars.registerHelper('isChecked', function(elem, forbidden, options) {
-        console.log(elem);
-        console.log(Menyou.AllergyKeywords[elem]);
         var compare = Menyou.AllergyKeywords[elem];
         for (var i=0; i<compare.length; i++) {
             if (forbidden.indexOf(compare[i]) == -1) {
