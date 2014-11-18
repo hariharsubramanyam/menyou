@@ -15,6 +15,7 @@
    * @param template - the name of the template to render.
    */
   Menyou.UI.render = function(template) {
+    $('body').html(Menyou.templates[template](Menyou.state));
     preRender[template](function() {
       $('body').html(Menyou.templates[template](Menyou.state));
       Menyou.Map.initialize(); //TODO this really shouldn't be right here
