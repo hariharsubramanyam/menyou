@@ -1,5 +1,14 @@
 (function() {
 
+Handlebars.registerHelper('isChecked', function(elem, forbidden, options) {
+    var compare = Menyou.AllergyKeywords[elem];
+    for (var i=0; i<compare.length; i++) {
+        if (forbidden.indexOf(compare[i]) == -1) {
+            return options.inverse(this);
+        }
+    } return options.fn(this);
+});
+
 $(document).on('click', '#profile', function(evt) {
     Menyou.UI.renderProfilePage();
 });
@@ -33,12 +42,11 @@ $(document).on('click', '.dislikes-remove', function(evt) {
 });
 
 $(document).on('click', '.checkbox', function(evt) {
+    var allergy = $(this)[0].value;
     if ($(this)[0].checked) {
-        // add to taste profile restrictions
-        console.log('add ' + $(this)[0].value);
+        update('forbidden', 'add', Menyou.AllergyKeywords[allergy]);
     } else {
-        // remove from taste profile restrictions
-        console.log('remove ' + $(this)[0].value);
+        update('forbidden', 'remove', Menyou.AllergyKeywords[allergy]);
     }
 });
 
@@ -60,8 +68,7 @@ function update(field, action, content) {
         updates[field][action].push(content[i]);
     }
     
-    // var token = $.cookie(Menyou.COOKIE_NAME);
-    var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiNTQ2YTMxMWE0OWNiNjM0ODMwYmEzZDhhIiwiZXhwaXJlcyI6MTQxNjMzNDQ0MzU0OH0.U8L7sTHkYiNjbLC5rMOzwYfvKXUmNTltvuQIHUnC7e0";
+    var token = $.cookie(Menyou.COOKIE_NAME);
     Menyou.APIHelper.updateTasteProfile(updates, token, function(response) {
         Menyou.UI.renderProfilePage();
     });
