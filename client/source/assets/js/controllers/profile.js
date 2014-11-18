@@ -7,6 +7,14 @@
 (function() {
 
     /**
+     * Show the user some recommended meals.
+     */
+    $(document).on("click", "#btn_profile_recommend", function() {
+      Menyou.UI.render('index');
+      Menyou.Map.initialize(); //TODO see nav.js
+    });
+
+    /**
      * Add a like to the list
      */
     $(document).on('click', '#likes-add', function(evt) {
