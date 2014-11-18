@@ -43,38 +43,14 @@
         <th>Y/N</th>
         <th>Allergies:</th>
       </tr>
-      <tr>
-        <td><input type=checkbox class="checkbox" value="egg"></td>
-        <td>Egg</td>
-      </tr>
-      <tr>
-        <td><input type=checkbox class="checkbox" value="fish"></td>
-        <td>Fish</td>
-      </tr>
-      <tr>
-        <td><input type=checkbox class="checkbox" value="milk"></td>
-        <td>Milk</td>
-      </tr>
-      <tr>
-        <td><input type=checkbox class="checkbox" value="peanut"></td>
-        <td>Peanut</td>
-      </tr>
-      <tr>
-        <td><input type=checkbox class="checkbox" value="treenut"></td>
-        <td>Tree Nut</td>
-      </tr>
-      <tr>
-        <td><input type=checkbox class="checkbox" value="shellfish"></td>
-        <td>Shellfish</td>
-      </tr>
-      <tr>
-        <td><input type=checkbox class="checkbox" value="soy"></td>
-        <td>Soy</td>
-      </tr>
-      <tr>
-        <td><input type=checkbox class="checkbox" value="wheat"></td>
-        <td>Wheat</td>
-      </tr>
+      {{#each allergies}}
+        <tr>
+          <td>
+            <input type=checkbox class="checkbox" value={{this}} {{#isChecked this ../forbidden}}checked{{/isChecked}}>
+          </td>
+          <td>{{this}}</td>
+        </tr>
+      {{/each}}
     </table>
   </div>
 

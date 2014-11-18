@@ -86,4 +86,14 @@
         });
     }
 
+    //TODO: cleaner way of doing this?
+    Handlebars.registerHelper('isChecked', function(elem, forbidden, options) {
+        var compare = Menyou.AllergyKeywords[elem];
+        for (var i=0; i<compare.length; i++) {
+            if (forbidden.indexOf(compare[i]) == -1) {
+                return options.inverse(this);
+            }
+        } return options.fn(this);
+    });
+
 })();

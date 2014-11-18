@@ -1,10 +1,15 @@
 #profile-container {
     min-height: calc(90% - 52px);
-    width: 90%;
+    width: calc(100% - 80px);
     margin: 40px 40px 0px 40px;;
     background-color: #FCFCF6;
     text-align: center;
     border: 1px solid #ccc;
+}
+
+hr {
+    width: 80%;
+    margin: 0 auto;
 }
 
 #username {
@@ -19,7 +24,6 @@
     width: 30%;
     display: inline-block;
     vertical-align: top;
-    // background-color: #f7f7e3;
 }
 
 #dislikes-container {
@@ -27,7 +31,6 @@
     width: 30%;
     display: inline-block;
     vertical-align: top;
-    // background-color: #f7f7e3;
 }
 
 #restrictions-container {
@@ -43,6 +46,7 @@
     font-size: 20px;
     font-weight: 400;
     margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 #allergies {
@@ -52,8 +56,11 @@
 
 #likes-input, #dislikes-input {
     width: calc(80% - 25px);
+    max-width: 120px;
     height: 25px;
     left: 0;
+    font-family: Lato;
+    margin-top: 4px;
 }
 
 #likes-add, #dislikes-add {
@@ -71,7 +78,7 @@
 }
 
 footer {
-    color: #a3a3a3;
+    color: black;
     text-align: center;
     font-size: 13px;
     line-height: 13px;
@@ -105,7 +112,3 @@ ul li:hover .likes-remove, ul li:hover .dislikes-remove {
 ul li:hover, ul li:hover {
     cursor: default;
 }
-
-// .content {
-//     float: left;
-// }
