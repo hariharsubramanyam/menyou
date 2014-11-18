@@ -2,7 +2,7 @@
 
   Menyou.Map = {};
 
-  var DEFAULT_LOCATION = { lat: 42.3606249, lng: -71.0591156 }; // Boston
+  var DEFAULT_LOCATION = { lat: 42.358638, lng: -71.093345}; // Boston
   var RED_MARKER_URL = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
   var GREEN_MARKER_URL = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
 
@@ -23,16 +23,6 @@
     var infowindow = new google.maps.InfoWindow({});
     var bounds = new google.maps.LatLngBounds();
 
-    var user_marker = new google.maps.Marker({
-        icon: RED_MARKER_URL,
-        position: map.center,
-        map: map,
-        title: 'Me'
-    });
-    google.maps.event.addListener(user_marker, 'click', function() {
-      infowindow.setContent("You are here");
-      infowindow.open(map,this);
-    });
 
     for (var i=0; i<dishes.length; i++) {
       var dish = dishes[i]
@@ -77,6 +67,18 @@
     };
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+    // Add a marker for the user's location.
+    var user_marker = new google.maps.Marker({
+        icon: RED_MARKER_URL,
+        position: map.center,
+        map: map,
+        title: 'Me'
+    });
+
+    google.maps.event.addListener(user_marker, 'click', function() {
+      infowindow.setContent("You are here");
+      infowindow.open(map,this);
+    });
     /**
      * Search Box Controller
      */

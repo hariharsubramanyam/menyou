@@ -21,10 +21,10 @@ Menyou = {};
       forbidden: []
     },
     location: {
-      lat: 42.3605419, // Boston Lat, Long as default
-      lon: -71.0595503,
-      radius: 5000, //TODO units?
-      city: 'Boston, MA'
+      lat: 42.358638, // MIT is default location.
+      lon: -71.093345,
+      radius: 2000, // in meters
+      city: 'Cambridge, MA'
     }
   };
 
