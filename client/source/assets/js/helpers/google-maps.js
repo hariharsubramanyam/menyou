@@ -2,11 +2,13 @@
 
   Menyou.Map = {};
 
+  var DEFAULT_LOCATION = { lat: 42.3606249, lng: -71.0591156 }; // Boston
+
   var markers;
   var mapOptions;
   var map;
 
-  var markedRestaurants = []; // string list of restaurant titles
+  var markedRestaurants = []; // string list of restaurant titles, so markers aren't duplicated
   
   /**
    * Mark Resaurants based on the current Recommended Dishes displayed to the User.
@@ -47,13 +49,14 @@
   /**
    * Initialize Map
    */
+
   Menyou.Map.initialize = function() {
 
     markers = [];
 
     mapOptions = {
-            center: { lat: 42.3606249, lng: -71.0591156},
-            zoom: 15,
+            center: DEFAULT_LOCATION,
+            zoom: 14,
             disableDefaultUI: true
     };
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
