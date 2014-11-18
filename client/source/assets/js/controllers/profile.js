@@ -51,10 +51,8 @@
      */
     $(document).on('click', '.checkbox', function(evt) {
         if ($(this)[0].checked) {
-            // add to taste profile restrictions
             console.log('add ' + $(this)[0].value);
         } else {
-            // remove from taste profile restrictions
             console.log('remove ' + $(this)[0].value);
         }
     });
@@ -77,12 +75,11 @@
             updates[field][action].push(content[i]);
         }
 
-        //TODO update local state
-
         Menyou.APIHelper.updateTasteProfile(updates, Menyou.state.token, function(response) {
             //TODO: some sort of error handling here?
             //      specifically, what happends if token expires, etc?
             Menyou.UI.render('profile');
+            Menyou.state.taste = response.content;
         });
     }
 
