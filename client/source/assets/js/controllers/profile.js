@@ -66,7 +66,6 @@
      * @param content - An array representing the content to be updated in the taste profile.
      */
     function update(field, action, content) {
-        console.log('called update');
         var updates = {
             likes: {add: [], remove: []},
             dislikes: {add: [], remove: []},
