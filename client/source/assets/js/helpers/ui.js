@@ -28,22 +28,22 @@
   var preRender = {
 
     index: function(callback) {
-
       // if there is no authenticated user, just return.
-      if(!Menyou.state.username) {
-        callback();
-        return;
-      }
-
-      // if there is an authenticated user, fetch his recommendations!
-      Menyou.APIHelper.getDishes(Menyou.state.location.lat, Menyou.state.location.lon,
-                                 Menyou.state.location.radius, Menyou.state.token,
-                                 function(data) {
-                                   //TODO handle failure case
-                                   Menyou.state.dishes = data.content;
-                                   callback();
-                                 });
-
+      Menyou.SessionHelper.currentToken(function(has_token) {
+        console.log(Menyou.state);
+        if (has_token) {
+          // if there is an authenticated user, fetch his recommendations!
+          Menyou.APIHelper.getDishes(Menyou.state.location.lat, Menyou.state.location.lon,
+                                     Menyou.state.location.radius, Menyou.state.token,
+                                     function(data) {
+                                       //TODO handle failure case
+                                       Menyou.state.dishes = data.content;
+                                       callback();
+                                     });
+        } else {
+          callback();
+        }
+      });
     },
 
     profile: function(callback) {
