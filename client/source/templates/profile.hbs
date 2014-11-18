@@ -46,7 +46,7 @@
       {{#each allergies}}
         <tr>
           <td>
-            <input type=checkbox class="checkbox" value={{this}} {{#isChecked this ../forbidden}}checked{{/isChecked}}>
+            <input type=checkbox class="checkbox" value={{this}} {{#isChecked this ../taste/forbidden}}checked{{/isChecked}}>
           </td>
           <td>{{this}}</td>
         </tr>
