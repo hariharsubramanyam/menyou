@@ -14,6 +14,8 @@
    * Mark Resaurants based on the current Recommended Dishes displayed to the User.
    */
   Menyou.Map.mark_restaurants = function() {
+    marker = []; markedRestaurants = [];
+
     dishes = Menyou.state.dishes;
 
     var infowindow = new google.maps.InfoWindow({});
