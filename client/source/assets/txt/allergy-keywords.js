@@ -11,4 +11,4 @@ Menyou.AllergyKeywords = {
 }
 
 Menyou.state.allergies = Menyou.AllergyKeywords.allergies;
-Menyou.DEFAULT_STATE.allergies = Menyou.AllergyKeywords;
+Menyou.DEFAULT_STATE.allergies = Menyou.AllergyKeywords.allergies;
