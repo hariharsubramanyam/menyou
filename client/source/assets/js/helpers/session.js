@@ -8,8 +8,6 @@
 
   Menyou.SessionHelper = {};
 
-  console.log('hi');
-
   /**
    * Get the current token from cookies if exists
    *
@@ -18,13 +16,18 @@
    */
   Menyou.SessionHelper.currentToken = function(callback) {
     var token = $.cookie(Menyou.COOKIE_NAME);
-    Menyou.APIHelper.validateToken(token, function(data) {
-      if(data.success) {
-        Menyou.state.username = data.content.username;
-        Menyou.state.token = data.content.token;
-      }
-      callback(data.success);
-    });
+    if (token === undefined) {
+      callback(false);
+    } else {
+      Menyou.APIHelper.validateToken(token, function(data) {
+        if(data.success) {
+          Menyou.state.username = data.content.username;
+          Menyou.state.token = token;
+        }
+        console.log(data);
+        callback(data.success);
+      });
+    }
   };
 
   /**
@@ -36,7 +39,7 @@
   Menyou.SessionHelper.newToken = function(username, password, callback) {
     Menyou.APIHelper.getToken(username, password, function(data) {
       if(data.success) {
-        $.cookie(Menyou.COOKIE_NAME, data.content.token);
+        $.cookie(Menyou.COOKIE_NAME, data.content.token, {'path': '/'});
         Menyou.state.username = data.content.username;
         Menyou.state.token = data.content.token;
       }
