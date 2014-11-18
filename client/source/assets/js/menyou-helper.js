@@ -1,4 +1,3 @@
-
 /**
  *
  */
@@ -116,15 +115,15 @@ Menyou.APIHelper.getTasteProfile = function(token, callback) {
  *
  * @param updates - The updates to the taste profile, must take the form:
  * {
- *  "likesg: {
+ *  "likes: {
  *    "add": ["keyword",...],
  *    "remove: ["keyword",...],
  *  },
- *  "dislikesg: {
+ *  "dislikes: {
  *    "add": ["keyword",...],
  *    "remove: ["keyword",...],
  *  },
- *  "forbiddeng: {
+ *  "forbidden: {
  *    "add": ["keyword",...],
  *    "remove: ["keyword",...],
  *  },
@@ -155,7 +154,7 @@ Menyou.APIHelper.responseHandlers = function(callback) {
   return {
     200: function(data) {
       console.log('OKAY');
-      console.log(data);
+      // console.log(data);
       callback(data);
     },
     304: function(jqxhr) {

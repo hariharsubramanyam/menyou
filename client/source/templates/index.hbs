@@ -1,25 +1,5 @@
 {{> nav}}
 
-<!-- Google Maps -->
-<input id="pac-input" class="controls" type="text" placeholder="Location">
-<div id="map-canvas"></div>
+{{> map}}
 
-
-<!-- Dish Recommendations-->
-<div id="menu-container">
-  <div id="recommendation-container">
-    <div id="recommendation-title">Meals for you in Boston, MA...</div>
-
-    {{#each dishes}}
-
-    <div class='meal'>
-      <p>{{title}} @ {{restaurant}} <span class='price'>{{price}}</span></p>
-      <p>{{description}}</p>
-    </div>
-
-    {{/each}}
-
-  </div>
-</div>
-
-{{> footer}}
+{{> menu}}

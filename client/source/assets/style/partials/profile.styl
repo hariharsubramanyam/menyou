@@ -51,8 +51,9 @@
 }
 
 #likes-input, #dislikes-input {
-    width: 80%;
+    width: calc(80% - 25px);
     height: 25px;
+    left: 0;
 }
 
 #likes-add, #dislikes-add {
@@ -62,6 +63,7 @@
     height: 25px;
     font-family: Lato;
     color: white;
+    font-weight: 300;
 }
 
 #likes-form, #dislikes-form {
@@ -81,8 +83,29 @@ footer {
 ul {
     list-style-type: none;
     padding-left:0;
+    margin: 0 auto;
 }
 
 td {
     font-weight: 300;
 }
+
+ul li .likes-remove, ul li .dislikes-remove {
+    cursor: pointer;
+    margin-left: 10px;
+    color: #7a7a7a;
+    font-weight: 100;
+    visibility: hidden;
+}
+
+ul li:hover .likes-remove, ul li:hover .dislikes-remove {
+    visibility: visible;
+}
+
+ul li:hover, ul li:hover {
+    cursor: default;
+}
+
+// .content {
+//     float: left;
+// }

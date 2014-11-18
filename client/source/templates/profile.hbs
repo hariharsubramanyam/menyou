@@ -15,7 +15,7 @@
 
     <ul>
       {{#each likes}}
-        <li>{{this}}</li>
+        <li><span class="content">{{this}}</span><span class="likes-remove">x</span></li>
       {{/each}}
     </ul>
   </div>
@@ -27,9 +27,9 @@
     <input id="dislikes-input" type="text">
     <input type="submit" id="dislikes-add" value="Add"></input>
 
-    <ul>
+    <ul >
       {{#each dislikes}}
-        <li>{{this}}</li>
+        <li><span class="content">{{this}}</span><span class="dislikes-remove">x</span></li>
       {{/each}}
     </ul>
   </div>

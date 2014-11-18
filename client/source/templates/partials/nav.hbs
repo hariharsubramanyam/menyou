@@ -1,12 +1,28 @@
 
 <nav>
-    <div id="logo">
-        menyou
-    </div>
+  <div id="logo">
+    menyou
+  </div>
+
+  {{!-- {{#if username}} --}}
+
     <div id="profile">
-        <a>Profile</a>
+      {{!-- <a>{{username}}</a> --}}
+      <a>Profile</a>
     </div>
     <div id="logout">
-        <a>Log Out</a>
+      <a>Log Out</a>
     </div>
+
+  {{!-- {{else}} --}}
+
+    {{!-- <div id='form'>
+      <input type='text' name='username' placeholder='username'>
+      <input type='password' name='password' placeholder='password'>
+    </div>
+    <div id='login'>
+      <a>Log In</a>
+    </div> --}}
+
+  {{!-- {{/if}} --}}
 </nav>
