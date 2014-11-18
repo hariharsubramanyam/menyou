@@ -15,10 +15,10 @@
    * @param template - the name of the template to render.
    */
   Menyou.UI.render = function(template) {
-    $('body').html(Menyou.templates[template](Menyou.state));
     preRender[template](function() {
       $('body').html(Menyou.templates[template](Menyou.state));
       Menyou.Map.initialize(); //TODO this really shouldn't be right here
+      postRender[template](function() {});
     });
   };
 
@@ -29,21 +29,9 @@
   var preRender = {
 
     index: function(callback) {
-      // if there is no authenticated user, just return.
+      // Attempt to get the token before rendering.
       Menyou.SessionHelper.currentToken(function(has_token) {
-        console.log(Menyou.state);
-        if (has_token) {
-          // if there is an authenticated user, fetch his recommendations!
-          Menyou.APIHelper.getDishes(Menyou.state.location.lat, Menyou.state.location.lon,
-                                     Menyou.state.location.radius, Menyou.state.token,
-                                     function(data) {
-                                       //TODO handle failure case
-                                       Menyou.state.dishes = data.content;
-                                       callback();
-                                     });
-        } else {
-          callback();
-        }
+        callback();
       });
     },
 
@@ -63,6 +51,26 @@
 
     }
 
+  };
+
+  var postRender = {
+    index: function(callback) {
+      // if there is an authenticated user, fetch his recommendations!
+      $('body').spin("modal");
+      Menyou.APIHelper.getDishes(Menyou.state.location.lat, Menyou.state.location.lon,
+                                 Menyou.state.location.radius, Menyou.state.token,
+                                 function(data) {
+                                   //TODO handle failure case
+                                  $('body').spin("modal");
+                                   Menyou.state.dishes = data.content;
+                                   $('body').html(Menyou.templates["index"](Menyou.state));
+                                   Menyou.Map.initialize(); //TODO this really shouldn't be right here
+                                   callback();
+                                 });
+    },
+    profile: function(callback) {
+      callback();
+    }
   };
 
 })();
