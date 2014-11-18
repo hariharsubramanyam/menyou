@@ -65,6 +65,7 @@
      * @param content - An array representing the content to be updated in the taste profile.
      */
     function update(field, action, content) {
+        console.log('called update');
         var updates = {
             likes: {add: [], remove: []},
             dislikes: {add: [], remove: []},
@@ -78,13 +79,15 @@
         Menyou.APIHelper.updateTasteProfile(updates, Menyou.state.token, function(response) {
             //TODO: some sort of error handling here?
             //      specifically, what happends if token expires, etc?
+            console.log(response);
             Menyou.UI.render('profile');
-            Menyou.state.taste = response.content;
         });
     }
 
     //TODO: cleaner way of doing this?
     Handlebars.registerHelper('isChecked', function(elem, forbidden, options) {
+        console.log(elem);
+        console.log(Menyou.AllergyKeywords[elem]);
         var compare = Menyou.AllergyKeywords[elem];
         for (var i=0; i<compare.length; i++) {
             if (forbidden.indexOf(compare[i]) == -1) {

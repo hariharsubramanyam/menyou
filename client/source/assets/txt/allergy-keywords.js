@@ -9,3 +9,6 @@ Menyou.AllergyKeywords = {
     soy: ['miso','soy','soya','tofu'],
     wheat: ['wheat','pasta']
 }
+
+Menyou.state.allergies = Menyou.AllergyKeywords;
+Menyou.DEFAULT_STATE.allergies = Menyou.AllergyKeywords;

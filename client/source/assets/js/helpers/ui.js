@@ -47,7 +47,19 @@
     },
 
     profile: function(callback) {
-      callback();
+
+      // if there is no authenticated user, just return.
+      if(!Menyou.state.username) {
+        callback();
+        return;
+      }
+
+      Menyou.APIHelper.getTasteProfile(Menyou.state.token, function(data) {
+        //TODO handle failure case
+        Menyou.state.taste = data.content;
+        callback();
+      });
+
     }
 
   };
