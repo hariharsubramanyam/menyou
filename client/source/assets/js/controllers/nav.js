@@ -45,13 +45,13 @@
     Menyou.APIHelper.register(username, password, function(data) {
       if(data.success) {
         Menyou.SessionHelper.newToken(username, password, function(success) {
-          console.log('successful register');
+          console.log("successful register");
           Menyou.UI.render('profile');
         });
       } else {
         //TODO: handle failure. Flash it
         console.log('failed register');
-        Menyou.UI.render('index');
+        alert(data.message);
       }
     });
   });
