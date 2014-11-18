@@ -15,6 +15,15 @@
   });
 
   /**
+   * Handler for clicking the recommendation button.
+   */
+  $(document).on('click', '#recommendations', function(evt) {
+    console.log('click!');
+    Menyou.UI.render('index');
+    Menyou.Map.initialize(); //TODO see nav.js
+  });
+
+  /**
    * Handler for clicking the user profile link.
    */
   $(document).on('click', '#profile', function(evt) {
