@@ -23,6 +23,7 @@ Menyou = {};
     location: {
       lat: 42.3605419, // Boston Lat, Long as default
       lon: -71.0595503,
+      radius: 5, //TODO units?
       city: 'Boston, MA'
     }
   };

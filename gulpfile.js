@@ -113,7 +113,7 @@ gulp.task('push', function() {
 
 gulp.task('watch', function() {
   gulp.watch(['client/source/assets/style/*.styl', 'client/source/assets/style/partials/*.styl'], ['stylus']);
-  gulp.watch(['client/source/index.html', 'client/source/assets/'], ['assets']);
+  gulp.watch(['client/source/index.html', 'client/source/assets/**/**/**'], ['assets']);
   gulp.watch('client/source/templates/*.hbs', ['templates']);
   gulp.watch('client/source/templates/partials/*.hbs', ['partials']);
 });

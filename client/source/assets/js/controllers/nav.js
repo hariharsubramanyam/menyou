@@ -27,8 +27,34 @@
   $(document).on('click', '#logout', function(evt) {
     Menyou.SessionHelper.clearSession();
     Menyou.UI.render('index');
-    Menyou.Map.initialize();
-    //TODO: make it so that map doesn't have to be manually initialized every time
+  });
+
+  $(document).on('click', '#register', function() {
+    var username = $('input[name=username]').val();
+    var password = $('input[name=password]').val();
+    console.log(username);
+    Menyou.APIHelper.register(username, password, function(data) {
+      if(data.success) {
+        Menyou.SessionHelper.newToken(username, password, function(success) {
+          console.log('successful register');
+          Menyou.UI.render('profile');
+        });
+      } else {
+        //TODO: handle failure. Flash it
+        console.log('failed register');
+        Menyou.UI.render('index');
+      }
+    });
+  });
+
+  $(document).on('click', '#login', function() {
+    //TODO: some sort of form validation here
+    var username = $('input[name=username]').val();
+    var password = $('input[name=password]').val();
+    Menyou.SessionHelper.newToken(username, password, function(success) {
+      //TODO: some sort of flash here
+      Menyou.UI.render('index');
+    });
   });
 
 })();

@@ -4,14 +4,14 @@
 
   Menyou.Map.initialize = function() {
 
-          var markers = [];
+    var markers = [];
 
-          var mapOptions = {
-                  center: { lat: 42.3606249, lng: -71.0591156},
-                  zoom: 15,
-                  disableDefaultUI: true
-          };
-          var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    var mapOptions = {
+            center: { lat: 42.3606249, lng: -71.0591156},
+            zoom: 15,
+            disableDefaultUI: true
+    };
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
     var input = document.getElementById('pac-input');
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);

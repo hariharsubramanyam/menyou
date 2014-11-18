@@ -8,6 +8,8 @@
 
   Menyou.SessionHelper = {};
 
+  console.log('hi');
+
   /**
    * Get the current token from cookies if exists
    *
@@ -50,4 +52,4 @@
     Menyou.state = $.extend(true, {}, Menyou.DEFAULT_STATE);
   };
 
-});
+})();
