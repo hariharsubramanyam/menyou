@@ -1,5 +1,5 @@
 
 <div class='meal'>
   <p><span class='name'>{{name}}</span> <span class='restaurant'>@ {{restaurant.name}}</span> <span class='price'>${{price}}</span></p>
-  <p class='description'>{{description}}</p>
+  <p class='description'>{{#ellipsize}}{{description}}{{/ellipsize}}</p>
 </div>
