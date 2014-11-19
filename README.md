@@ -9,7 +9,7 @@ Menyou is an app that lets you build a profile reflecting your unique taste in f
 
 # Usage
 
-The app can be accessed at [104.236.61.65:8080](104.236.61.65:8080).
+The app can be accessed at [104.236.61.65:8080](http://104.236.61.65:8080).
 
 To run locally, please do the following:
 
