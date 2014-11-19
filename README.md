@@ -1,6 +1,10 @@
 Menyou
 ======
 
+# Authors
+
+Ryan Chipman, Danielle Man, Harihar Subramanyam, Tawanda Zimuto
+
 # Overview
 
 A menu for you.
@@ -19,9 +23,18 @@ To run locally, please do the following:
 3. `gulp` (if you don't have `gulp`, run `sudo npm install -g gulp`)
 4. Navigate to [localhost:8080](http://localhost:8080)
 
-# Authors
+This will bring you the **main page**. Register for an account. Then, build your taste profile (i.e. the ingredients you like, the ingredients you dislike, and any allergies). When you're done, click the button to get recommended dishes. This may take some time, as the menu API (Locu) that we use is quite slow (they give you better speed if you pay for API access - we are using the free plan).
 
-Ryan Chipman, Danielle Man, Harihar Subramanyam, Tawanda Zimuto
+# Limitations of the MVP
+
+Keep in mind that this is an MVP, so some features are missing. For instance:
+
+1. Clicking recommended dishes does nothing. In the final version, this will locate the restaurant on the map and pop up its information
+2. The allergies are few in number. In the final version, we allow you to select more "forbidden foods" (and enter your own).
+3. The recommendation is not stellar. In the final version, our recommendation algorithm will be more refined.
+4. The restaurants on the map do not show much information when clicked. In the final version, they will show the restaurant name, address, etc.
+5. There is no way to search, sort, filter, or get more recommendations. In the final version, we will support these operations.
+6. There are no in-app questions to build your taste profile (see our Design Doc). In the final version, we will include questions.
 
 # API Documentation
 
@@ -35,33 +48,30 @@ The meat of the app is divided into two parts, the client and the server, each i
 
 ## Server
 
-- **app/** - the folder containing the key server-side code
-  - **config/** - the folder containing configurations for the server, db, etc.
-  - **controllers/** - the folder containing the controllers
-  - **helpers/** - the folder containing the helpers
-  - **models/** - the folder containing the models
-  - **test/** - the folder containing all tests for the server/API
-  - **app.js** - the main file for the express app
+- **app/** - The key server-side code
+  - **config/** - Configurations for the server, db, etc.
+  - **controllers/** - Controllers for the routes
+  - **helpers/** - Helpers for complex logic (ex. recommendation)
+  - **models/** - Database models
+  - **test/** - Mocha tests
+  - **app.js** - Main file for express app
 
-- **bin/** - the folder for scripts/executables that may need to be run externally
-  - **www** - node code for starting the server. 'node server/bin/www' will start the server
+- **bin/** - Scripts/executables that may need to be run externally
+  - **www** - Node code for starting the server. 'node server/bin/www' will start the server
 
 ## Client
 
-- **app/** - the folder containing the angular app's key components
-  - **/shared** - the folder containing directives that will be reused throughout the app
-  - **components/** - the folder containing the sections of the angular app, each section with its own views, controllers, and services. each component is like a little mini angular app in and of itself.
-  - **app.module.js** - file handling the setup of the app, loading Angular dependencies, etc.
-  - **app.routes.js** - file handling angular routes & route configurations
-- **assets/** - folder containing all static assets used for front-end purposes
-  - **js/** - folder containing javascript files not related to Angular code. This could be transitions, animations, etc.
-  - **style/** - folder containing stylesheets
-    - **stylus/** - folder containing the stylus sheets
-      - **style.styl** - the main stylus file that will be compiled into css. Any other stylus files written outside of here should be imported into this.
-    - **css/** - folder containing the css compiled from the stylus sheets
-      - **style.css** - the compiled css version of style.styl
-  - **img/** - folder containing images & other graphics
-- **index.html** - the main file that gets rendered to display the angular app. primarily just loads in all the other angular elements that make up the app.
+- **build/** - Compiled styles, templates, and scripts (will be created after running `gulp`)
+- **source/** - Source code
+  - **assets/** - JavaScript, styles, and additional useful data
+    - **js/** - JavaScript
+      - **controllers/** - Logic for each page
+      - **helpers/** - Helpers for complex logic (ex. interacting with API)
+      - **vendor/** - 3rd party libraries
+    - **style/** - CSS styles
+    - **txt/** - Useful text files
+  - **index.html/** - Entry point for the SPA
+  - **templates/** - Handlebars templates
 
 ## Documentation
 
