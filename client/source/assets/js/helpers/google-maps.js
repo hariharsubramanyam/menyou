@@ -2,9 +2,9 @@
 
   Menyou.Map = {};
 
-  var DEFAULT_LOCATION = { lat: 42.358638, lng: -71.093345}; // Boston
-  var RED_MARKER_URL = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
-  var GREEN_MARKER_URL = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+  var DEFAULT_LOCATION = { lat: 42.359132, lng: -71.093659}; // MIT
+  var RED_MARKER_URL = "http://maps.google.com/mapfiles/kml/pal2/icon10.png";
+  var GREEN_MARKER_URL = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|5D8A31";
 
   var markers;
   var mapOptions;
@@ -17,13 +17,10 @@
    */
   Menyou.Map.mark_restaurants = function() {
     marker = []; markedRestaurants = [];
-
-    dishes = Menyou.state.dishes;
-
     var infowindow = new google.maps.InfoWindow({});
     var bounds = new google.maps.LatLngBounds();
 
-
+    dishes = Menyou.state.dishes;
     for (var i=0; i<dishes.length; i++) {
       var dish = dishes[i]
 
@@ -72,11 +69,11 @@
         icon: RED_MARKER_URL,
         position: map.center,
         map: map,
-        title: 'Me'
+        title: 'You are here.'
     });
 
     google.maps.event.addListener(user_marker, 'click', function() {
-      infowindow.setContent("You are here");
+      infowindow.setContent(this.title);
       infowindow.open(map,this);
     });
     /**
