@@ -4,7 +4,7 @@
 
   var DEFAULT_LOCATION = { lat: 42.359132, lng: -71.093659}; // MIT
   var RED_MARKER_URL = "http://maps.google.com/mapfiles/kml/pal2/icon10.png";
-  var GREEN_MARKER_URL = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|5D8A31";
+  var GREEN_MARKER_URL = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|5D8A31";
 
   var markers;
   var mapOptions;
