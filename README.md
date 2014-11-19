@@ -1,13 +1,29 @@
 Menyou
 ======
 
-**NOTE** If you are looking for the design doc/teamwork plan, please check the **/doc/** directory.
-
-###Ryan Chipman, Danielle Man, Harihar Subramanyam, Tawanda Zimuto
+# Overview
 
 A menu for you.
 
-##API Documentation
+Menyou is an app that lets you build a profile reflecting your unique taste in food. Then, it will recommend dishes from nearby restaurants with foods that fit your tastes.
+
+# Usage
+
+The app can be accessed at [104.236.61.65:8080](http://104.236.61.65:8080).
+
+To run locally, please do the following:
+
+1. (in separate terminal) `sudo mongod`
+1. Clone the repo
+2. `npm install`
+3. `gulp` (if you don't have `gulp`, run `sudo npm install -g gulp`)
+4. Navigate to [localhost:8080](http://localhost:8080)
+
+# Authors
+
+Ryan Chipman, Danielle Man, Harihar Subramanyam, Tawanda Zimuto
+
+# API Documentation
 
 The API documentation is accessed at the following link:
 
@@ -17,7 +33,7 @@ https://docs.google.com/document/d/1DDVklyfrSfcfKjzs5Morc1ZGB5zDgEWIZnuiFBhSTxg/
 
 The meat of the app is divided into two parts, the client and the server, each in the correspondingly named folders.
 
-###Server
+## Server
 
 - **app/** - the folder containing the key server-side code
   - **config/** - the folder containing configurations for the server, db, etc.
@@ -30,7 +46,7 @@ The meat of the app is divided into two parts, the client and the server, each i
 - **bin/** - the folder for scripts/executables that may need to be run externally
   - **www** - node code for starting the server. 'node server/bin/www' will start the server
 
-###Client
+## Client
 
 - **app/** - the folder containing the angular app's key components
   - **/shared** - the folder containing directives that will be reused throughout the app
@@ -47,7 +63,7 @@ The meat of the app is divided into two parts, the client and the server, each i
   - **img/** - folder containing images & other graphics
 - **index.html** - the main file that gets rendered to display the angular app. primarily just loads in all the other angular elements that make up the app.
 
-###Documentation
+## Documentation
 
 Documentation can be found in the **/doc/** directory.
 
@@ -56,11 +72,3 @@ Documentation can be found in the **/doc/** directory.
 - **MenyouPitch.pdf** - the document used to pitch the application.
 - **TeamContract.pdf** - the document detailing the contract agreed by the team.
 - **TeamworkPlan.pdf** - the document detailing the teamwork plan.
-
-##Accessing
-
-The app can be accessed at 104.236.61.65:8080
-
-All routes matching 104.236.61.65:8080/api/\* are handled as API requests.
-All other routes are handled as front-end requests.
-
