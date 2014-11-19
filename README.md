@@ -16,7 +16,7 @@ To run locally, please do the following:
 1. (in separate terminal) `sudo mongod`
 1. Clone the repo
 2. `npm install`
-3. `gulp`
+3. `gulp` (if you don't have `gulp`, run `sudo npm install -g gulp`)
 4. Navigate to [localhost:8080](http://localhost:8080)
 
 # Authors
