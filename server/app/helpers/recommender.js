@@ -59,11 +59,20 @@ var recommend = function(menu_items, taste_profile) {
   var dislike_set = FuzzySet(taste_profile.dislikes);
   var forbidden_set = FuzzySet(taste_profile.forbidden);
   
+  // Don't recommend any dish twice.
+  var used_dishes = {};
+
   // Set array of recommended meals.
   var recommended = [];
 
   // Iterate through each menu item.
   menu_items.forEach(function(menu_item) {
+
+
+    // Don't recommend any meal twice.
+    var key_name = menu_item.name + menu_item.restaurant.name;
+    if (used_dishes[key_name]) return;
+    used_dishes[key_name] = true;
 
     // Tokenize the name + description.
     var tokens = (menu_item.name + " " + menu_item.description).split(" ");
