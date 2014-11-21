@@ -79,8 +79,16 @@ var recommend = function(menu_items, taste_profile) {
     var isForbidden = false;
     var points = 0;
 
+    // Don't assign points for the same keyword twice.
+    var used_keyword = {};
+
     // Iterate through each token.
     tokens.forEach(function(token) {
+      if (used_keyword[token.toLowerCase()]) {
+        return;
+      } else {
+        used_keyword[token.toLowerCase()] = true;
+      }
       // Check for forbidden token to forbid the meal.
       if (contains(forbidden_set, token) === 1) {
         isForbidden = true;
