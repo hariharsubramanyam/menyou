@@ -35,6 +35,10 @@ var FuzzySet = require("fuzzyset.js");
  */
 var recommend = function(menu_items, taste_profile) {
 
+  // No restaurant is allowed to give more than MAX_RECOMMENDATIONS_FROM_RESTAURANT 
+  // recommendations.
+  var MAX_RECOMMENDATIONS_FROM_RESTAURANT = 3;
+
   // Vary from 0 to 1. This is the number returned by fuzzyset.get(someval). Read about what
   // that means on http://glench.github.io/fuzzyset.js/ 
   var FUZZY_MATCH_THRESHOLD = 0.7;
@@ -68,7 +72,6 @@ var recommend = function(menu_items, taste_profile) {
   // Iterate through each menu item.
   menu_items.forEach(function(menu_item) {
 
-
     // Don't recommend any meal twice.
     var key_name = menu_item.name + menu_item.restaurant.name;
     if (used_dishes[key_name]) return;
@@ -79,8 +82,16 @@ var recommend = function(menu_items, taste_profile) {
     var isForbidden = false;
     var points = 0;
 
+    // Don't assign points for the same keyword twice.
+    var used_keyword = {};
+
     // Iterate through each token.
     tokens.forEach(function(token) {
+      if (used_keyword[token.toLowerCase()]) {
+        return;
+      } else {
+        used_keyword[token.toLowerCase()] = true;
+      }
       // Check for forbidden token to forbid the meal.
       if (contains(forbidden_set, token) === 1) {
         isForbidden = true;
@@ -102,8 +113,32 @@ var recommend = function(menu_items, taste_profile) {
     return b.points - a.points;
   });
 
-  // Return only the first NUM_ELEMENTS_RETURNED recommended dishes.
-  return recommended.slice(0, NUM_ELEMENTS_RETURNED);
+  // 
+  var num_recommendations_for_restaurant = {};
+  var final_recommendations = [];
+  var num_recommended = 0;
+  recommended.forEach(function(menu_item) {
+    // Ensure we don't recommend too many dishes.
+    if (num_recommended == NUM_ELEMENTS_RETURNED) {
+      return;
+    }
+
+    // Ensure that no restaurant has too many dishes recommended.
+    var r_name = menu_item.restaurant.name;
+    if (num_recommendations_for_restaurant[r_name] !== undefined) {
+      num_recommendations_for_restaurant[r_name] += 1;
+      if (num_recommendations_for_restaurant[r_name] >= MAX_RECOMMENDATIONS_FROM_RESTAURANT) {
+        return;
+      } 
+    } else {
+      num_recommendations_for_restaurant[r_name] = 0;
+    }
+
+    final_recommendations.push(menu_item);
+    num_recommended += 1;
+  });
+
+  return final_recommendations;
 };
 
 module.exports.recommend = recommend;
