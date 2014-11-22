@@ -1,3 +1,15 @@
+@import url('http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic');
+@import url('http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600');
+@import url(http://fonts.googleapis.com/css?family=Lora);
+
+green = #5D8A31
+beige = #FCFCF6
+
+@import 'partials/profile'
+@import 'partials/map'
+@import 'partials/dishes'
+@import 'partials/nav'
+
 html, body {
 	height: 100%;
 	margin: 0;
@@ -7,43 +19,41 @@ html, body {
 }
 
 hr {
-  margin: 0px 0px 10px 0px;
+  margin: 0px 0px 0px 0px;
   color: #7a7a7a;
   border: 0;
   border-top: 1px solid #ccc;
   margin: 0 auto;
-  
 }
 
-@import 'partials/profile'
-@import 'partials/map'
-@import 'partials/dishes'
-@import 'partials/nav'
+
 
 /** ----------------------------------------------- **/
 
-@media (min-width: 805px) {
-	#pac-input:focus {
-		border-color: #4d90fe;
-		margin-left: -1px;
-		padding-left: 14px;  /* Regular padding-left + 1. */
-		margin-left: 20px;
-		margin-right: 20px;
-		width: 301px;
-	}
+@media (min-width: 760px) {
 	#pac-input {
 		padding: 0 11px 0 13px;
 		font-family: Lato;
 		font-size: 15px;
 		font-weight: 300;
 		text-overflow: ellipsis;
-		margin-left: 20px;
-		margin-right: 20px;
-		width: 300px;
+		width: 250px;
+		position: absolute;
+		top: 10px;
+		left: 160px;
+	    border: 1px solid #ccc;
+	    border-radius: 2px 0 0 2px;
+	    box-sizing: border-box;
+	    height: 32px;
+	    transition: .5s;
+	    
+	    &:focus {
+	    	border-color: green;
+	    	transition: .5s;
+	    	outline: none;
+	    }
 	}
-	.pac-container {
-		font-family: Lato;
-	}
+
 	#map-canvas {
 		width: calc(100% - 465px);
 		height: calc(100% - 52px);
@@ -57,15 +67,10 @@ hr {
 		position: absolute;
 		top: 52px;
 	}
-	#recommendations {
-		position: absolute;
-		right: 150px;
-		top: 15px;
-	}
 }
 
 @media (min-width: 0px) {
-	@media (max-width: 804px) {
+	@media (max-width: 759px) {
 		#pac-input {
 			display: none;
 		}
@@ -81,11 +86,6 @@ hr {
 			height: calc(100% - 52px);
 			top: 52px;
 			border-right: 1px solid #ccc;
-		}
-		#recommendations {
-			position: absolute;
-			right: 150px;
-			top: 15px;
 		}
 	}
 	@media (max-width: 465px) {
@@ -103,17 +103,6 @@ hr {
 			display: none;
 		}
 	}
-}
-
-.controls {
-    margin-top: 16px;
-    border: 1px solid transparent;
-    border-radius: 2px 0 0 2px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    height: 32px;
-    outline: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 #type-selector {

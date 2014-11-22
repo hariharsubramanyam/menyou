@@ -1,4 +1,3 @@
-
 nav {
 	height: 40px;
 	padding-bottom: 10px;
@@ -11,10 +10,22 @@ nav {
 	}
 }
 
+.nav-link {
+	float: right;
+	margin-top: 15px;
+	padding-right: 15px;
+	
+	&:hover {
+		color: green;
+		font-weight: 400;
+		cursor: pointer;
+	}
+}
+
 #logo {
 	font-size: 35px;
 	margin-left: 20px;
-	color: #5D8A31;
+	color: green;
 	font-weight: 300;
 	cursor: pointer;
 
@@ -23,33 +34,8 @@ nav {
 	}
 }
 
-#login, #logout {
-	position: absolute;
-	right: 20px;
-	top: 15px;
+#username-input {
 }
 
-#register {
-	position: absolute;
-	right: 70px;
-	top: 15px;
-}
-
-#profile {
-	position: absolute;
-	right: 92px;
-	top: 15px;
-}
-
-#form {
-	position: absolute;
-	right: 140px;
-	top: 15px;
-}
-
-#profile:hover, #login:hover,
-#logout:hover, #register:hover, #recommendations:hover {
-	color: #5D8A31;
-	font-weight: 400;
-	cursor: pointer;
+#password-input {
 }

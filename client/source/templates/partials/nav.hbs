@@ -5,27 +5,25 @@
   </div>
 
   {{#if username}}
-    <div id="recommendations">
-      <a>Recommended Dishes</a>
+
+    <div>
+      <a id="logout" class="nav-link">Log Out</a>
     </div>
-    <div id="profile">
-      <a>Profile</a>
-    </div>
-    <div id="logout">
-      <a>Log Out</a>
+    <div>
+      <a id="profile" class="nav-link">Profile</a>
     </div>
 
   {{else}}
 
-    <div id='form'>
-      <input type='text' name='username' placeholder='username'>
-      <input type='password' name='password' placeholder='password'>
-    </div>
-    <div id='login'>
+    <div id='login' class="nav-link">
       <a>Log In</a>
     </div>
-    <div id='register'>
+    <div id='register' class="nav-link">
       <a>Register</a>
+    </div>
+    <div id='form'>
+    <input id="password-input" class="nav-link" type='password' name='password' placeholder='password'>
+      <input id="username-input" class="nav-link" type='text' name='username' placeholder='username'>
     </div>
 
   {{/if}}

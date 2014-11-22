@@ -3,20 +3,21 @@
   Menyou.Map = {};
 
   var DEFAULT_LOCATION = { lat: 42.359132, lng: -71.093659}; // MIT
-  var RED_MARKER_URL = "http://maps.google.com/mapfiles/kml/pal2/icon10.png";
-  var GREEN_MARKER_URL = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|5D8A31";
+  var USER_POSITION = "http://maps.google.com/mapfiles/kml/pal2/icon10.png";
+  var RESTAURANT_POSITION = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|5D8A31";
 
   var markers;
   var mapOptions;
   var map;
 
-  var markedRestaurants = []; // string list of restaurant titles, so markers aren't duplicated
+  // String list of Restaurant titles - so Restaurants aren't marked twice.
+  var markedRestaurants = [];
   
   /**
    * Mark Resaurants based on the current Recommended Dishes displayed to the User.
    */
   Menyou.Map.mark_restaurants = function() {
-    marker = []; markedRestaurants = [];
+    markers = []; markedRestaurants = [];
     var infowindow = new google.maps.InfoWindow({});
     var bounds = new google.maps.LatLngBounds();
 
@@ -30,7 +31,7 @@
         bounds.extend(latlng)
 
         var marker = new google.maps.Marker({
-          icon: GREEN_MARKER_URL,
+          icon: RESTAURANT_POSITION,
           position: latlng,
           map: map,
           title: dish.restaurant.name
@@ -45,6 +46,7 @@
         markedRestaurants.push(dish.restaurant.name);
 
       }
+
     }
 
   }
@@ -64,9 +66,11 @@
     };
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-    // Add a marker for the user's location.
+    /**
+     * Mark User's Location
+     */
     var user_marker = new google.maps.Marker({
-        icon: RED_MARKER_URL,
+        icon: USER_POSITION,
         position: map.center,
         map: map,
         title: 'You are here.'
@@ -76,11 +80,12 @@
       infowindow.setContent(this.title);
       infowindow.open(map,this);
     });
+
     /**
      * Search Box Controller
      */
     var input = document.getElementById('pac-input');
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
     var searchBox = new google.maps.places.SearchBox((input));
     google.maps.event.addListener(searchBox, 'places_changed', function() {
       var places = searchBox.getPlaces();
