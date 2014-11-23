@@ -49,6 +49,12 @@
 
     }
 
+    $(document).on("click", ".meal", function() {
+      var restaurant = $(this).find('.restaurant').html();
+      var index = markedRestaurants.indexOf(restaurant);
+      google.maps.event.trigger(markers[index], 'click');
+    });
+
   }
 
   /**
