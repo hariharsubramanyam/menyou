@@ -2,81 +2,171 @@
     min-height: calc(90% - 52px);
     width: calc(100% - 80px);
     margin: 40px 40px 0px 40px;;
-    background-color: beige;
     text-align: center;
-    border: 1px solid #ccc;
-}
+    
+    #username {
+        height: 70px;
+        font-size: 50px;
+        padding: 10px;
+    }
+    
+    input {
+        width: 80%;
+        padding: 0 11px 0 13px;
+        font-family: Lato;
+        font-size: 15px;
+        font-weight: 300;
+        text-overflow: ellipsis;
+        border: 1px solid #ccc;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        height: 32px;
+        transition: .5s;
+    }
+    
+    ul {
+        list-style-type: none;
+        padding-left:0;
+        margin: 0 auto;
+        margin-top: 10px;
+        
+        li {
+            display: inline-block;
+            border: 1px solid #ccc;
+            margin: 2px 4px;
+            padding: 1px 10px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: .5s;
+        }
+    }
+    
+    #likes-container {
+        left: 5%;
+        width: 30%;
+        display: inline-block;
+        vertical-align: top;
+        
+        #likes-input {
+            text-align: center;
+            &:focus {
+                border-color: #5d9c14;
+                transition: .5s;
+                outline: none;
+            }            
+        }
+        
+        ul li {
+            color: #5d9c14;
+            
+            &:hover {
+                background-color: #dadada;
+                transition: .5s;
+                .likes-remove {
+                    background: transparent url('/assets/img/close-green.png') no-repeat center center;  
+                    background-size: 10px 10px;
+                }
+            }
+            
+            .likes-remove {
+                height: 10px;
+                width: 10px;
+                display: inline-block;
+                background: transparent url('/assets/img/circle-green.png') no-repeat center center;  
+                background-size: 10px 10px;
+                margin-left: 5px;
+            }
+        }
+    }
 
-#profile-container hr {
-    width: 80%;
-}
+    #dislikes-container {
+        left: 35%;
+        width: 30%;
+        display: inline-block;
+        vertical-align: top;
+        
+        #dislikes-input {
+            text-align: center;
+            &:focus {
+                border-color: #e57c10;
+                transition: .5s;
+                outline: none; 
+            }            
+        }
+        
+        ul li {
+            color: #e57c10;
+            
+            &:hover {
+                background-color: #dadada;
+                transition: .5s;
+                .dislikes-remove {
+                    background: transparent url('/assets/img/close-orange.png') no-repeat center center;  
+                    background-size: 10px 10px;
+                }
+            }
+            
+            .dislikes-remove {
+                height: 10px;
+                width: 10px;
+                display: inline-block;
+                background: transparent url('/assets/img/circle-orange.png') no-repeat center center;  
+                background-size: 10px 10px;
+                margin-left: 5px;
+            }
+        }
+    }
 
-#username {
-    height: 70px;
-    font-size: 50px;
-    padding: 10px;
-    font-weight: 200;
-}
-
-#likes-container {
-    left: 5%;
-    width: 30%;
-    display: inline-block;
-    vertical-align: top;
-}
-
-#dislikes-container {
-    left: 35%;
-    width: 30%;
-    display: inline-block;
-    vertical-align: top;
-}
-
-#restrictions-container {
-    right: 5%;
-    width: 30%;
-    display: inline-block;
-    vertical-align: top;
-    padding-bottom: 20px;
-    // background-color: #f7f7e3;
-}
-
-.section-title {
-    font-size: 20px;
-    font-weight: 400;
-    margin-bottom: 5px;
-    margin-top: 5px;
-}
-
-#allergies {
-    text-align: left;
-    margin: 0 auto;
-}
-
-#likes-input, #dislikes-input {
-    width: calc(80% - 25px);
-    max-width: 120px;
-    height: 25px;
-    left: 0;
-    font-family: Lato;
-    margin-top: 4px;
-    font-weight: 200;
-    font-size: 14px;
-    padding-left: 5px;
-}
-
-#likes-add, #dislikes-add {
-    border: 1px solid #5D8A31;
-    border-radius: 0px;
-    background-color: #5D8A31;
-    height: 25px;
-    font-family: Lato;
-    color: white;
-    font-weight: 300;
-}
-
-#likes-form, #dislikes-form {
-    margin-bottom: 0px;
+    #restrictions-container {
+        right: 5%;
+        width: 30%;
+        display: inline-block;
+        vertical-align: top;
+        
+        #restrictions-title {
+            color: black;
+            padding-bottom: 5px;
+            width: 80%;
+            border-bottom: 1px solid #cc0b0b;
+            margin: 0 auto;
+            margin-top: 5px;
+        }
+        
+        #allergies {
+            text-align: left;
+            margin: 0 auto;
+            
+            td {
+                font-weight: 300;
+                border-collapse: collapse;
+                display: inline;
+                
+                .checkbox-name {
+                    margin-left: 10px;  
+                }
+                
+                .checkbox {
+                    border: 5px solid red;
+                    height: 5px;
+                }
+            }
+        }
+    }
+    
+    #btn_profile_recommend {
+        background-color: #5D8A31;
+        border-radius: 2px;
+        border: 1px solid #5D8A31;
+        display:inline-block;
+        cursor:pointer;
+        color: #fff;
+        font-family: Lato;
+        font-size: 18px;
+        padding: 16px 31px;
+        text-decoration: none;
+        text-shadow: 0px 1px 0px #2f6627;
+        font-weight: 300;
+    }
 }
 
 footer {
@@ -87,45 +177,4 @@ footer {
     font-weight: 300;
     margin-top: 12px;
     margin-bottom: 15px;
-}
-
-ul {
-    list-style-type: none;
-    padding-left:0;
-    margin: 0 auto;
-}
-
-td {
-    font-weight: 300;
-}
-
-ul li .likes-remove, ul li .dislikes-remove {
-    cursor: pointer;
-    margin-left: 10px;
-    color: #7a7a7a;
-    font-weight: 100;
-    visibility: hidden;
-}
-
-ul li:hover .likes-remove, ul li:hover .dislikes-remove {
-    visibility: visible;
-}
-
-ul li:hover, ul li:hover {
-    cursor: default;
-}
-
-#btn_profile_recommend {
-  background-color: #5D8A31;
-  border-radius: 0px;
-  border: 1px solid #5D8A31;
-  display:inline-block;
-  cursor:pointer;
-  color: #fff;
-  font-family: Lato;
-  font-size: 18px;
-  padding: 16px 31px;
-  text-decoration: none;
-  text-shadow: 0px 1px 0px #2f6627;
-  font-weight: 300;
 }

@@ -4,17 +4,14 @@
   <div id="recommendation-container">
     <div id="recommendation-title">
       {{#if username}}
-        Meals for you in {{location.city}}
+        Dishes for <span class="green">you</span> in {{location.city}}
       {{else}}
         Log in for personalized meal recommendations!
       {{/if}}
     </div>
-    <hr>
 
     {{#each dishes}}
-
       {{> dish}}
-
     {{/each}}
 
   </div>

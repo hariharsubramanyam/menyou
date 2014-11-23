@@ -17,40 +17,35 @@
     /**
      * Add a like to the list
      */
-    $(document).on('click', '#likes-add', function(evt) {
-        var input = $(this).parent().find('#likes-input');
-        var like = input.val();
-        if (like != '') {
-            input.val('');
-            update('likes', 'add', [like]);
-        }
+    $(document).on('change', '#likes-input', function(evt) {
+        var like = $(this).val().toLowerCase();
+        update('likes', 'add', [like]);
+        $(this).val('');
     });
 
     /**
      * Remove a like from the list
      */
     $(document).on('click', '.likes-remove', function(evt) {
-        var like = $(this).parent().find('.content')[0].innerHTML;
+        var like = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
+        console.log(like);
         update('likes', 'remove', [like]);
     });
 
     /**
      * Add a dislike to the list
      */
-    $(document).on('click', '#dislikes-add', function(evt) {
-        var input = $(this).parent().find('#dislikes-input');
-        var dislike = input.val();
-        if (dislike != '') {
-            input.val('');
-            update('dislikes', 'add', [dislike]);
-        }
+    $(document).on('change', '#dislikes-input', function(evt) {
+        var dislike = $(this).val().toLowerCase();
+        update('dislikes', 'add', [dislike]);
+        $(this).val('');
     });
 
     /**
      * Remove a dislike from the list
      */
     $(document).on('click', '.dislikes-remove', function(evt) {
-        var dislike = $(this).parent().find('.content')[0].innerHTML;
+        var dislike = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
         update('dislikes', 'remove', [dislike]);
     });
 

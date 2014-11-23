@@ -7,48 +7,32 @@
   </div>
 
   <div id="likes-container">
-    <h3 class="section-title">Likes</h3>
-    <hr>
-
-    <input id="likes-input" type="text" placeholder="ex. noodles,peanut">
-    <input type="button" id="likes-add" value="Add"></input>
-
+    <input id="likes-input" type="text" placeholder="What do you like?">
     <ul>
       {{#each taste.likes}}
-        <li><span class="content">{{this}}</span><span class="likes-remove">x</span></li>
+        <li><span class="content">{{toUpperCase this}}</span><span class="likes-remove"></span></li>
       {{/each}}
     </ul>
   </div>
 
   <div id="dislikes-container">
-    <h3 class="section-title">Dislikes</h3>
-    <hr>
-
-    <input id="dislikes-input" type="text" placeholder="ex. chili,olives">
-    <input type="submit" id="dislikes-add" value="Add"></input>
-
+    <input id="dislikes-input" type="text" placeholder="What don't you like?">
     <ul >
       {{#each taste.dislikes}}
-        <li><span class="content">{{this}}</span><span class="dislikes-remove">x</span></li>
+        <li><span class="content">{{toUpperCase this}}</span><span class="dislikes-remove"></span></li>
       {{/each}}
     </ul>
   </div>
 
   <div id="restrictions-container">
-    <h3 class="section-title">Dietary Restrictions</h3>
-    <hr>
-
+    <p id="restrictions-title">What can't you have?</p>
     <table id="allergies">
-      <tr>
-        <th>Y/N</th>
-        <th>Allergies:</th>
-      </tr>
       {{#each allergies}}
         <tr>
           <td>
             <input type=checkbox class="checkbox" value={{this}} {{#isChecked this ../taste.forbidden}}checked{{/isChecked}}>
           </td>
-          <td>{{this}}</td>
+          <td><span class="checkbox-name">{{this}}</span></td>
         </tr>
       {{/each}}
     </table>

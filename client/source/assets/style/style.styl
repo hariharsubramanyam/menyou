@@ -1,6 +1,5 @@
 @import url('http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic');
-@import url('http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600');
-@import url(http://fonts.googleapis.com/css?family=Lora);
+@import url('http://fonts.googleapis.com/css?family=Lora');
 
 green = #5D8A31
 beige = #FCFCF6
@@ -26,7 +25,10 @@ hr {
   margin: 0 auto;
 }
 
-
+.green {
+	color: green;
+	font-weight: 400;
+}
 
 /** ----------------------------------------------- **/
 
@@ -53,13 +55,7 @@ hr {
 	    	outline: none;
 	    }
 	}
-
-	#map-canvas {
-		width: calc(100% - 465px);
-		height: calc(100% - 52px);
-		top: 52px;
-		border-right: 1px solid #ccc;
-	}
+	
 	#menu-container {
 		width: 465px;
 		height: calc(100% - 52px);
@@ -74,6 +70,7 @@ hr {
 		#pac-input {
 			display: none;
 		}
+		
 		#menu-container {
 			width: 465px;
 			height: calc(100% - 52px);
@@ -81,17 +78,8 @@ hr {
 			position: absolute;
 			top: 52px;
 		}
-		#map-canvas {
-			width: calc(100% - 465px);
-			height: calc(100% - 52px);
-			top: 52px;
-			border-right: 1px solid #ccc;
-		}
 	}
 	@media (max-width: 465px) {
-		#map-canvas {
-			display:;
-		}
 		#menu-container {
 			width: 100%;
 			height: calc(100% - 52px);
@@ -99,6 +87,7 @@ hr {
 			position: absolute;
 			top: 52px;
 		}
+		
 		#recommendations {
 			display: none;
 		}
@@ -116,4 +105,3 @@ hr {
 	    font-weight: 300;
 	}
 }
-

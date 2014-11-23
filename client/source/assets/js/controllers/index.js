@@ -29,4 +29,8 @@
     }
   });
 
+  Handlebars.registerHelper('toUpperCase', function(elem) {
+    return elem.toUpperCase();
+  });
+
 })();
