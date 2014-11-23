@@ -38,8 +38,20 @@
         });
 
         google.maps.event.addListener(marker, 'click', function() {
+          $('.meal').each(function(index) { $(this).removeClass('selected'); })
+
+          var looking_for = this.title;
+
+          $('.meal').each(function(index) {
+            var restaurant = $(this).find('.restaurant').html();
+            if (looking_for == restaurant) {
+              $(this).addClass('selected');
+            }
+          })
+
           infowindow.setContent(this.title);
           infowindow.open(map,this);
+
         });
 
         markers.push(marker);

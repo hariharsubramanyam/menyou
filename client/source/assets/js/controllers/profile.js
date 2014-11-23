@@ -28,7 +28,6 @@
      */
     $(document).on('click', '.likes-remove', function(evt) {
         var like = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
-        console.log(like);
         update('likes', 'remove', [like]);
     });
 
