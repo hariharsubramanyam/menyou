@@ -54,14 +54,14 @@
         #likes-input {
             text-align: center;
             &:focus {
-                border-color: #5d9c14;
+                border-color: green;
                 transition: .5s;
                 outline: none;
             }            
         }
         
         ul li {
-            color: #5d9c14;
+            color: green;
             
             &:hover {
                 background-color: #ececec;
@@ -93,14 +93,14 @@
         #dislikes-input {
             text-align: center;
             &:focus {
-                border-color: #e57c10;
+                border-color: orange;
                 transition: .5s;
                 outline: none; 
             }            
         }
         
         ul li {
-            color: #e57c10;
+            color: orange;
             
             &:hover {
                 background-color: #ececec;
@@ -129,7 +129,21 @@
         display: inline-block;
         vertical-align: top;
         
-        .restrictions-title {
+        #restrictions-possible-container:hover {
+            #restrictions-possible-title {
+                border-bottom: 1px solid blue;
+                transition: .5s;
+            }
+        }
+        
+        #restrictions-forbidden-container:hover {
+            #restrictions-forbidden-title {
+                border-bottom: 1px solid red;
+                transition: .5s;
+            }
+        }
+        
+        #restrictions-possible-title, #restrictions-forbidden-title {
             color: black;
             padding-bottom: 5px;
             width: 80%;
@@ -137,14 +151,15 @@
             margin: 0 auto;
             margin-top: 5px;
             margin-bottom: 13px;
-        }
-        
-        #restrictions-forbidden {
-            color: #e33e3e;
+            transition: .5s;
         }
         
         #restrictions-possible {
-            color: #39B3C5;
+            color: blue;
+        }
+        
+        #restrictions-forbidden {
+            color: red;
         }
 
         ul li {            
@@ -153,7 +168,7 @@
                 transition: .5s;
                 
                 .restrictions-forbid {
-                    background: transparent url('/assets/img/arrow-down-blue.png') no-repeat center center;  
+                    background: transparent url('/assets/img/check-blue.png') no-repeat center center;  
                     background-size: 10px 10px;
                 }
                 

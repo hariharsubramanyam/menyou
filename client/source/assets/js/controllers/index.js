@@ -11,8 +11,7 @@
    * index is the default view.
    */
   $(document).ready(function() {
-    // Menyou.UI.render('index');
-    Menyou.UI.render('profile');
+    Menyou.UI.render('index');
   });
 
   /**
