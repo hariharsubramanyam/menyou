@@ -38,6 +38,10 @@
             font-size: 13px;
             cursor: pointer;
             transition: .5s;
+            
+            .content {
+                vertical-align: middle;
+            }
         }
     }
     
@@ -75,6 +79,7 @@
                 background: transparent url('/assets/img/circle-green.png') no-repeat center center;  
                 background-size: 10px 10px;
                 margin-left: 5px;
+                vertical-align: middle;
             }
         }
     }
@@ -113,6 +118,7 @@
                 background: transparent url('/assets/img/circle-orange.png') no-repeat center center;  
                 background-size: 10px 10px;
                 margin-left: 5px;
+                vertical-align: middle;
             }
         }
     }
@@ -123,32 +129,58 @@
         display: inline-block;
         vertical-align: top;
         
-        #restrictions-title {
+        .restrictions-title {
             color: black;
             padding-bottom: 5px;
             width: 80%;
-            border-bottom: 1px solid #cc0b0b;
+            border-bottom: 1px solid #ccc;
             margin: 0 auto;
             margin-top: 5px;
+            margin-bottom: 13px;
         }
         
-        #allergies {
-            text-align: left;
-            margin: 0 auto;
+        #restrictions-forbidden {
+            color: #e33e3e;
+        }
+        
+        #restrictions-possible {
+            color: #39B3C5;
+        }
+
+        ul li {            
+            &:hover {
+                background-color: #ececec;
+                transition: .5s;
+                
+                .restrictions-forbid {
+                    background: transparent url('/assets/img/arrow-down-blue.png') no-repeat center center;  
+                    background-size: 10px 10px;
+                }
+                
+                .restrictions-unforbid {
+                    background: transparent url('/assets/img/close-red.png') no-repeat center center;  
+                    background-size: 10px 10px;
+                }
+            }
+                        
+            .restrictions-forbid {
+                height: 10px;
+                width: 10px;
+                display: inline-block;
+                background: transparent url('/assets/img/circle-blue.png') no-repeat center center;  
+                background-size: 10px 10px;
+                margin-left: 5px;
+                vertical-align: middle;
+            }
             
-            td {
-                font-weight: 300;
-                border-collapse: collapse;
-                display: inline;
-                
-                .checkbox-name {
-                    margin-left: 10px;  
-                }
-                
-                .checkbox {
-                    border: 5px solid red;
-                    height: 5px;
-                }
+            .restrictions-unforbid {
+                height: 10px;
+                width: 10px;
+                display: inline-block;
+                background: transparent url('/assets/img/circle-red.png') no-repeat center center;  
+                background-size: 10px 10px;
+                margin-left: 5px;
+                vertical-align: middle;
             }
         }
     }

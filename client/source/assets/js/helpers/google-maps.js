@@ -49,6 +49,8 @@
             }
           })
 
+          $('#recommendation-container').scrollTop($('').position().top);
+
           infowindow.setContent(this.title);
           infowindow.open(map,this);
 

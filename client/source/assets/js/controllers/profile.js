@@ -51,13 +51,14 @@
     /**
      * Toggle an allergy from the allergy list
      */
-    $(document).on('click', '.checkbox', function(evt) {
-        var allergy = $(this)[0].value;
-        if ($(this)[0].checked) {
-            update('forbidden', 'add', Menyou.AllergyKeywords[allergy]);
-        } else {
-            update('forbidden', 'remove', Menyou.AllergyKeywords[allergy]);
-        }
+    $(document).on('click', '.restrictions-forbid', function(evt) {
+        var allergy = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
+        update('forbidden', 'add', Menyou.AllergyKeywords[allergy]);
+    });
+
+    $(document).on('click', '.restrictions-unforbid', function(evt) {
+        var allergy = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
+        update('forbidden', 'remove', Menyou.AllergyKeywords[allergy]);
     });
 
     /**
@@ -86,7 +87,6 @@
         });
     }
 
-    //TODO: cleaner way of doing this?
     Handlebars.registerHelper('isChecked', function(elem, forbidden, options) {
         var compare = Menyou.AllergyKeywords[elem];
         for (var i=0; i<compare.length; i++) {
@@ -94,6 +94,15 @@
                 return options.inverse(this);
             }
         } return options.fn(this);
+    });
+
+    Handlebars.registerHelper('isNotChecked', function(elem, forbidden, options) {
+        var compare = Menyou.AllergyKeywords[elem];
+        for (var i=0; i<compare.length; i++) {
+            if (forbidden.indexOf(compare[i]) == -1) {
+                return options.fn(this);
+            }
+        } return options.inverse(this);
     });
 
 })();

@@ -17,7 +17,7 @@
 
   <div id="dislikes-container">
     <input id="dislikes-input" type="text" placeholder="What don't you like?">
-    <ul >
+    <ul>
       {{#each taste.dislikes}}
         <li><span class="content">{{toUpperCase this}}</span><span class="dislikes-remove"></span></li>
       {{/each}}
@@ -25,17 +25,30 @@
   </div>
 
   <div id="restrictions-container">
-    <p id="restrictions-title">What can't you have?</p>
-    <table id="allergies">
+    <p class="restrictions-title">What can't you have?</p>
+    <ul id="restrictions-possible">
       {{#each allergies}}
-        <tr>
-          <td>
-            <input type=checkbox class="checkbox" value={{this}} {{#isChecked this ../taste.forbidden}}checked{{/isChecked}}>
-          </td>
-          <td><span class="checkbox-name">{{this}}</span></td>
-        </tr>
+        {{#isNotChecked this ../taste.forbidden}}
+          <li>
+            <span class="content">{{toUpperCase this}}</span>
+            <span class="restrictions-forbid"></span>
+          </li>
+        {{/isNotChecked}}
       {{/each}}
-    </table>
+    </ul>
+
+    <p class="restrictions-title">Forbidden</p>
+    <ul id="restrictions-forbidden">
+      {{#each allergies}}
+        {{#isChecked this ../taste.forbidden}}
+          <li>
+            <span class="content">{{toUpperCase this}}</span>
+            <span class="restrictions-unforbid"></span>
+          </li>
+        {{/isChecked}}
+      {{/each}}
+    </ul>
+
   </div>
 
   <button id="btn_profile_recommend" >Recommend me dishes!</button>
