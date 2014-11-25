@@ -24,7 +24,6 @@
    */
   Menyou.Map.mark_restaurants = function() {
     markers = []; markedRestaurants = [];
-    var infowindow = new google.maps.InfoWindow({});
     var bounds = new google.maps.LatLngBounds();
 
     dishes = Menyou.state.dishes;
@@ -36,11 +35,15 @@
         var latlng = new google.maps.LatLng(dish.restaurant.lat,dish.restaurant.lon)
         bounds.extend(latlng)
 
+        var infowindow = new google.maps.InfoWindow({});
+
         var marker = new google.maps.Marker({
           icon: RESTAURANT_POSITION,
           position: latlng,
           map: map,
-          title: dish.restaurant.name
+          title: dish.restaurant.name,
+          address: dish.restaurant.address,
+          dishes: [dish.name]
         });
 
         google.maps.event.addListener(marker, 'click', function() {
@@ -55,16 +58,25 @@
             }
           })
 
-          // $('#recommendation-container').scrollTop($('').position().top);
+          var contentString = '<h3>' + this.title + '</h3>' +
+                              '<p><i>' + this.address + '</i></p>' +
+                              '<p><span class="green">Recommended Dishes:</span><br>';
+          for (var i=0; i<this.dishes.length; i++) {
+            console.log(this.dishes[i]);
+            contentString = contentString + this.dishes[i] + '<br>';
+          }
+          contentString = contentString + '</p>';
 
-          infowindow.setContent(this.title);
+          infowindow.setContent(contentString);
           infowindow.open(map,this);
-
         });
 
         markers.push(marker);
         markedRestaurants.push(dish.restaurant.name);
 
+      } else {
+        var marker = markers[markedRestaurants.indexOf(dish.restaurant.name)]
+        marker.dishes.push(dish.name)
       }
 
     }
