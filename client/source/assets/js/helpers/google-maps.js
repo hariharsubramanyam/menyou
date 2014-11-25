@@ -58,16 +58,12 @@
             }
           })
 
-          var contentString = '<h3>' + this.title + '</h3>' +
-                              '<p><i>' + this.address + '</i></p>' +
-                              '<p><span class="green">Recommended Dishes:</span><br>';
-          for (var i=0; i<this.dishes.length; i++) {
-            console.log(this.dishes[i]);
-            contentString = contentString + this.dishes[i] + '<br>';
-          }
-          contentString = contentString + '</p>';
-
-          infowindow.setContent(contentString);
+          var info_html = Menyou.templates["infowindow"]({
+            "title": this.title,
+            "address": this.address,
+            "dishes": this.dishes
+          });
+          infowindow.setContent(info_html);
           infowindow.open(map,this);
         });
 
