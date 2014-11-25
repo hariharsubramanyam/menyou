@@ -11,6 +11,8 @@ red = #e33e3e
 @import 'partials/map'
 @import 'partials/dishes'
 @import 'partials/nav'
+@import 'partials/footer'
+@import 'partials/login'
 
 html, body {
 	height: 100%;
@@ -30,12 +32,15 @@ hr {
 
 .green {
 	color: green;
-	font-weight: 400;
+}
+
+.blue {
+	color: blue;
 }
 
 /** ----------------------------------------------- **/
 
-@media (min-width: 760px) {
+@media (min-width: 580px) {
 	#pac-input {
 		padding: 0 11px 0 13px;
 		font-family: Lato;
@@ -53,7 +58,7 @@ hr {
 	    transition: .5s;
 	    
 	    &:focus {
-	    	border-color: green;
+	    	border-color: blue;
 	    	transition: .5s;
 	    	outline: none;
 	    }
@@ -69,7 +74,7 @@ hr {
 }
 
 @media (min-width: 0px) {
-	@media (max-width: 759px) {
+	@media (max-width: 579px) {
 		#pac-input {
 			display: none;
 		}
@@ -107,4 +112,19 @@ hr {
 	    font-size: 13px;
 	    font-weight: 300;
 	}
+}
+
+#logo {
+    font-size: 35px;
+    margin-left: 20px;
+    color: green;
+    font-weight: 300;
+    cursor: pointer;
+    transition: .5s;
+    
+
+    &:hover {
+        color: black;
+        transition: .5s;
+    }
 }

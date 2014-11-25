@@ -7,7 +7,7 @@
 (function() {
 
     /**
-     * Show the user some recommended meals.
+     * Show the user some recommended meals (redirect them back to the home page).
      */
     $(document).on("click", "#btn_profile_recommend", function() {
       Menyou.UI.render('index');
@@ -15,7 +15,7 @@
     });
 
     /**
-     * Add a like to the list
+     * Add a like to the like list.
      */
     $(document).on('change', '#likes-input', function(evt) {
         var like = $(this).val().toLowerCase();
@@ -24,7 +24,7 @@
     });
 
     /**
-     * Remove a like from the list
+     * Remove a like from the like list.
      */
     $(document).on('click', '.likes-remove', function(evt) {
         var like = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
@@ -32,7 +32,7 @@
     });
 
     /**
-     * Add a dislike to the list
+     * Add a dislike to the disike list.
      */
     $(document).on('change', '#dislikes-input', function(evt) {
         var dislike = $(this).val().toLowerCase();
@@ -41,7 +41,7 @@
     });
 
     /**
-     * Remove a dislike from the list
+     * Remove a dislike from the dislike list.
      */
     $(document).on('click', '.dislikes-remove', function(evt) {
         var dislike = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
@@ -49,13 +49,16 @@
     });
 
     /**
-     * Toggle an allergy from the allergy list
+     * Add an allergy to the forbidden list.
      */
     $(document).on('click', '.restrictions-forbid', function(evt) {
         var allergy = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
         update('forbidden', 'add', Menyou.AllergyKeywords[allergy]);
     });
 
+    /**
+     * Remove an allergy from the forbidden list.
+     */
     $(document).on('click', '.restrictions-unforbid', function(evt) {
         var allergy = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
         update('forbidden', 'remove', Menyou.AllergyKeywords[allergy]);
@@ -87,6 +90,10 @@
         });
     }
 
+    /**
+     * Handlebars helper function
+     * Checks that the keyword is forbidden.
+     */
     Handlebars.registerHelper('isChecked', function(elem, forbidden, options) {
         var compare = Menyou.AllergyKeywords[elem];
         for (var i=0; i<compare.length; i++) {
@@ -96,6 +103,10 @@
         } return options.fn(this);
     });
 
+    /**
+     * Handlebars helper function
+     * Checks that the keyword is not forbidden.
+     */
     Handlebars.registerHelper('isNotChecked', function(elem, forbidden, options) {
         var compare = Menyou.AllergyKeywords[elem];
         for (var i=0; i<compare.length; i++) {

@@ -1,3 +1,9 @@
+/**
+ * Event handlers for the map.
+ *
+ * Author: daniman
+ */
+
 (function() {
 
   Menyou.Map = {};

@@ -1,0 +1,79 @@
+#login-container {
+    text-align: center;
+    padding-top: 10%;
+    
+    #login-title {
+        color: green;
+        font-size: 80px;
+        text-align: center;
+        font-weight: 200;
+    }
+
+    #login-subtitle {
+        font-size: 25px;
+    }
+    
+    #register, #login {
+        background-color: green;
+        border-radius: 2px;
+        border: 1px solid green;
+        display:inline-block;
+        cursor:pointer;
+        color: white;
+        font-family: Lato;
+        font-size: 15px;
+        padding: 10px;
+        text-decoration: none;
+        font-weight: 200;
+        margin-top: 20px;
+        transition: .5s;
+    }
+    
+    #register:hover {
+        background-color: blue;
+        border: 1px solid blue;
+        transition: .5s;
+    }
+    
+    #login:hover {
+        background-color: orange;
+        border: 1px solid orange;
+        transition: .5s;
+    }
+    
+    input {
+        width: 200px;;
+        padding: 0 11px 0 13px;
+        font-family: Lato;
+        font-size: 15px;
+        font-weight: 300;
+        text-overflow: ellipsis;
+        border: 1px solid #ccc;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        height: 32px;
+        transition: .5s;
+    }
+    
+    #username-input {
+        margin-top: 20px;
+        border-radius: 2px 2px 0px 0px;
+        
+        &:focus {
+            border-color: blue;
+            transition: .5s;
+            outline: none;
+        }
+    }
+    
+    #password-input {
+        border-radius: 0px 0px 2px 2px;
+                
+        &:focus {
+            border-color: red;
+            transition: .5s;
+            outline: none;
+        }       
+    }
+}
+
