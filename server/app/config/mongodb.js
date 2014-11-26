@@ -3,8 +3,8 @@
  *
  * Connect to MongoDB database.
  */
-var mongo_url = require("./secrets.js").MONGO_URL;
 var mongoose = require('mongoose');
+var mongo_url = require("./secrets.js").MONGO_URL;
 
 mongoose.connect(mongo_url);
 var db = mongoose.connection;

@@ -12,7 +12,6 @@
  * follow.
  */
 
-
 var fs = require("fs");
 
 /**
@@ -83,4 +82,3 @@ var import_mappings = function(file_path, Mapping, callback) {
 
 
 module.exports.import_mappings = import_mappings;
-
