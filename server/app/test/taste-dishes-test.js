@@ -1,7 +1,6 @@
 var request = require('request');
 var expect = require("chai").expect;
 var User = require('../models/user');
-var db = require('../config/mongodb');
 var SERVER_ADDRESS = "http://localhost:8080/"
 var token = "";
 

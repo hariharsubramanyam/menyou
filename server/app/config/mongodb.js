@@ -3,10 +3,10 @@
  *
  * Connect to MongoDB database.
  */
+var mongo_url = require("./secrets.js").MONGO_URL;
 var mongoose = require('mongoose');
-var connection_string = 'mongodb://localhost/menyou';
 
-mongoose.connect(connection_string);
+mongoose.connect(mongo_url);
 var db = mongoose.connection;
 
 module.exports = db;

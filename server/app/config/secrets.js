@@ -8,3 +8,5 @@
 module.exports.LOCU_API_KEY = "cdfb728fb1bb599f80c93cc098ac10b3a6e35049";
 module.exports.SALT = 10;
 module.exports.TOKEN_SECRET = "this_is_a_secret";
+module.exports.MONGO_URL = "mongodb://localhost:menyou";
+module.exports.MONGO_TEST_URL = "mongodb://localhost:menyoutest"
