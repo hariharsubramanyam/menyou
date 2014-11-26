@@ -80,8 +80,9 @@
               $('body').html(Menyou.templates["index"](Menyou.state));
               Menyou.Map.initialize(); //TODO this really shouldn't be right here
               Menyou.Map.mark_restaurants();
+              Menyou.QuestionCtrl.create_question();
               callback();
-            });
+          });
       }
     },
     profile: function(callback) {

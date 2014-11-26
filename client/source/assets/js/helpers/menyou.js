@@ -162,6 +162,21 @@ Menyou.APIHelper.getMappings = function(callback) {
 };
 
 /**
+ * Get a random Question.
+ */
+Menyou.APIHelper.getQuestion = function(callback) {
+  $.ajax({
+    url: 'api/questions/random',
+    type: 'GET',
+    headers: {
+      'Accept': 'appliction/json; charset=utf-8',
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    statusCode: Menyou.APIHelper.responseHandlers(callback)
+  });
+};
+
+/**
  * Respond to error codes, and if there are none, trigger the callback.
  *
  * @param callback - Executed as callback(data) if there is no error.
