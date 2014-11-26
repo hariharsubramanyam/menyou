@@ -29,8 +29,8 @@ var send_success_response = function(res, message, content) {
  */
 var send_failure_response = function(res, code, message) {
   res.status(code).json({
-    success: false,
-    message: message
+    "success": false,
+    "message": message
   });
 };
 

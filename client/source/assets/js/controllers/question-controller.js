@@ -7,20 +7,33 @@
 
   // Get a random question and display it.
   var create_question = function() {
-    Menyou.APIHelper.getQuestion(function(data) {
-      question = data.content;
-      // Display the question text.
-      $(".question_text").text(question.question_text);
+    Menyou.APIHelper.getQuestion(Menyou.state.token, function(data) {
+      if (data.success === false) {
+        // Display the question text.
+        $(".question_text").text("You answered all the questions!");
 
-      // Iterate through each of the 4 answers.
-      for (var i = 0; i < 4; i++) {
-        // Set the answer text.
-        $(".answer_" + (i + 1)).text(question.answers[i].answer_text);
-        // Add a property indicating the index of the answer.
-        $(".answer_" + (i + 1)).attr("data-answer-num", i);
-      }
-    });
-  };
+        // Iterate through each of the 4 answers.
+        for (var i = 0; i < 4; i++) {
+          // Hide the answers
+          $(".answer_" + (i + 1)).hide();
+        } // for
+      } else {
+        question = data.content;
+        // Display the question text.
+        $(".question_text").text(question.question_text);
+
+        // Iterate through each of the 4 answers.
+        for (var i = 0; i < 4; i++) {
+          // Show the answer.
+          $(".answer_" + (i + 1)).show();
+          // Set the answer text.
+          $(".answer_" + (i + 1)).text(question.answers[i].answer_text);
+          // Add a property indicating the index of the answer.
+          $(".answer_" + (i + 1)).attr("data-answer-num", i);
+        } // for
+      } // else
+    }); // getQuestion
+  }; // create_question
 
   // Hide the question when the X button is clicked.
   $(document).on("click", ".close_button", function() {

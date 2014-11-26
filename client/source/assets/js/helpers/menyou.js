@@ -164,13 +164,14 @@ Menyou.APIHelper.getMappings = function(callback) {
 /**
  * Get a random Question.
  */
-Menyou.APIHelper.getQuestion = function(callback) {
+Menyou.APIHelper.getQuestion = function(token, callback) {
   $.ajax({
     url: 'api/questions/random',
     type: 'GET',
     headers: {
       'Accept': 'appliction/json; charset=utf-8',
       'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
     },
     statusCode: Menyou.APIHelper.responseHandlers(callback)
   });
