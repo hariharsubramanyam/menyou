@@ -8,7 +8,7 @@ var mongoose = require("mongoose");
 var mappingSchema = mongoose.Schema({
   source: { 
     type: String, 
-    unique: true, 
+    unique: true,
     index: true, 
     required: "A mapping must have a source",
     dropDups: true

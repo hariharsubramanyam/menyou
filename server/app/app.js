@@ -16,12 +16,17 @@ var logger = require('./config/logger');
 // save all the model classes into a single object
 var model = {
   User: require('./models/user'),
-  Mapping: require("./models/mapping")
+  Mapping: require("./models/mapping"),
+  Question: require("./models/question")
 };
 
 // load the mapping data into the database.
 require("./helpers/mappings-from-file").import_mappings(path.resolve(__dirname, 'data/mapping_data.csv'),
     model.Mapping, function() {});
+
+// load the question data into the database.
+require("./helpers/questions-from-file").import_questions(path.resolve(__dirname, "data/question_data.txt"),
+    model.Question, function() {});
 
 // create the express app that we will attach
 // all our middleware to
