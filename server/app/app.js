@@ -43,6 +43,7 @@ app.use('/api/auth', require('./controllers/auth'));
 app.use('/api/taste', require('./controllers/taste'));
 app.use('/api/dishes', require('./controllers/recommend'));
 app.use('/api/mappings', require('./controllers/mappings'));
+app.use('/api/questions', require('./controllers/questions'));
 app.use(express.static(path.join(__dirname, '../../client/build')));
 
 module.exports = app;
