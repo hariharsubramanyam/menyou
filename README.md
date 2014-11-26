@@ -1,6 +1,8 @@
 Menyou
 ======
 
+**NOTE: If you are looking for the revised design doc, please see [`doc/DesignDoc.pdf`](https://github.com/6170-fa14/hsubrama_rchipman_daniman_tzimuto1_finalProj/blob/master/doc/DesignDoc.pdf?raw=true)**
+
 # Authors
 
 Ryan Chipman, Danielle Man, Harihar Subramanyam, Tawanda Zimuto
