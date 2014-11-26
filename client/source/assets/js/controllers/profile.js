@@ -59,9 +59,17 @@
     /**
      * Remove a source from the forbidden list.
      */
-    $(document).on('click', '.restrictions-unforbid', function(evt) {
+    $(document).on('click', '.restrictions-unforbid-keyword', function(evt) {
         var source = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
         update('forbidden', 'remove', Menyou.Mappings[source]);
+    });
+
+    /**
+     * Remove a source from the forbidden list.
+     */
+    $(document).on('click', '.restrictions-unforbid-singleword', function(evt) {
+        var source = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
+        update('forbidden', 'remove', [source]);
     });
 
     /**
@@ -95,21 +103,8 @@
      */
     Handlebars.registerHelper('isChecked', function(elem, forbidden, options) {
         var compare = Menyou.Mappings[elem];
-        for (var i=0; i<compare.length; i++) {
-            if (forbidden.indexOf(compare[i]) == -1) {
-                return options.inverse(this);
-            }
-        } return options.fn(this);
-    });
-
-    /**
-     * Handlebars helper function
-     * Checks that the keyword is not forbidden.
-     */
-    Handlebars.registerHelper('isNotChecked', function(elem, forbidden, options) {
-        var compare = Menyou.Mappings[elem];
-        for (var i=0; i<compare.length; i++) {
-            if (forbidden.indexOf(compare[i]) == -1) {
+        for (var i=0; i<forbidden.length; i++) {
+            if (compare.indexOf(forbidden[i]) > -1) {
                 return options.fn(this);
             }
         } return options.inverse(this);
