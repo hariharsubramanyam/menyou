@@ -32,6 +32,15 @@ var expect = require("chai").expect;
 describe("Recommender", function() {
   describe("#recommend", function() {
     it("should recommend dishes correctly", function() {
+      var restaurant = {
+        "name": "Test restaurant",
+        "lat": 42,
+        "lon": -72,
+        "address": "1 Main St, Boston, MA"
+      };
+      for (var i = 0; i < menu_items.length; i++) {
+        menu_items[i].restaurant = restaurant;
+      }
       var recommended = recommender.recommend(menu_items, taste_profile);
 
       // key = name of dish, value = number of points for dish with given name.
