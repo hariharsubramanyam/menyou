@@ -26,7 +26,7 @@
     <div id="restrictions-possible-container">
       <p id="restrictions-possible-title">What can't you have?</p>
       <ul id="restrictions-possible">
-        {{#each allergies}}
+        {{#each sources}}
           {{#isNotChecked this ../taste.forbidden}}
             <li>
               <span class="content">{{toUpperCase this}}</span>
@@ -40,7 +40,7 @@
     <div id="restrictions-forbidden-container">
       <p id="restrictions-forbidden-title">Forbidden</p>
       <ul id="restrictions-forbidden">
-        {{#each allergies}}
+        {{#each sources}}
           {{#isChecked this ../taste.forbidden}}
             <li>
               <span class="content">{{toUpperCase this}}</span>

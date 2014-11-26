@@ -40,16 +40,13 @@
   $(document).on('click', '#register', function() {
     var username = $('input[name=username]').val();
     var password = $('input[name=password]').val();
-    console.log(username);
     Menyou.APIHelper.register(username, password, function(data) {
       if(data.success) {
         Menyou.SessionHelper.newToken(username, password, function(success) {
-          console.log("successful register");
           Menyou.UI.render('profile');
         });
       } else {
         //TODO: handle failure. Flash it
-        console.log('failed register');
         alert(data.message);
       }
     });

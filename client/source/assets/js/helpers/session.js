@@ -24,7 +24,6 @@
           Menyou.state.username = data.content.username;
           Menyou.state.token = token;
         }
-        console.log(data);
         callback(data.success);
       });
     }

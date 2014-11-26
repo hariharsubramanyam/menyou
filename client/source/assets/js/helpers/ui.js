@@ -40,7 +40,22 @@
         Menyou.APIHelper.getTasteProfile(Menyou.state.token, function(data) {
           //TODO handle failure case
           Menyou.state.taste = data.content;
-          callback();
+          // If there are no mappings fetch them.
+          if (Menyou.Mappings === null) {
+            Menyou.APIHelper.getMappings(function(data) {
+              Menyou.Mappings = {};
+              Menyou.state.sources = [];
+              var mappings = data.content;
+              for (var i = 0; i < mappings.length; i++) {
+                var mapping = mappings[i];
+                Menyou.state.sources.push(mapping.source);
+                Menyou.Mappings[mapping.source] = mapping.targets;
+              }
+              callback();
+            });
+          } else {
+            callback();
+          }
         });
       });
 

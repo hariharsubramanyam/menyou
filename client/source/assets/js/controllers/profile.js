@@ -49,19 +49,19 @@
     });
 
     /**
-     * Add an allergy to the forbidden list.
+     * Add an source to the forbidden list.
      */
     $(document).on('click', '.restrictions-forbid', function(evt) {
-        var allergy = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
-        update('forbidden', 'add', Menyou.AllergyKeywords[allergy]);
+        var source = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
+        update('forbidden', 'add', Menyou.Mappings[source]);
     });
 
     /**
-     * Remove an allergy from the forbidden list.
+     * Remove a source from the forbidden list.
      */
     $(document).on('click', '.restrictions-unforbid', function(evt) {
-        var allergy = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
-        update('forbidden', 'remove', Menyou.AllergyKeywords[allergy]);
+        var source = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
+        update('forbidden', 'remove', Menyou.Mappings[source]);
     });
 
     /**
@@ -85,7 +85,6 @@
         Menyou.APIHelper.updateTasteProfile(updates, Menyou.state.token, function(response) {
             //TODO: some sort of error handling here?
             //      specifically, what happends if token expires, etc?
-            console.log(response);
             Menyou.UI.render('profile');
         });
     }
@@ -95,7 +94,7 @@
      * Checks that the keyword is forbidden.
      */
     Handlebars.registerHelper('isChecked', function(elem, forbidden, options) {
-        var compare = Menyou.AllergyKeywords[elem];
+        var compare = Menyou.Mappings[elem];
         for (var i=0; i<compare.length; i++) {
             if (forbidden.indexOf(compare[i]) == -1) {
                 return options.inverse(this);
@@ -108,7 +107,7 @@
      * Checks that the keyword is not forbidden.
      */
     Handlebars.registerHelper('isNotChecked', function(elem, forbidden, options) {
-        var compare = Menyou.AllergyKeywords[elem];
+        var compare = Menyou.Mappings[elem];
         for (var i=0; i<compare.length; i++) {
             if (forbidden.indexOf(compare[i]) == -1) {
                 return options.fn(this);
