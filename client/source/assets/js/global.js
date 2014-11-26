@@ -28,6 +28,12 @@ Menyou = {};
     }
   };
 
+  /*location: {
+      lat: 42.358638, // MIT is default location.
+      lon: -71.093345,
+      radius: 1500, // in meters
+      city: 'Cambridge, MA'
+    }*/
   // set current state as default state
   Menyou.state = $.extend(true, {}, Menyou.DEFAULT_STATE);
 

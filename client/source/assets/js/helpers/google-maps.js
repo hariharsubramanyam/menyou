@@ -8,7 +8,8 @@
 
   Menyou.Map = {};
 
-  var DEFAULT_LOCATION = { lat: 42.359132, lng: -71.093659}; // MIT
+  /*var DEFAULT_LOCATION = { lat: 42.359132, lng: -71.093659}; // MIT*/
+  var DEFAULT_LOCATION = { lat: 42.358638, lng: -71.093345}; // MIT
   var USER_POSITION = "http://maps.google.com/mapfiles/kml/pal2/icon10.png";
   var RESTAURANT_POSITION = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|5D8A31";
 
@@ -93,8 +94,13 @@
 
     markers = [];
 
+    var current_position = {
+      lat: Menyou.state.location.lat,
+      lng: Menyou.state.location.lon
+    }
+
     mapOptions = {
-            center: DEFAULT_LOCATION,
+            center: current_position,
             zoom: 14,
             disableDefaultUI: true
     };
@@ -131,6 +137,29 @@
       }
       map.fitBounds(bounds);
       map.setZoom(15);
+
+      //Changes the City in the User's state when the bounds of the map change
+
+      var lat = map.getCenter().lat();
+      var lon = map.getCenter().lng();
+      Menyou.state.location.lat = lat;
+      Menyou.state.location.lon = lon;
+
+      $.ajax({
+        url: 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon + '&sensor=true',
+        type: 'GET',
+        success: function(object) {
+          for (var i=0; i<object.results.length; i++) {
+            if (object.results[i].types.indexOf('locality') > -1) {
+              Menyou.state.location.city = object.results[object.results.length-4].formatted_address;
+            }
+          }
+        }
+      });
+      
+      //TODO Need to use a callback?
+      $("#recommend-btn").show();    
+
     });
 
     /**
@@ -139,7 +168,6 @@
     google.maps.event.addListener(map, 'bounds_changed', function() {
           var bounds = map.getBounds();
           searchBox.setBounds(bounds);
-
           /**
            * Changes the City in the User's state when the bounds of the map change
            *
