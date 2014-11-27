@@ -113,7 +113,7 @@ router.get("/random", passport.authenticate('bearer', {session: false}), functio
   if (questions !== null) {
     var question = create_random_question(req.user.tasteProfile);
     if (question === null) {
-      resHelper.error(res, 200, "Failed to generate a question");
+      resHelper.failure(res, 200, "Failed to generate a question");
     } else {
       resHelper.success(res, "Question", question);
     }
