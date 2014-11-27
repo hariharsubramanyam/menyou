@@ -8,8 +8,6 @@
 
   Menyou.Map = {};
 
-  /*var DEFAULT_LOCATION = { lat: 42.359132, lng: -71.093659}; // MIT*/
-  var DEFAULT_LOCATION = { lat: 42.358638, lng: -71.093345}; // MIT
   var USER_POSITION = "http://maps.google.com/mapfiles/kml/pal2/icon10.png";
   var RESTAURANT_POSITION = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|5D8A31";
   var LOCATE_ME_BUTTTON = "http://cdn.androidpolice.com/wp-content/uploads/2012/09/nexusae0_btn_myl_normal.png";
@@ -95,6 +93,7 @@
 
     markers = [];
 
+    //current position as stored in the Menyou state
     var current_position = {
       lat: Menyou.state.location.lat,
       lng: Menyou.state.location.lon
@@ -123,10 +122,10 @@
     });
 
     /*
-    Put the "Locate Me" button on the map
+    *Put the "Locate Me" button on the map
     */
     var locate_me_btn = $("<img>").attr("src", LOCATE_ME_BUTTTON)
-                        .height(50).width(50);
+                        .attr("id", "locate-me-btn");
     //set postion of the btn
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(locate_me_btn[0]);
     google.maps.event.addDomListener(locate_me_btn[0], 'click', function() {
@@ -199,9 +198,8 @@
     /**
     Changes the position of the user marker, changes Menyou state, and displays
     the "Recommend Nearby" button
-    @param lat_lng - this is a structure with coordinates of the map's center
-    The format is:
-    {lat: Number, lng: Number}
+    @param lat - the latitude of the map's center
+    @param lon - the longitude of the map's center
     **/
     function handleMapChange(lat, lon){
       //change the position of the user marker
