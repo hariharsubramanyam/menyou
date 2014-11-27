@@ -52,7 +52,7 @@ var create_random_question = function(taste_profile) {
           "modify_list": "likes" 
         },
         {
-          "answer_text": "I don't mind it",
+          "answer_text": "I don't know",
           "modify_list": null
         },
         {

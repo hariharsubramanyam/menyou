@@ -4,24 +4,86 @@
   bottom: 0;
   width: 300px;
   height: 180px;
-  background-color: rgba(240, 240, 240, 0.8);
-  border: 1px solid black;
+  background-color: white;
+  opacity: 0.8;
+  border: 1px solid green;
   text-align: center;
+  transition: .5s;
+  
+  &:hover {
+    opacity: 1;
+    transition: .5s;
+  }
+  
+  #question_title {
+    font-weight: 300;
+  }
+
+  .close_button {
+    background: none;
+    border: none;
+    font-size: 10pt;
+    float: right;
+    
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .answer_button {
+    margin-bottom: 5px;
+    background: none;
+    border: 1px solid #ccc;
+    width: 200px;
+    height: 20px;
+    font-size: 10pt;
+    font-weight: 200;
+    transition: .5s;
+    
+    &:hover {
+      cursor: pointer;
+      transition: .5s;
+    }
+  }
+
+  .answer_1 {
+    &:hover {
+      border: 1px solid green;
+      color: green;
+    }
+    &:focus {
+      outline: none
+    }
+  }
+
+  .answer_2 {
+    &:hover {
+      border: 1px solid blue;
+      color: blue;
+    }
+    &:focus {
+      outline: none
+    }
+  }
+
+  .answer_3 {
+    &:hover {
+      border: 1px solid orange;
+      color: orange;
+    }
+    &:focus {
+      outline: none
+    }
+  }
+
+  .answer_4 {
+    &:hover {
+      border: 1px solid red;
+      color: red;
+    }
+    &:focus {
+      outline: none
+    }
+  }
 }
 
-.close_button {
-  background: none;
-  border: none;
-  font-size: 10pt;
-  float: right;
-}
-
-.answer_button {
-  margin-bottom: 5px;
-  background: none;
-  border: 1px solid black;
-  width: 200px;
-  height: 20px;
-  font-size: 10pt;
-  font-weight: 300;
-}
