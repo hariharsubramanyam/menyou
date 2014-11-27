@@ -146,6 +146,38 @@ Menyou.APIHelper.updateTasteProfile = function(updates, token, callback) {
 };
 
 /**
+ * Get the Mappings. A Mapping associates a source keyword (ex. "dairy") with targets (ex. "milk",
+ * "yogurt", "cheese").
+ */
+Menyou.APIHelper.getMappings = function(callback) {
+  $.ajax({
+    url: 'api/mappings',
+    type: 'GET',
+    headers: {
+      'Accept': 'appliction/json; charset=utf-8',
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+    statusCode: Menyou.APIHelper.responseHandlers(callback)
+  });
+};
+
+/**
+ * Get a random Question.
+ */
+Menyou.APIHelper.getQuestion = function(token, callback) {
+  $.ajax({
+    url: 'api/questions/random',
+    type: 'GET',
+    headers: {
+      'Accept': 'appliction/json; charset=utf-8',
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer ' + token
+    },
+    statusCode: Menyou.APIHelper.responseHandlers(callback)
+  });
+};
+
+/**
  * Respond to error codes, and if there are none, trigger the callback.
  *
  * @param callback - Executed as callback(data) if there is no error.
@@ -153,24 +185,19 @@ Menyou.APIHelper.updateTasteProfile = function(updates, token, callback) {
 Menyou.APIHelper.responseHandlers = function(callback) {
   return {
     200: function(data) {
-      console.log('OKAY');
       // console.log(data);
       callback(data);
     },
     304: function(jqxhr) {
-      console.log('NOT CHANGED');
       console.log(jqxhr);
     },
     401: function(jqxhr) {
-      console.log('NOT AUTHORIZED');
       console.log(jqxhr);
     },
     404: function(jqxhr) {
-      console.log('NOT FOUND');
       console.log(jqxhr);
     },
     500: function(jqxhr) {
-      console.log('INTERNAL SERVER ERROR')
       console.log(jqxhr);
     }
   };

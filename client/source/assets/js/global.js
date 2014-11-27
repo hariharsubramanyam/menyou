@@ -38,5 +38,6 @@ Menyou = {};
   Menyou.state = $.extend(true, {}, Menyou.DEFAULT_STATE);
 
   Menyou.COOKIE_NAME = "token";
+  Menyou.Mappings = null; 
 
 })();
