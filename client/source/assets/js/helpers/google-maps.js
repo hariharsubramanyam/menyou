@@ -12,7 +12,8 @@
   var DEFAULT_LOCATION = { lat: 42.358638, lng: -71.093345}; // MIT
   var USER_POSITION = "http://maps.google.com/mapfiles/kml/pal2/icon10.png";
   var RESTAURANT_POSITION = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|5D8A31";
-
+  var LOCATE_ME_BUTTTON = "http://cdn.androidpolice.com/wp-content/uploads/2012/09/nexusae0_btn_myl_normal.png";
+  
   var markers;
   var mapOptions;
   var map;
@@ -121,6 +122,29 @@
       infowindow.open(map,this);
     });
 
+    /*
+    Put the "Locate Me" button on the map
+    */
+    var locate_me_btn = $("<img>").attr("src", LOCATE_ME_BUTTTON)
+                        .height(50).width(50);
+    //set postion of the btn
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(locate_me_btn[0]);
+    google.maps.event.addDomListener(locate_me_btn[0], 'click', function() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(location){
+          var lat = location.coords.latitude,
+              lon = location.coords.longitude;
+          //change the center of the map
+          map.setCenter({lat: lat, lng: lon});
+          //modify UI and state
+          handleMapChange(lat, lon);
+        });
+      } else {
+        alert("Your browser doesn't support Geolocation");
+      }
+
+    });
+
     /**
      * Search Box Controller
      */
@@ -138,28 +162,10 @@
       map.fitBounds(bounds);
       map.setZoom(15);
 
-      //Changes the City in the User's state when the bounds of the map change
-
       var lat = map.getCenter().lat();
       var lon = map.getCenter().lng();
-      Menyou.state.location.lat = lat;
-      Menyou.state.location.lon = lon;
-
-      $.ajax({
-        url: 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon + '&sensor=true',
-        type: 'GET',
-        success: function(object) {
-          for (var i=0; i<object.results.length; i++) {
-            if (object.results[i].types.indexOf('locality') > -1) {
-              Menyou.state.location.city = object.results[object.results.length-4].formatted_address;
-            }
-          }
-        }
-      });
-      
-      //TODO Need to use a callback?
-      $("#recommend-btn").show();    
-
+      //modify UI and state
+      handleMapChange(lat, lon);   
     });
 
     /**
@@ -189,6 +195,35 @@
            * });
            */
     });
+
+    /**
+    Changes the position of the user marker, changes Menyou state, and displays
+    the "Recommend Nearby" button
+    @param lat_lng - this is a structure with coordinates of the map's center
+    The format is:
+    {lat: Number, lng: Number}
+    **/
+    function handleMapChange(lat, lon){
+      //change the position of the user marker
+      user_marker.setPosition({lat: lat, lng: lon});
+      //change state
+      Menyou.state.location.lat = lat;
+      Menyou.state.location.lon = lon;
+
+      $.ajax({
+        url: 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon + '&sensor=true',
+        type: 'GET',
+        success: function(object) {
+          for (var i=0; i<object.results.length; i++) {
+            if (object.results[i].types.indexOf('locality') > -1) {
+              Menyou.state.location.city = object.results[object.results.length-4].formatted_address;
+            }
+          }
+        }
+      });
+      //TODO Need to use a callback?
+      $("#recommend-btn").show();  
+    }
 
   };
 
