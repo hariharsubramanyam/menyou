@@ -168,6 +168,17 @@
     });
 
     /**
+    * Map Click handler
+    **/
+    google.maps.event.addListener(map, 'click', function(event) {
+      var lat_lng = event.latLng;
+      //change the center of the map
+      map.setCenter(lat_lng);
+      //modify UI and state
+      handleMapChange(lat_lng.lat(), lat_lng.lng());
+    });
+
+    /**
      * Biases the search box towards addresses in the map window
      */
     google.maps.event.addListener(map, 'bounds_changed', function() {
