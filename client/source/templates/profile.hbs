@@ -2,22 +2,22 @@
 
 <div id="profile-container">
 
-  <div id="username">{{username}}</div>
-
-  <div id="likes-container">
-    <input id="likes-input" type="text" placeholder="What do you like?">
-    <ul>
-      {{#each taste.likes}}
-        <li><span class="content">{{toUpperCase this}}</span><span class="likes-remove"></span></li>
-      {{/each}}
-    </ul>
-  </div>
+  <div id="username">{{username}}'s taste profile</div>
 
   <div id="dislikes-container">
     <input id="dislikes-input" type="text" placeholder="What don't you like?">
     <ul>
       {{#each taste.dislikes}}
         <li><span class="content">{{toUpperCase this}}</span><span class="dislikes-remove"></span></li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <div id="likes-container">
+    <input id="likes-input" type="text" placeholder="What do you like?">
+    <ul>
+      {{#each taste.likes}}
+        <li><span class="content">{{toUpperCase this}}</span><span class="likes-remove"></span></li>
       {{/each}}
     </ul>
   </div>
