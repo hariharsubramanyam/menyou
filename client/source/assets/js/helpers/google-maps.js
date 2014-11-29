@@ -8,6 +8,7 @@
 
   Menyou.Map = {};
 
+  // Icons for the map.
   var USER_POSITION = "http://maps.google.com/mapfiles/kml/pal2/icon10.png";
   var RESTAURANT_POSITION = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|5D8A31";
   var LOCATE_ME_BUTTTON = "http://cdn.androidpolice.com/wp-content/uploads/2012/09/nexusae0_btn_myl_normal.png";
@@ -184,26 +185,6 @@
     google.maps.event.addListener(map, 'bounds_changed', function() {
           var bounds = map.getBounds();
           searchBox.setBounds(bounds);
-          /**
-           * Changes the City in the User's state when the bounds of the map change
-           *
-           * var lat = map.getCenter().lat();
-           * var lon = map.getCenter().lng();
-           * Menyou.state.location.lat = lat;
-           * Menyou.state.location.lon = lon;
-           * 
-           * $.ajax({
-           *   url: 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon + '&sensor=true',
-           *   type: 'GET',
-           *   success: function(object) {
-           *     for (var i=0; i<object.results.length; i++) {
-           *       if (object.results[i].types.indexOf('locality') > -1) {
-           *         Menyou.state.location.city = object.results[object.results.length-4].formatted_address;
-           *       }
-           *     }
-           *   }
-           * });
-           */
     });
 
     /**
@@ -230,7 +211,6 @@
           }
         }
       });
-      //TODO Need to use a callback?
       $("#recommend-btn").show();  
     }
 
