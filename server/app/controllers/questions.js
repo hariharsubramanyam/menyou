@@ -75,6 +75,10 @@ var create_random_question = function(taste_profile) {
  * Request: 
  * GET /api/questions/random
  *
+ * Headers:
+ * Content-Type: application/json
+ * Authorization: Bearer <token>
+ 
  * Response:
  *
  * On success:
