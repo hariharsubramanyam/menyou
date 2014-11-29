@@ -1,0 +1,57 @@
+Our code has been designed to avoid security risks. A few, but not all, of the steps we have taken 
+to avoid security risks is shown below.
+
+SQL Injection:
+
+Since we are using MongoDB, we are not using SQL. We have some protection from "No-SQL" injection
+built in:
+
+"As a client program assembles a query in MongoDB, it builds a BSON object, not a string. 
+Thus traditional SQL injection attacks are not a problem."
+
+Furthermore, we are not using any of the operators in MongoDB which can be exploited (ex. $where).
+
+XSS & CSRF:
+
+First are foremost, a user will NEVER see anything that another user has inputted into the app. Our
+app is unique in that there is zero interaction between users, and there is no way to get any info
+about other users (or even know how many users exist). Since there is no user interaction and users
+CANNOT see any information relating to any other user, XSS and CSRF become much less of a threat.
+
+That being said, we sanitize every input to every API call, just to be extra safe.
+
+Missing Authorization & Authentication:
+
+Every API call that changes the server state, and every API call that accesses user data is 
+authorized/authentiated (with login credentials or a security token).
+
+Furthermore, we use Passport.js, a tried and true authentication framework instead of a homegrown
+solution, which would likely have subtle errors.
+
+Hard-coded Credentials:
+
+There are no hardcoded credentials in the app. Every "secret" is in the secrets.js file (which is
+on the server). In a real-world setting, we would NOT put secrets.js on the GitHub repo.
+The only reason we have put in the repo in this case is because the TAs need access to it in order
+to build our project, and putting it in the repo is the easiest way to give them the data.
+
+We do not store passwords - we store salted, hashed, passwords.
+
+File Uploads:
+
+We do not have any file uploads. The only input that the client gives to the server are strings.
+
+Missing Encryption:
+
+In a real-world setting, we would perform login/registration over HTTPS (if possible, we may do
+everything in our app over HTTPS). However, since getting a certificate from a CA is time consuming
+and costs money, we have not done it.
+
+OS Command Injection:
+
+The server does not use any client supplied input (or database value) to make an OS command call.
+
+Buffer Overflow:
+
+We make no assumptions about the length of an array. Also, buffer overflow is more of a threat in
+languages like C/C++ which do not check array lengths.
