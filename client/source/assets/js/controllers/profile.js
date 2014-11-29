@@ -78,6 +78,15 @@
      * @param field - The field can be 'likes', 'dislikes', or 'forbidden'.
      * @param action - The action can be 'add' or 'remove'.
      * @param content - An array representing the content to be updated in the taste profile.
+     *
+     * It will call the Menyou.APIHelper.updateTasteProfile(updates...)function  
+     * where updates is of the form:
+     * {
+     *  "likes": {"add": [], "remove": []},
+     *  "dislikes": {"add": [], "remove": []},
+     *  "forbidden": {"add": [], "remove": []}
+     * }
+     * but has <content> added to the <action> list of <field>.
      */
     function update(field, action, content) {
         var updates = {
@@ -91,8 +100,6 @@
         }
 
         Menyou.APIHelper.updateTasteProfile(updates, Menyou.state.token, function(response) {
-            //TODO: some sort of error handling here?
-            //      specifically, what happends if token expires, etc?
             Menyou.UI.render('profile');
         });
     }
@@ -102,12 +109,70 @@
      * Checks that the keyword is forbidden.
      */
     Handlebars.registerHelper('isChecked', function(elem, forbidden, options) {
-        var compare = Menyou.Mappings[elem];
-        for (var i=0; i<forbidden.length; i++) {
-            if (compare.indexOf(forbidden[i]) > -1) {
-                return options.fn(this);
-            }
-        } return options.inverse(this);
+        if (isChecked(Menyou.Mappings, elem, forbidden)) {
+          return options.fn(this);
+        }
+        return options.inverse(this);
     });
+
+    /**
+     * Check if a dietary restriction is reflected in the forbidden list.
+     *
+     * @param mappings - key = string, value = array of string.
+     * @param source - A key in mappings
+     * @param forbidden - An array of strings.
+     *
+     * @return true if at least one element of forbidden appears in mappings[source]
+     */
+    var isChecked = function(mappings, source, forbidden) {
+      var targets = mappings[source];
+      for (var i = 0; i < forbidden.length; i++) {
+        if (targets.indexOf(forbidden[i]) > -1) {
+          return true;
+        }
+      };
+      return false;
+    };
+
+    /********************************************
+     * UNIT TESTS
+     *******************************************/
+    if (Menyou.shouldTest) {
+      QUnit.test("profile update test", function(assert) {
+        // Stub the updateTasteProfile function.
+        var old_func = Menyou.APIHelper.updateTasteProfile;
+        var result = {};
+        Menyou.APIHelper.updateTasteProfile = function(updates, token, callback) {
+          result = updates;
+        };
+
+        update("likes", "add", ["test"]);
+        assert.equal(result.likes.add[0], "test");
+
+        update("dislikes", "remove", ["test"]);
+        assert.equal(result.dislikes.remove[0], "test");
+
+        update("forbidden", "add", ["test"]);
+        assert.equal(result.forbidden.add[0], "test");
+
+        // Return updateTasteProfile to original value.
+        Menyou.APIHelper.updateTasteProfile = old_func;
+      });
+
+      QUnit.test("profile is checked", function(assert) {
+        var mappings = {
+          "source": ["target1", "target2", "target3"]
+        };
+        var source = "source";
+        var forbiddenChecked = ["dummy", "dummy", "target2", "dummy", "dummy", "dummy"]
+        var forbiddenNotChecked = ["dummy", "dummy", "dummy"];
+
+        // Should return true.
+        assert.ok(isChecked(mappings, source, forbiddenChecked));
+        
+        // Should return false.
+        assert.ok(!isChecked(mappings, source, forbiddenNotChecked));
+      });
+    }
 
 })();

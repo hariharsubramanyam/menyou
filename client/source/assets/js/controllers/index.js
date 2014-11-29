@@ -43,7 +43,6 @@
    * UNIT TESTS
    *******************************************/
   if (Menyou.shouldTest) {
-    console.log(QUnit.test);
     QUnit.test("ellipsize test", function(assert) {
       assert.equal(ellipsize("this is text", 5), "this ...");
     });
