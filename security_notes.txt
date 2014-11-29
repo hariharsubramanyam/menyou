@@ -18,7 +18,7 @@ app is unique in that there is zero interaction between users, and there is no w
 about other users (or even know how many users exist). Since there is no user interaction and users
 CANNOT see any information relating to any other user, XSS and CSRF become much less of a threat.
 
-That being said, we sanitize every input to every API call, just to be extra safe.
+That being said, to be extra safe, we sanitize strings.
 
 Missing Authorization & Authentication:
 

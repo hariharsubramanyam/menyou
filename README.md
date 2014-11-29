@@ -27,16 +27,20 @@ To run locally, please do the following:
 
 This will bring you the **main page**. Register for an account. Then, build your taste profile (i.e. the ingredients you like, the ingredients you dislike, and any allergies). When you're done, click the button to get recommended dishes. This may take some time, as the menu API (Locu) that we use is quite slow (they give you better speed if you pay for API access - we are using the free plan).
 
-# Limitations of the MVP
+# Tests
 
-Keep in mind that this is an MVP, so some features are missing. For instance:
+We do **server** side testing with [mocha](http://mochajs.org/). To run the server tests, do this:
 
-1. Clicking recommended dishes does nothing. In the final version, this will locate the restaurant on the map and pop up its information
-2. The allergies are few in number. In the final version, we allow you to select more "forbidden foods" (and enter your own).
-3. The recommendation is not stellar. In the final version, our recommendation algorithm will be more refined.
-4. The restaurants on the map do not show much information when clicked. In the final version, they will show the restaurant name, address, etc.
-5. There is no way to search, sort, filter, or get more recommendations. In the final version, we will support these operations.
-6. There are no in-app questions to build your taste profile (see our Design Doc). In the final version, we will include questions.
+1. Install mocha (`sudo npm install -g mocha`)
+2. Navigate to `server/app`
+3. Run `mocha`
+
+We do **client** side testing with [qunit](http://qunitjs.com/). To run the client tets, do this:
+
+1. Open `client/source/assets/js/tests.js`
+2. Set `Menyou.shouldTest = true` in the first line. 
+3. Launch the app (see the **Usage** section of this README)
+4. Now instead of displaying the app, the client side tests are run and the results are displayed.
 
 # API Documentation
 
