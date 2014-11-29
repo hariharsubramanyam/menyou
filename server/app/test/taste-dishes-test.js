@@ -1,7 +1,8 @@
 var request = require('request');
 var expect = require("chai").expect;
-var User = require('../models/user');
 var SERVER_ADDRESS = "http://localhost:8080/"
+var MongoClient = require('mongodb').MongoClient;
+var MONGO_URL = require("../config/secrets").MONGO_URL;
 var token = "";
 
 describe("Taste and Dishes routing", function(){
@@ -131,7 +132,8 @@ describe("Taste and Dishes routing", function(){
 				}
 			}, function(err, httpResponse, body) {
 			  if (err) {
-			    throw err;
+			    console.log(err);
+          done();
 			  } else {
 			  	expect(body).to.have.property("success");
 			  	expect(body).to.have.property("message");
@@ -152,13 +154,13 @@ describe("Taste and Dishes routing", function(){
 
 	after(function(done){
 		this.timeout(10000);
-		User.remove({"username" : "menyou"}, function(err){
-			if (err){
-				throw err;
-			} else{
-				done();
-			}
-		});
+    MongoClient.connect(MONGO_URL, function(err, db) {
+      var collection = db.collection("users");
+      collection.remove({"username": "menyou"}, function(err, result) {
+        done();
+        db.close();
+      });
+    });
 	});
 
 });
