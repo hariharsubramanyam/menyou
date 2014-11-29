@@ -42,6 +42,10 @@ We do **client** side testing with [qunit](http://qunitjs.com/). To run the clie
 3. Launch the app (see the **Usage** section of this README)
 4. Now instead of displaying the app, the client side tests are run and the results are displayed.
 
+# Security
+
+See the [`security_notes.txt`](https://github.com/6170-fa14/hsubrama_rchipman_daniman_tzimuto1_finalProj/blob/master/security_notes.txt).
+
 # API Documentation
 
 The API documentation is accessed at the following link:
