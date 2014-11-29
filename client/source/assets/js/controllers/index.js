@@ -11,7 +11,9 @@
    * index is the default view.
    */
   $(document).ready(function() {
-    Menyou.UI.render('index');
+    if (!Menyou.shouldTest) {
+      Menyou.UI.render('index');
+    }
   });
 
   /**
@@ -22,15 +24,29 @@
   Handlebars.registerHelper('ellipsize', function(options) {
     var MAX_LENGTH = 300;
     var str = options.fn(this);
-    if (str.length > MAX_LENGTH) {
-      return new Handlebars.SafeString(str.substring(1, MAX_LENGTH) + "...");
-    } else {
-      return new Handlebars.SafeString(str);
-    }
+    return Handlebars.SafeString(ellipsize(str));
   });
 
   Handlebars.registerHelper('toUpperCase', function(elem) {
     return elem.toUpperCase();
   });
+
+  var ellipsize = function(string, max_length) {
+    if (string.length > max_length) {
+      return string.substring(0, max_length) + "...";
+    } else {
+      return string;
+    }
+  };
+
+  /********************************************
+   * UNIT TESTS
+   *******************************************/
+  if (Menyou.shouldTest) {
+    console.log(QUnit.test);
+    QUnit.test("ellipsize test", function(assert) {
+      assert.equal(ellipsize("this is text", 5), "this ...");
+    });
+  }
 
 })();

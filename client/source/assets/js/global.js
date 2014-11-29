@@ -38,4 +38,6 @@ Menyou = {};
   // (ex. "oyster", "clam", "lobster", "crab")
   Menyou.Mappings = null; 
 
+  Menyou.shouldTest = true;
+
 })();
