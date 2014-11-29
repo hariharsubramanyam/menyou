@@ -54,7 +54,6 @@
           Menyou.UI.render('profile');
         });
       } else {
-        //TODO: handle failure. Flash it
         alert(data.message);
       }
     });

@@ -38,7 +38,4 @@ Menyou = {};
   // (ex. "oyster", "clam", "lobster", "crab")
   Menyou.Mappings = null; 
 
-  // If true, the tests will be run instead of the app. If false, then the app will run as normal.
-  Menyou.shouldTest = true;
-
 })();
