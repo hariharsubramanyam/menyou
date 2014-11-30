@@ -68,14 +68,14 @@
     index: function(callback) {
       // if there is an authenticated user, fetch his recommendations!
       if (Menyou.state.token) {
-        $('body').spin("modal");
+        Menyou.UI.animateLoading();
         Menyou.APIHelper.getDishes(Menyou.state.location.lat, 
             Menyou.state.location.lon,
             Menyou.state.location.radius, 
             Menyou.state.token,
             function(data) {
               //TODO handle failure case
-              $('body').spin("modal");
+              Menyou.UI.animateLoading();
               Menyou.state.dishes = data.content;
               $('body').html(Menyou.templates["index"](Menyou.state));
               Menyou.Map.initialize(); //TODO this really shouldn't be right here
