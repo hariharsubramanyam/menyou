@@ -1,5 +1,8 @@
 /**
  * Lead Author: Harihar
+ *
+ * Controller for displaying a small box where we can ask questions. The questions have a 
+ * "question text" and four answers.
  */
 
 (function() {
@@ -46,6 +49,18 @@
     var answer_index = $(evt.target).attr("data-answer-num");
     var keyword = question.keyword;
     var modify_list = question.answers[answer_index].modify_list;
+    var updates = create_updates(keyword, modify_list);
+
+    if (modify_list !== null) {
+      Menyou.APIHelper.updateTasteProfile(updates, Menyou.state.token, function() {
+        create_question();
+      });
+    } else {
+      create_question();
+    }
+  });
+
+  var create_updates = function(keyword, modify_list) {
     var updates = {
       "likes": {
         "add": [],
@@ -63,15 +78,32 @@
 
     if (modify_list !== null) {
       updates[modify_list]["add"].push(keyword);
-      Menyou.APIHelper.updateTasteProfile(updates, Menyou.state.token, function() {
-        create_question();
-      });
-    } else {
-      create_question();
     }
-  });
+    return updates;
+  };
 
   var QuestionCtrl = {};
   QuestionCtrl.create_question = create_question;
   Menyou.QuestionCtrl = QuestionCtrl;
+
+  if (Menyou.shouldTest) {
+    QUnit.test("question controller create updates", function(assert) {
+      // Add to likes.
+      var updates = create_updates("test","likes");
+      assert.equal("test", updates.likes.add[0]);
+
+      // Make sure that null does not update anything.
+      updates = create_updates("test2", null);
+      assert.equal(0, updates.likes.add.length);
+      assert.equal(0, updates.dislikes.add.length);
+      assert.equal(0, updates.forbidden.add.length);
+      assert.equal(0, updates.likes.remove.length);
+      assert.equal(0, updates.dislikes.remove.length);
+      assert.equal(0, updates.forbidden.remove.length);
+
+      // Add to dislikes.
+      updates = create_updates("test3", "dislikes");
+      assert.equal("test3", updates.dislikes.add[0]);
+    });
+  }
 })();
