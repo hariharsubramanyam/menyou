@@ -152,6 +152,7 @@
       <circle
          id="svg_9"
          data-async="true"
+         data-duration="200"
          r="258.15173"
          cy="344.31888"
          cx="496.28986"
@@ -166,6 +167,7 @@
       <circle
          id="plate-inner"
          r="217.29465"
+         data-duration="200"
          cy="346.4928"
          cx="497.73914"
          stroke-linejoin="null"
