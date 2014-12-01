@@ -31,6 +31,11 @@
     return elem.toUpperCase();
   });
 
+  /**
+  * @param string - The string to ellipsize
+  * @param max_length - Number, the maximum length of the ellipsized string
+  * @return - The ellipsized string
+  **/
   var ellipsize = function(string, max_length) {
     if (string.length > max_length) {
       return string.substring(0, max_length) + "...";

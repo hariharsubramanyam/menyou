@@ -60,6 +60,12 @@
     }
   });
 
+  /**
+  * Add a keyword to taste profile updates
+  * @param keyword - String
+  * @param modify_list - String, the taste profile element to update
+  * @return - The structure containing the updates 
+  **/
   var create_updates = function(keyword, modify_list) {
     var updates = {
       "likes": {
