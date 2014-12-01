@@ -201,6 +201,16 @@
     });
 
     /**
+    * Map dragend listener
+    **/
+    google.maps.event.addListener(map, 'dragend', function() {
+      //get coordinates
+      var lat = map.getCenter().lat();
+      var lon = map.getCenter().lng();
+      //modify UI and state
+      handleMapChange(lat, lon);
+    });
+    /**
     Changes the position of the user marker, changes Menyou state, and displays
     the "Recommend Nearby" button
     @param lat - the latitude of the map's center
