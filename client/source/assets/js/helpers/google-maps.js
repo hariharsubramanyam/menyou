@@ -38,7 +38,7 @@
 
         var infowindow = new google.maps.InfoWindow({});
 
-        //marker object 
+        //create marker
         var marker = new google.maps.Marker({
           icon: RESTAURANT_POSITION,
           position: latlng,
@@ -145,6 +145,7 @@
     google.maps.event.addDomListener(locate_me_btn[0], 'click', function() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(location){
+          //get coordinates
           var lat = location.coords.latitude,
               lon = location.coords.longitude;
           //change the center of the map
@@ -174,7 +175,7 @@
       }
       map.fitBounds(bounds);
       map.setZoom(15);
-
+      //get coordinates
       var lat = map.getCenter().lat();
       var lon = map.getCenter().lng();
       //modify UI and state
@@ -185,6 +186,7 @@
     * Map Click handler
     **/
     google.maps.event.addListener(map, 'click', function(event) {
+      //get coordinates
       var lat_lng = event.latLng;
       //change the center of the map
       map.setCenter(lat_lng);
@@ -222,7 +224,7 @@
       //change state
       Menyou.state.location.lat = lat;
       Menyou.state.location.lon = lon;
-
+      //get name of city at (lat, lon)
       $.ajax({
         url: 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon + '&sensor=true',
         type: 'GET',
@@ -234,6 +236,7 @@
           }
         }
       });
+      //display the "Recommend Nearby" button
       $("#recommend-btn").show();  
     }
 
