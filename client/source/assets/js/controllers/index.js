@@ -24,7 +24,7 @@
   Handlebars.registerHelper('ellipsize', function(options) {
     var MAX_LENGTH = 300;
     var str = options.fn(this);
-    return Handlebars.SafeString(ellipsize(str));
+    return (ellipsize(str));
   });
 
   Handlebars.registerHelper('toUpperCase', function(elem) {
