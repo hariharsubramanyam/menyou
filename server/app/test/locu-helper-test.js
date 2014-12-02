@@ -1,3 +1,8 @@
+/**
+ * Lead Author: Harihar
+ *
+ * Test module for fetching and parsing data from Locu.
+ */
 // Create a sample menu.
 var menu = {
   "menu_name": "Lunch",

@@ -1,3 +1,8 @@
+/**
+ * Handle loading screen while menus are loaded.
+ *
+ * Lead Author: rchipman
+ */
 (function() {
 
   Menyou.UI.animateLoading = function() {

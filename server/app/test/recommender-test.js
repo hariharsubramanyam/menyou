@@ -1,3 +1,8 @@
+/**
+ * Lead Author: Harihar
+ *
+ * Test module for recommendation algorithm.
+ */
 var menu_items = [
   {
     "name": "Yellow Curry",

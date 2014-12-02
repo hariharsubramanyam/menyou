@@ -92,6 +92,9 @@
   QuestionCtrl.create_question = create_question;
   Menyou.QuestionCtrl = QuestionCtrl;
 
+  /********************************************
+   * UNIT TESTS
+   *******************************************/
   if (Menyou.shouldTest) {
     QUnit.test("question controller create updates", function(assert) {
       // Add to likes.
