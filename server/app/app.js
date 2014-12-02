@@ -39,6 +39,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+// Configure API endpoints.
 app.use('/api/auth', require('./controllers/auth'));
 app.use('/api/taste', require('./controllers/taste'));
 app.use('/api/dishes', require('./controllers/recommend'));

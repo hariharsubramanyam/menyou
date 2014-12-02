@@ -1,3 +1,8 @@
+/**
+ * Lead Author: Tawanda 
+ *
+ * Test module for modifying taste profile.
+ */
 var request = require('request');
 var expect = require("chai").expect;
 var SERVER_ADDRESS = "http://localhost:8080/"
