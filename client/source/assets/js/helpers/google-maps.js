@@ -27,7 +27,7 @@
     markers = []; markedRestaurants = [];
     var bounds = new google.maps.LatLngBounds();
 
-    dishes = Menyou.state.dishes;
+    var dishes = Menyou.state.dishes;
     for (var i=0; i<dishes.length; i++) {
       var dish = dishes[i]
 
@@ -38,6 +38,7 @@
 
         var infowindow = new google.maps.InfoWindow({});
 
+        //create marker
         var marker = new google.maps.Marker({
           icon: RESTAURANT_POSITION,
           position: latlng,
@@ -47,6 +48,9 @@
           dishes: [dish.name]
         });
 
+        /**
+        * Marker click listener
+        **/
         google.maps.event.addListener(marker, 'click', function() {
           $('.meal').each(function(index) { $(this).removeClass('selected'); })
 
@@ -78,6 +82,9 @@
 
     }
 
+    /**
+    * Meal widget click listener
+    **/
     $(document).on("click", ".meal", function() {
       var restaurant = $(this).find('.restaurant').html();
       var index = markedRestaurants.indexOf(restaurant);
@@ -92,6 +99,7 @@
 
   Menyou.Map.initialize = function() {
 
+    //reset list of markers
     markers = [];
 
     //current position as stored in the Menyou state
@@ -100,6 +108,7 @@
       lng: Menyou.state.location.lon
     }
 
+    //initial map options
     mapOptions = {
             center: current_position,
             zoom: 14,
@@ -117,6 +126,9 @@
         title: 'You are here.'
     });
 
+    /**
+    * user's location marker click listener
+    **/
     google.maps.event.addListener(user_marker, 'click', function() {
       infowindow.setContent(this.title);
       infowindow.open(map,this);
@@ -127,11 +139,13 @@
     */
     var locate_me_btn = $("<img>").attr("src", LOCATE_ME_BUTTTON)
                         .attr("id", "locate-me-btn");
-    //set postion of the btn
+    //set postion of "Locate Me" btn
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(locate_me_btn[0]);
+    //"Locate Me" button click listener 
     google.maps.event.addDomListener(locate_me_btn[0], 'click', function() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(location){
+          //get coordinates
           var lat = location.coords.latitude,
               lon = location.coords.longitude;
           //change the center of the map
@@ -161,7 +175,7 @@
       }
       map.fitBounds(bounds);
       map.setZoom(15);
-
+      //get coordinates
       var lat = map.getCenter().lat();
       var lon = map.getCenter().lng();
       //modify UI and state
@@ -172,6 +186,7 @@
     * Map Click handler
     **/
     google.maps.event.addListener(map, 'click', function(event) {
+      //get coordinates
       var lat_lng = event.latLng;
       //change the center of the map
       map.setCenter(lat_lng);
@@ -188,6 +203,16 @@
     });
 
     /**
+    * Map dragend listener
+    **/
+    google.maps.event.addListener(map, 'dragend', function() {
+      //get coordinates
+      var lat = map.getCenter().lat();
+      var lon = map.getCenter().lng();
+      //modify UI and state
+      handleMapChange(lat, lon);
+    });
+    /**
     Changes the position of the user marker, changes Menyou state, and displays
     the "Recommend Nearby" button
     @param lat - the latitude of the map's center
@@ -199,7 +224,7 @@
       //change state
       Menyou.state.location.lat = lat;
       Menyou.state.location.lon = lon;
-
+      //get name of city at (lat, lon)
       $.ajax({
         url: 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon + '&sensor=true',
         type: 'GET',
@@ -211,6 +236,7 @@
           }
         }
       });
+      //display the "Recommend Nearby" button
       $("#recommend-btn").show();  
     }
 

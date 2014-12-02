@@ -24,13 +24,18 @@
   Handlebars.registerHelper('ellipsize', function(options) {
     var MAX_LENGTH = 300;
     var str = options.fn(this);
-    return Handlebars.SafeString(ellipsize(str));
+    return (ellipsize(str));
   });
 
   Handlebars.registerHelper('toUpperCase', function(elem) {
     return elem.toUpperCase();
   });
 
+  /**
+  * @param string - The string to ellipsize
+  * @param max_length - Number, the maximum length of the ellipsized string
+  * @return - The ellipsized string
+  **/
   var ellipsize = function(string, max_length) {
     if (string.length > max_length) {
       return string.substring(0, max_length) + "...";
