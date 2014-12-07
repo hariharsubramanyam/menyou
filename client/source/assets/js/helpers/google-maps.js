@@ -16,6 +16,7 @@
   var markers;
   var mapOptions;
   var map;
+  var searchRadiusCircle;
 
   // String list of Restaurant titles - so Restaurants aren't marked twice.
   var markedRestaurants = [];
@@ -124,6 +125,23 @@
         position: map.center,
         map: map,
         title: 'You are here.'
+    });
+
+    /**
+     * Create circle indicating search radius.
+     */
+    if (searchRadiusCircle !== undefined) {
+      searchRadiusCircle.setMap(null);
+    }
+    var searchRadiusCircle = new google.maps.Circle({
+      strokeColor: '#3e621b',
+      strokeOpacity: 0.3,
+      strokeWeight: 2,
+      fillColor: '#5d8a31',
+      fillOpacity: 0.2,
+      map: map,
+      center: map.center,
+      radius: Menyou.state.location.radius
     });
 
     /**
