@@ -27,15 +27,17 @@
       <p id="restrictions-possible-title">What can't you have?</p>
       <ul id="restrictions-possible">
         {{#each sources}}
-          <li>
             {{#isChecked this ../taste.forbidden}}
+          <li class="unforbid-li">
               <span class="content keyword-forbidden">{{toUpperCase this}}</span>
               <span class="restrictions-unforbid-keyword"></span>
+          </li>
             {{else}}
+          <li class="forbid-li">
               <span class="content keyword-not-forbidden">{{toUpperCase this}}</span>
               <span class="restrictions-forbid"></span>
-            {{/isChecked}}
           </li>
+            {{/isChecked}}
             
         {{/each}}
       </ul>

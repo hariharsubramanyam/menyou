@@ -26,8 +26,9 @@
     /**
      * Remove a like from the like list.
      */
-    $(document).on('click', '.likes-remove', function(evt) {
-        var like = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
+    $(document).on('click', '#likes-container ul li', function(evt) {
+        var like = $(this).find('.content')[0].innerHTML.toLowerCase();
+        console.log(like);
         update('likes', 'remove', [like]);
     });
 
@@ -43,32 +44,32 @@
     /**
      * Remove a dislike from the dislike list.
      */
-    $(document).on('click', '.dislikes-remove', function(evt) {
-        var dislike = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
+    $(document).on('click', '#dislikes-container ul li', function(evt) {
+        var dislike = $(this).find('.content')[0].innerHTML.toLowerCase();
         update('dislikes', 'remove', [dislike]);
     });
 
     /**
      * Add an source to the forbidden list.
      */
-    $(document).on('click', '.restrictions-forbid', function(evt) {
-        var source = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
+    $(document).on('click', '.forbid-li', function(evt) {
+        var source = $(this).find('.content')[0].innerHTML.toLowerCase();
         update('forbidden', 'add', Menyou.Mappings[source]);
     });
 
     /**
      * Remove a source from the forbidden list.
      */
-    $(document).on('click', '.restrictions-unforbid-keyword', function(evt) {
-        var source = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
+    $(document).on('click', '.unforbid-li', function(evt) {
+        var source = $(this).find('.content')[0].innerHTML.toLowerCase();
         update('forbidden', 'remove', Menyou.Mappings[source]);
     });
 
     /**
      * Remove a source from the forbidden list.
      */
-    $(document).on('click', '.restrictions-unforbid-singleword', function(evt) {
-        var source = $(this).parent().find('.content')[0].innerHTML.toLowerCase();
+    $(document).on('click', '#restrictions-forbidden li', function(evt) {
+        var source = $(this).find('.content')[0].innerHTML.toLowerCase();
         update('forbidden', 'remove', [source]);
     });
 
