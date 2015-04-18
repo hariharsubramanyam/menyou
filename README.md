@@ -13,8 +13,6 @@ Menyou is an app that lets you build a profile reflecting your unique taste in f
 
 # Usage
 
-The app can be accessed at [104.131.164.172:8080](http://104.131.164.172:8080/).
-
 To run locally, please do the following:
 
 1. (in separate terminal) `sudo mongod`
