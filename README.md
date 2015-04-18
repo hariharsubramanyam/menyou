@@ -2,8 +2,7 @@ Menyou
 ======
 Ryan Chipman, Danielle Man, Harihar Subramanyam, Tawanda Zimuto
 
-**NOTE: If you are looking for the reflection, you can find it in [`doc/Reflection.pdf`](https://github.com/6170-fa14/hsubrama_rchipman_daniman_tzimuto1_finalProj/blob/master/doc/Reflection.pdf?raw=true)**
-
+![Screenshot](https://raw.githubusercontent.com/hariharsubramanyam/menyou/master/img/screenshot.png)
 
 # Overview
 
